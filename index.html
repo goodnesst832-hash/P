@@ -2,157 +2,182 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>موقع صحتي - موريتانيا</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>صحتي – موريتانيا</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; min-height: 100vh; background: #f0f4f8; color: #333; }
-  nav { width: 250px; background: #0b3954; color: #fff; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
-  nav h2 { margin-top: 0; font-size: 22px; }
-  nav button { margin: 5px 0; padding: 10px; background: #087ca7; color: #fff; border: none; cursor: pointer; text-align: left; border-radius: 5px; transition: 0.3s; }
-  nav button:hover { background: #055a75; }
-  nav select { margin-top: 10px; padding: 5px; border-radius: 5px; }
-  main { flex: 1; padding: 20px; box-sizing: border-box; overflow-y: auto; }
-  #map { height: 500px; margin-bottom: 20px; border-radius: 10px; }
-  h1, h2 { margin: 10px 0; }
-  .disease { margin-bottom: 15px; padding: 15px; border: 1px solid #ccc; border-radius: 10px; background: #fff; }
-  footer { text-align: center; margin-top: 20px; font-size: 14px; color: #555; }
+    body { margin:0; font-family: Arial, sans-serif; background: #f0f4f8; color:#333;}
+    header { background:#0b3954; color:#fff; padding:15px; text-align:center;}
+    nav { display:flex; justify-content:center; flex-wrap:wrap; margin:10px 0;}
+    nav button { margin:5px; padding:10px 15px; border:none; border-radius:5px; background:#3282b8; color:#fff; cursor:pointer;}
+    nav button:hover { background:#0b5394;}
+    main { padding:10px; max-width:1200px; margin: auto;}
+    section { margin-bottom:30px;}
+    h2 { color:#0b3954; margin-bottom:15px;}
+    #map { width: 100%; height: 50vh; max-height:500px; margin-bottom:20px; border-radius:10px;}
+    .hospital-list, .disease-list { display:flex; flex-wrap:wrap; gap:15px; justify-content:center;}
+    .card { background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); width:280px; cursor:pointer; transition:0.3s;}
+    .card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+    footer { text-align:center; padding:15px; background:#0b3954; color:#fff;}
+    select { padding:8px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc;}
+    @media (max-width:768px){
+        .hospital-list, .disease-list { flex-direction:column; align-items:center;}
+        .card { width:90%;}
+    }
 </style>
 </head>
 <body>
 
+<header>
+    <h1>صحتي – موريتانيا</h1>
+    <p>دليل المستشفيات والأمراض في موريتانيا</p>
+</header>
+
 <nav>
-  <h2 id="navTitle">القائمة</h2>
-  <button onclick="showSection('hospitals')" id="btnHospitals">دليل المستشفيات</button>
-  <button onclick="showSection('diseases')" id="btnDiseases">الأمراض وطرق العلاج</button>
-  <button onclick="showSection('about')" id="btnAbout">عن الموقع والمطور</button>
-  <select id="languageSelect" onchange="changeLanguage()">
-    <option value="ar">العربية</option>
-    <option value="fr">Français</option>
-    <option value="en">English</option>
-  </select>
+    <button onclick="showSection('hospitals')">دليل المستشفيات</button>
+    <button onclick="showSection('diseases')">الأمراض وطرق العلاج</button>
+    <button onclick="showSection('about')">عن الموقع والمطور</button>
 </nav>
 
 <main>
-  <!-- دليل المستشفيات -->
-  <section id="hospitals">
-    <h1 id="hospitalsTitle">دليل المستشفيات في موريتانيا</h1>
-    <div id="map"></div>
-  </section>
+    <!-- اختيار اللغة -->
+    <select id="language" onchange="changeLanguage()">
+        <option value="ar">العربية</option>
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+    </select>
 
-  <!-- الأمراض وطرق العلاج -->
-  <section id="diseases" style="display:none;">
-    <h1 id="diseasesTitle">الأمراض وطرق العلاج</h1>
-    <div class="disease"><h2>الملاريا</h2><p>العلاج: تناول الأدوية المخصصة، الوقاية باستخدام الناموسيات، والحفاظ على البيئة نظيفة لتقليل البعوض.</p></div>
-    <div class="disease"><h2>السكري</h2><p>العلاج: التحكم بمستوى السكر عبر الحمية الصحية، ممارسة الرياضة، والأدوية الخاصة بالسكري.</p></div>
-    <div class="disease"><h2>ارتفاع ضغط الدم</h2><p>العلاج: متابعة ضغط الدم، تقليل الملح، ممارسة الرياضة، وتناول الأدوية عند الحاجة.</p></div>
-    <div class="disease"><h2>الإنفلونزا</h2><p>العلاج: الراحة، شرب السوائل، الأدوية المضادة للفيروسات إذا لزم الأمر، وتجنب الاختلاط لتقليل العدوى.</p></div>
-    <div class="disease"><h2>الإسهال</h2><p>العلاج: تعويض السوائل والأملاح، الحفاظ على نظافة الطعام والماء، استخدام أدوية مضادة للإسهال عند الضرورة.</p></div>
-    <div class="disease"><h2>الحمى الصفراء</h2><p>العلاج: التطعيم والوقاية من لدغات البعوض، استشارة الطبيب فور ظهور الأعراض.</p></div>
-    <div class="disease"><h2>الربو</h2><p>العلاج: استخدام أجهزة الاستنشاق، تجنب مسببات الحساسية، متابعة الطبيب بانتظام.</p></div>
-    <div class="disease"><h2>التهاب الكبد</h2><p>العلاج: الراحة، تناول الأدوية التي يصفها الطبيب، تجنب الكحول.</p></div>
-    <div class="disease"><h2>الملاريا</h2><p>الوقاية: استخدام الناموسيات، رش المبيدات، استشارة الطبيب عند ظهور أعراض الحمى.</p></div>
-    <!-- يمكن إضافة المزيد من الأمراض بنفس الشكل -->
-  </section>
+    <!-- دليل المستشفيات -->
+    <section id="hospitals">
+        <h2>دليل المستشفيات</h2>
+        <div id="map"></div>
+        <div class="hospital-list" id="hospitalList"></div>
+    </section>
 
-  <!-- مقال عن الموقع والمطور -->
-  <section id="about" style="display:none;">
-    <h1 id="aboutTitle">عن الموقع والمطور</h1>
-    <p id="aboutText">
-      موقع <strong>صحتي</strong> هو منصة شاملة تهدف إلى تقديم معلومات دقيقة وموثوقة حول المستشفيات في موريتانيا، بالإضافة إلى الأمراض وطرق العلاج والنصائح الصحية.  
-      تم تطوير الموقع بواسطة <strong>رضوان</strong>، مطور مبدع يسعى لنشر الوعي الصحي وتسهيل الوصول إلى المعلومات الطبية لجميع المستخدمين.  
-      يحتوي الموقع على واجهة سهلة الاستخدام، خريطة تفاعلية، ومقالات طبية دقيقة. هدفه تمكين المواطنين من اتخاذ قرارات صحية أفضل وتحسين جودة حياتهم.
-    </p>
-  </section>
+    <!-- الأمراض وطرق العلاج -->
+    <section id="diseases" style="display:none;">
+        <h2>الأمراض وطرق العلاج</h2>
+        <div class="disease-list" id="diseaseList"></div>
+    </section>
+
+    <!-- عن الموقع والمطور -->
+    <section id="about" style="display:none;">
+        <h2>عن الموقع والمطور</h2>
+        <p>مرحبًا بك في موقع <strong>صحتي – موريتانيا</strong>، هذا الموقع هدفه توفير دليل شامل للمستشفيات والأمراض في موريتانيا بطريقة تفاعلية وسهلة الاستخدام. يمكنك تصفح المستشفيات ومعرفة مواقعها على الخريطة، بالإضافة إلى التعرف على الأمراض وطرق العلاج المختلفة.</p>
+        <p>المطور: <strong>رضوان</strong>، وهو متخصص في تطوير المواقع التفاعلية مع خبرة في واجهات المستخدم وتصميم الخرائط التفاعلية. يحرص على تقديم تجربة مستخدم ممتازة على جميع الأجهزة، سواء كانت هواتف أو أجهزة لوحية أو حواسيب.</p>
+    </section>
 </main>
 
-<footer id="footer">تم تطوير الموقع بواسطة رضوان</footer>
+<footer>
+    جميع الحقوق محفوظة &copy; 2025 | مطور الموقع: رضوان
+</footer>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-  // الخرائط
-  var map = L.map('map').setView([18.079, -15.981], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
+    // لغة الموقع
+    const translations = {
+        fr: {
+            hospitals:"Annuaire des hôpitaux",
+            diseases:"Maladies et traitements",
+            about:"À propos du site et du développeur"
+        },
+        en: {
+            hospitals:"Hospitals Directory",
+            diseases:"Diseases and Treatments",
+            about:"About the Site and Developer"
+        },
+        ar: {
+            hospitals:"دليل المستشفيات",
+            diseases:"الأمراض وطرق العلاج",
+            about:"عن الموقع والمطور"
+        }
+    };
 
-  var hospitals = [
-    { name: "المستشفى الوطني نواكشوط", lat: 18.0875, lng: -15.98806 },
-    { name: "مستشفى الشيخ زايد", lat: 18.0875, lng: -15.98806 },
-    { name: "مستشفى الأمومة والطفولة", lat: 18.0875, lng: -15.98806 },
-    { name: "مستشفى كيفه", lat: 16.617, lng: -12.640 },
-    { name: "مستشفى النعمة", lat: 16.508, lng: -7.250 },
-    { name: "مستشفى أطار", lat: 20.520, lng: -13.050 },
-    { name: "مستشفى الشامي", lat: 20.970, lng: -17.070 },
-    { name: "مستشفى كيهيدي", lat: 15.780, lng: -13.000 },
-    { name: "مستشفى ألاك", lat: 16.800, lng: -14.000 },
-    { name: "مستشفى تجكجة", lat: 16.670, lng: -11.400 },
-    { name: "مستشفى زويرات", lat: 20.450, lng: -13.750 },
-    { name: "مستشفى روصو", lat: 16.500, lng: -15.500 },
-    { name: "مستشفى بوتلميت", lat: 17.000, lng: -15.000 }
-  ];
-
-  hospitals.forEach(function(hospital) {
-    L.marker([hospital.lat, hospital.lng]).addTo(map)
-      .bindPopup(hospital.name);
-  });
-
-  // التنقل بين الخانات
-  function showSection(sectionId) {
-    document.getElementById('hospitals').style.display = 'none';
-    document.getElementById('diseases').style.display = 'none';
-    document.getElementById('about').style.display = 'none';
-    document.getElementById(sectionId).style.display = 'block';
-  }
-
-  // دعم تغيير اللغة
-  function changeLanguage() {
-    var lang = document.getElementById('languageSelect').value;
-    if(lang === 'ar'){
-      document.body.dir = 'rtl';
-      document.getElementById('navTitle').textContent = 'القائمة';
-      document.getElementById('btnHospitals').textContent = 'دليل المستشفيات';
-      document.getElementById('btnDiseases').textContent = 'الأمراض وطرق العلاج';
-      document.getElementById('btnAbout').textContent = 'عن الموقع والمطور';
-      document.getElementById('hospitalsTitle').textContent = 'دليل المستشفيات في موريتانيا';
-      document.getElementById('diseasesTitle').textContent = 'الأمراض وطرق العلاج';
-      document.getElementById('aboutTitle').textContent = 'عن الموقع والمطور';
-      document.getElementById('aboutText').innerHTML = `
-      موقع <strong>صحتي</strong> هو منصة شاملة تهدف إلى تقديم معلومات دقيقة وموثوقة حول المستشفيات في موريتانيا، بالإضافة إلى الأمراض وطرق العلاج والنصائح الصحية.  
-      تم تطوير الموقع بواسطة <strong>رضوان</strong>، مطور مبدع يسعى لنشر الوعي الصحي وتسهيل الوصول إلى المعلومات الطبية لجميع المستخدمين.  
-      يحتوي الموقع على واجهة سهلة الاستخدام، خريطة تفاعلية، ومقالات طبية دقيقة. هدفه تمكين المواطنين من اتخاذ قرارات صحية أفضل وتحسين جودة حياتهم.`;
-      document.getElementById('footer').textContent = 'تم تطوير الموقع بواسطة رضوان';
-    } else if(lang === 'fr'){
-      document.body.dir = 'ltr';
-      document.getElementById('navTitle').textContent = 'Menu';
-      document.getElementById('btnHospitals').textContent = 'Guide des hôpitaux';
-      document.getElementById('btnDiseases').textContent = 'Maladies et traitements';
-      document.getElementById('btnAbout').textContent = 'À propos du site et du développeur';
-      document.getElementById('hospitalsTitle').textContent = 'Guide des hôpitaux en Mauritanie';
-      document.getElementById('diseasesTitle').textContent = 'Maladies et traitements';
-      document.getElementById('aboutTitle').textContent = 'À propos du site et du développeur';
-      document.getElementById('aboutText').innerHTML = `
-      Le site <strong>Ma Santé</strong> est une plateforme complète fournissant des informations fiables sur les hôpitaux en Mauritanie, ainsi que sur les maladies, leurs traitements et des conseils de santé.  
-      Développé par <strong>Redouane</strong>, un développeur passionné visant à sensibiliser le public et faciliter l'accès aux informations médicales.  
-      Le site offre une interface facile à utiliser, une carte interactive et des articles médicaux précis. Son objectif est de permettre aux citoyens de prendre de meilleures décisions pour leur santé et d'améliorer leur qualité de vie.`;
-      document.getElementById('footer').textContent = 'Développé par Redouane';
-    } else {
-      document.body.dir = 'ltr';
-      document.getElementById('navTitle').textContent = 'Menu';
-      document.getElementById('btnHospitals').textContent = 'Hospital Guide';
-      document.getElementById('btnDiseases').textContent = 'Diseases and Treatments';
-      document.getElementById('btnAbout').textContent = 'About the Site & Developer';
-      document.getElementById('hospitalsTitle').textContent = 'Hospital Guide in Mauritania';
-      document.getElementById('diseasesTitle').textContent = 'Diseases and Treatments';
-      document.getElementById('aboutTitle').textContent = 'About the Site & Developer';
-      document.getElementById('aboutText').innerHTML = `
-      <strong>My Health</strong> is a comprehensive platform providing reliable information about hospitals in Mauritania, diseases, treatments, and health tips.  
-      Developed by <strong>Redouane</strong>, a dedicated developer aiming to raise health awareness and facilitate access to medical information.  
-      The site features an easy-to-use interface, interactive maps, and accurate medical articles. Its goal is to empower citizens to make better health decisions and improve quality of life.`;
-      document.getElementById('footer').textContent = 'Developed by Redouane';
+    function changeLanguage(){
+        const lang = document.getElementById('language').value;
+        document.querySelector('#hospitals h2').innerText = translations[lang].hospitals;
+        document.querySelector('#diseases h2').innerText = translations[lang].diseases;
+        document.querySelector('#about h2').innerText = translations[lang].about;
     }
-  }
+
+    function showSection(id){
+        document.querySelectorAll('main section').forEach(sec => sec.style.display='none');
+        document.getElementById(id).style.display='block';
+    }
+
+    // بيانات المستشفيات مع الخرائط
+    const hospitals = [
+        {name:"المستشفى الوطني – نواكشوط", lat:18.073, lng:-15.958},
+        {name:"مستشفى الصداقة – نواكشوط", lat:18.085, lng:-15.965},
+        {name:"مستشفى الشيخ زايد – نواكشوط", lat:18.079, lng:-15.952},
+        {name:"مستشفى أطار المركزي – أطار", lat:20.513, lng:-13.045},
+        {name:"مستشفى نواذيبو العام – نواذيبو", lat:20.944, lng:-16.033},
+        {name:"مستشفى كيهيدي – كيهيدي", lat:16.064, lng:-13.509},
+        {name:"مستشفى بوتلميت – بوتلميت", lat:17.037, lng:-14.454},
+        {name:"مستشفى كيفه – كيفه", lat:16.617, lng:-13.498},
+        {name:"مستشفى تجكجة – تجكجة", lat:19.782, lng:-11.432},
+        {name:"مستشفى روصو – روصو", lat:16.504, lng:-13.497},
+        {name:"مستشفى كيهيدي العسكري – كيهيدي", lat:16.065, lng:-13.511},
+        {name:"مستشفى بوكي – بوكي", lat:16.593, lng:-13.423},
+        {name:"مستشفى المذرذرة – المذرذرة", lat:21.470, lng:-11.970},
+        {name:"مستشفى لعيون – لعيون", lat:20.816, lng:-13.056},
+        {name:"مستشفى أكجوجت – أكجوجت", lat:19.733, lng:-14.392},
+        {name:"مستشفى وادان – وادان", lat:19.893, lng:-13.912},
+        {name:"مستشفى ألاك – ألاك", lat:17.471, lng:-13.049},
+        {name:"مستشفى النعمة – النعمة", lat:16.492, lng:-7.255},
+        {name:"مستشفى تمبدغة – تمبدغة", lat:19.673, lng:-9.940},
+        {name:"مستشفى تنسيفت – تنسيفت", lat:21.025, lng:-11.552},
+        {name:"مستشفى بوتسرا – بوتسرا", lat:18.512, lng:-10.755},
+        {name:"مستشفى أوجفت – أوجفت", lat:20.267, lng:-13.948},
+        {name:"مستشفى باركيول – باركيول", lat:21.213, lng:-10.632},
+        {name:"مستشفى كوبني – كوبني", lat:17.283, lng:-10.133},
+        {name:"مستشفى الطينطان – الطينطان", lat:16.333, lng:-11.701},
+        {name:"مستشفى الشامي – الشامي", lat:20.527, lng:-13.906},
+        {name:"مستشفى أفورار – أفورار", lat:18.632, lng:-14.784},
+        {name:"مستشفى شنقيط – شنقيط", lat:20.920, lng:-13.058},
+        {name:"مستشفى تميرت – تميرت", lat:17.657, lng:-12.312},
+        {name:"مستشفى ألاك العسكري – ألاك", lat:17.472, lng:-13.048}
+    ];
+
+    const map = L.map('map').setView([18.073, -15.958], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:'&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const hospitalList = document.getElementById('hospitalList');
+
+    hospitals.forEach(h => {
+        // إضافة علامة على الخريطة
+        L.marker([h.lat,h.lng]).addTo(map).bindPopup(h.name);
+
+        // إضافة بطاقة المستشفى
+        const card = document.createElement('div');
+        card.className='card';
+        card.innerText=h.name;
+        card.onclick = ()=>{ map.setView([h.lat,h.lng],14); }
+        hospitalList.appendChild(card);
+    });
+
+    // الأمراض وطرق العلاج
+    const diseases = [
+        {name:"الملاريا", treatment:"استخدام الأدوية الموصوفة والوقاية من البعوض"},
+        {name:"السكري", treatment:"مراقبة نسبة السكر في الدم واتباع نظام غذائي صحي"},
+        {name:"الضغط", treatment:"ممارسة الرياضة واتباع نظام غذائي منخفض الملح"},
+        {name:"الإنفلونزا", treatment:"الراحة وشرب السوائل واستخدام الأدوية لتخفيف الأعراض"},
+        {name:"الكوليرا", treatment:"شرب محاليل الإماهة الفموية والحفاظ على النظافة"},
+        {name:"الحمى الصفراء", treatment:"التطعيم والوقاية من البعوض"},
+        {name:"الإيدز", treatment:"العلاج بمضادات الفيروسات والوقاية من العدوى"},
+        {name:"الحصبة", treatment:"التطعيم والرعاية الطبية عند الإصابة"}
+    ];
+
+    const diseaseList = document.getElementById('diseaseList');
+    diseases.forEach(d => {
+        const card = document.createElement('div');
+        card.className='card';
+        card.innerHTML=`<strong>${d.name}</strong><br>${d.treatment}`;
+        diseaseList.appendChild(card);
+    });
 </script>
 
 </body>
-</html>  
+</html>
