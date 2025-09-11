@@ -1,743 +1,158 @@
-<!DOCTYPE html>  <html lang="ar">    <head>        <meta charset="utf-8" />      
-  <meta name="viewport" content="width=device-width, initial-scale=1" />      
-  <title>صحتي – موريتانيا</title>      
-  <style>      
-    :root{      
-      --accent:#0b7b7b;      
-      --accent-2:#0f9a9a;      
-      --bg:#f4f7f8;      
-      --card:#ffffff;      
-      --muted:#65757a;      
-      --glass: rgba(255,255,255,0.6);      
-    }      
-    *{box-sizing:border-box}      
-    html,body{height:100%;}      
-    body{      
-      margin:0;      
-      font-family: "Noto Sans Arabic", "Tahoma", system-ui, Arial;      
-      background: linear-gradient(180deg,#f7fbfb 0%, #eef6f6 100%);      
-      color:#163238;      
-      -webkit-font-smoothing:antialiased;      
-      -moz-osx-font-smoothing:grayscale;      
-      display:flex;      
-      flex-direction:column;      
-      min-height:100vh;      
-    }  /* Header */      
-header{      
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));      
-  color:white;      
-  padding:18px 16px;      
-  display:flex;      
-  gap:16px;      
-  align-items:center;      
-  justify-content:space-between;      
-  flex-wrap:wrap;      
-}      
-.brand{      
-  display:flex;gap:12px;align-items:center;      
-}      
-.logo{      
-  width:52px;height:52px;border-radius:10px;      
-  background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-weight:700;      
-  font-size:20px;      
-  box-shadow:0 6px 18px rgba(11,123,123,0.18);      
-}      
-.brand h1{margin:0;font-size:20px}      
-.brand p{margin:0;font-size:13px;opacity:.9}    .controls{display:flex;gap:8px;align-items:center;}  
-.lang-btn{  
-background:transparent;border:1px solid rgba(255,255,255,0.16);color:white;padding:8px 10px;border-radius:8px;cursor:pointer;  
-}  
-.lang-btn.active{background:white;color:var(--accent);font-weight:700}  
-.searchbar{  
-display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);padding:6px;border-radius:10px;  
-min-width:260px;  
-}  
-.searchbar input{  
-border:0;background:transparent;color:white;outline:none;padding:6px 8px;width:220px;  
-}  
-.switch{  
-display:flex;gap:6px;background:rgba(0,0,0,0.08);padding:6px;border-radius:8px;  
-}  
-.tab-btn{background:transparent;border:0;padding:6px 8px;border-radius:8px;cursor:pointer;color:white;font-weight:600}  
-.tab-btn.active{background:rgba(255,255,255,0.18)}  /* Main layout */
-.container{
-max-width:1100px;margin:18px auto;padding:16px;width:95%;
-display:grid;grid-template-columns: 1fr 360px;gap:18px;
-align-items:start;
-}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>موقع صحتي - موريتانيا</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; min-height: 100vh; background: #f0f4f8; color: #333; }
+  nav { width: 250px; background: #0b3954; color: #fff; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+  nav h2 { margin-top: 0; font-size: 22px; }
+  nav button { margin: 5px 0; padding: 10px; background: #087ca7; color: #fff; border: none; cursor: pointer; text-align: left; border-radius: 5px; transition: 0.3s; }
+  nav button:hover { background: #055a75; }
+  nav select { margin-top: 10px; padding: 5px; border-radius: 5px; }
+  main { flex: 1; padding: 20px; box-sizing: border-box; overflow-y: auto; }
+  #map { height: 500px; margin-bottom: 20px; border-radius: 10px; }
+  h1, h2 { margin: 10px 0; }
+  .disease { margin-bottom: 15px; padding: 15px; border: 1px solid #ccc; border-radius: 10px; background: #fff; }
+  footer { text-align: center; margin-top: 20px; font-size: 14px; color: #555; }
+</style>
+</head>
+<body>
 
-/* Left content */
-.panel{
-background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 24px rgba(15,154,154,0.06);
-}
-.hero{
-display:flex;gap:18px;align-items:center;
-padding:12px;border-radius:10px;background:linear-gradient(90deg,#f0ffff, #ffffff);
-}
-.hero .title{font-size:20px;margin:0}
-.hero .subtitle{color:var(--muted);margin:6px 0 0 0;font-size:13px}
+<nav>
+  <h2 id="navTitle">القائمة</h2>
+  <button onclick="showSection('hospitals')" id="btnHospitals">دليل المستشفيات</button>
+  <button onclick="showSection('diseases')" id="btnDiseases">الأمراض وطرق العلاج</button>
+  <button onclick="showSection('about')" id="btnAbout">عن الموقع والمطور</button>
+  <select id="languageSelect" onchange="changeLanguage()">
+    <option value="ar">العربية</option>
+    <option value="fr">Français</option>
+    <option value="en">English</option>
+  </select>
+</nav>
 
-.filters{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.pill{background:#eefaf9;padding:8px 10px;border-radius:999px;color:var(--accent);font-weight:700;border:1px solid rgba(11,123,123,0.05);cursor:pointer}
-.pill.secondary{background:#fff;border:1px solid #e6eef0;color:var(--muted);font-weight:600}
+<main>
+  <!-- دليل المستشفيات -->
+  <section id="hospitals">
+    <h1 id="hospitalsTitle">دليل المستشفيات في موريتانيا</h1>
+    <div id="map"></div>
+  </section>
 
-/* Articles grid */
-.grid{
-display:grid;grid-template-columns: repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:16px;
-}
-.card{
-background:linear-gradient(180deg,#ffffff,#fbffff);
-padding:14px;border-radius:10px;border:1px solid rgba(10,10,10,0.02);
-transition:transform .18s ease,box-shadow .18s ease;
-}
-.card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(11,123,123,0.08)}
-.card h3{margin:0 0 8px 0}
-.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.35}
-.readmore{display:inline-block;margin-top:10px;padding:8px 10px;border-radius:8px;background:var(--accent);color:white;text-decoration:none;font-weight:700;font-size:13px}
+  <!-- الأمراض وطرق العلاج -->
+  <section id="diseases" style="display:none;">
+    <h1 id="diseasesTitle">الأمراض وطرق العلاج</h1>
+    <div class="disease"><h2>الملاريا</h2><p>العلاج: تناول الأدوية المخصصة، الوقاية باستخدام الناموسيات، والحفاظ على البيئة نظيفة لتقليل البعوض.</p></div>
+    <div class="disease"><h2>السكري</h2><p>العلاج: التحكم بمستوى السكر عبر الحمية الصحية، ممارسة الرياضة، والأدوية الخاصة بالسكري.</p></div>
+    <div class="disease"><h2>ارتفاع ضغط الدم</h2><p>العلاج: متابعة ضغط الدم، تقليل الملح، ممارسة الرياضة، وتناول الأدوية عند الحاجة.</p></div>
+    <div class="disease"><h2>الإنفلونزا</h2><p>العلاج: الراحة، شرب السوائل، الأدوية المضادة للفيروسات إذا لزم الأمر، وتجنب الاختلاط لتقليل العدوى.</p></div>
+    <div class="disease"><h2>الإسهال</h2><p>العلاج: تعويض السوائل والأملاح، الحفاظ على نظافة الطعام والماء، استخدام أدوية مضادة للإسهال عند الضرورة.</p></div>
+    <div class="disease"><h2>الحمى الصفراء</h2><p>العلاج: التطعيم والوقاية من لدغات البعوض، استشارة الطبيب فور ظهور الأعراض.</p></div>
+    <div class="disease"><h2>الربو</h2><p>العلاج: استخدام أجهزة الاستنشاق، تجنب مسببات الحساسية، متابعة الطبيب بانتظام.</p></div>
+    <div class="disease"><h2>التهاب الكبد</h2><p>العلاج: الراحة، تناول الأدوية التي يصفها الطبيب، تجنب الكحول.</p></div>
+    <div class="disease"><h2>الملاريا</h2><p>الوقاية: استخدام الناموسيات، رش المبيدات، استشارة الطبيب عند ظهور أعراض الحمى.</p></div>
+    <!-- يمكن إضافة المزيد من الأمراض بنفس الشكل -->
+  </section>
 
-/* Right sidebar */
-aside{position:relative}
-.side-panel{position:sticky;top:20px}
-.hospital-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.h-item{background:linear-gradient(180deg,#ffffff,#fbffff);padding:10px;border-radius:10px;border:1px solid rgba(10,10,10,0.03);cursor:pointer;display:flex;gap:8px;align-items:center}
-.h-item:hover{transform:translateX(6px)}
-.h-item .h-title{font-weight:700}
-.h-item .h-sub{font-size:13px;color:var(--muted)}
+  <!-- مقال عن الموقع والمطور -->
+  <section id="about" style="display:none;">
+    <h1 id="aboutTitle">عن الموقع والمطور</h1>
+    <p id="aboutText">
+      موقع <strong>صحتي</strong> هو منصة شاملة تهدف إلى تقديم معلومات دقيقة وموثوقة حول المستشفيات في موريتانيا، بالإضافة إلى الأمراض وطرق العلاج والنصائح الصحية.  
+      تم تطوير الموقع بواسطة <strong>رضوان</strong>، مطور مبدع يسعى لنشر الوعي الصحي وتسهيل الوصول إلى المعلومات الطبية لجميع المستخدمين.  
+      يحتوي الموقع على واجهة سهلة الاستخدام، خريطة تفاعلية، ومقالات طبية دقيقة. هدفه تمكين المواطنين من اتخاذ قرارات صحية أفضل وتحسين جودة حياتهم.
+    </p>
+  </section>
+</main>
 
-.map-frame{width:100%;height:360px;border-radius:10px;border:0;margin-top:12px;overflow:hidden}
+<footer id="footer">تم تطوير الموقع بواسطة رضوان</footer>
 
-/* search results */
-.results{margin-top:12px}
-.nores{color:var(--muted);padding:12px;text-align:center;background:#fbfcfc;border-radius:8px}
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  // الخرائط
+  var map = L.map('map').setView([18.079, -15.981], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
 
-/* footer */
-footer{margin-top:auto;padding:14px;text-align:center;color:var(--muted);font-size:14px}
+  var hospitals = [
+    { name: "المستشفى الوطني نواكشوط", lat: 18.0875, lng: -15.98806 },
+    { name: "مستشفى الشيخ زايد", lat: 18.0875, lng: -15.98806 },
+    { name: "مستشفى الأمومة والطفولة", lat: 18.0875, lng: -15.98806 },
+    { name: "مستشفى كيفه", lat: 16.617, lng: -12.640 },
+    { name: "مستشفى النعمة", lat: 16.508, lng: -7.250 },
+    { name: "مستشفى أطار", lat: 20.520, lng: -13.050 },
+    { name: "مستشفى الشامي", lat: 20.970, lng: -17.070 },
+    { name: "مستشفى كيهيدي", lat: 15.780, lng: -13.000 },
+    { name: "مستشفى ألاك", lat: 16.800, lng: -14.000 },
+    { name: "مستشفى تجكجة", lat: 16.670, lng: -11.400 },
+    { name: "مستشفى زويرات", lat: 20.450, lng: -13.750 },
+    { name: "مستشفى روصو", lat: 16.500, lng: -15.500 },
+    { name: "مستشفى بوتلميت", lat: 17.000, lng: -15.000 }
+  ];
 
-/* responsive */
-@media(max-width:980px){
-.container{grid-template-columns:1fr;gap:12px}
-.map-frame{height:300px}
-.side-panel{position:relative;top:0}
-}
+  hospitals.forEach(function(hospital) {
+    L.marker([hospital.lat, hospital.lng]).addTo(map)
+      .bindPopup(hospital.name);
+  });
 
-/* language direction control - ltr for french */
-.ltr{direction:ltr;font-family: "Helvetica Neue", Arial, sans-serif}
+  // التنقل بين الخانات
+  function showSection(sectionId) {
+    document.getElementById('hospitals').style.display = 'none';
+    document.getElementById('diseases').style.display = 'none';
+    document.getElementById('about').style.display = 'none';
+    document.getElementById(sectionId).style.display = 'block';
+  }
 
-  </style>      
-</head>      
-<body>      
-  <header>      
-    <div class="brand" id="brand">      
-      <div class="logo">ص</div>      
-      <div>      
-        <h1 id="siteTitle">صحتي – موريتانيا</h1>      
-        <p id="siteTag">موسوعة الصحة والتوعية للمجتمع الموريتاني</p>      
-      </div>      
-    </div>  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">      
-  <div class="searchbar" role="search">      
-    <input id="globalSearch" placeholder="ابحث عن مرض أو مستشفى..." aria-label="search"/>      
-    <div class="switch" role="tablist" aria-label="search mode">      
-      <button class="tab-btn active" data-mode="disease" id="tabDisease">أمراض</button>      
-      <button class="tab-btn" data-mode="hospital" id="tabHospital">مستشفيات</button>      
-    </div>      
-  </div>      <div class="controls">      
-    <button class="lang-btn active" data-lang="ar" id="langAr">عربى</button>      
-    <button class="lang-btn" data-lang="fr" id="langFr">Français</button>      
-    <button class="lang-btn" data-lang="hs" id="langHs">حسانية</button>      
-  </div>      
-</div>    </header>    <main class="container" id="mainContainer">      
-    <!-- left column -->      
-    <section class="panel">      
-      <div class="hero">      
-        <div style="flex:1">      
-          <h2 class="title" id="heroTitle">موسوعة الأمراض ونصائح الوقاية</h2>      
-          <p class="subtitle" id="heroSub">مقالات مبسطة، فيديوهات توعوية، وخريطة لجميع المستشفيات.</p>      
-        </div>      
-        <div style="width:160px;text-align:center">      
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='18' fill='%230b7b7b'/><text x='50%' y='55%' fill='white' font-size='46' font-family='Arial' text-anchor='middle' dominant-baseline='central'>🩺</text></svg>" alt="logo" style="width:76px;height:76px;border-radius:12px;box-shadow:0 8px 20px rgba(11,123,123,0.08)"/>      
-        </div>      
-      </div>  <div class="filters" id="categoryPills">      
-    <!-- pills injected by JS -->      
-  </div>      <div class="results" id="resultsArea">      
-    <div class="grid" id="articlesGrid">      
-      <!-- article cards injected by JS -->      
-    </div>      
-    <div id="noResults" class="nores" style="display:none">لا توجد نتائج.</div>      
-  </div>      
-</section>    <!-- right column / sidebar -->    <aside>      
-  <div class="side-panel panel">      
-    <h3 id="hospTitle">🏥 مستشفيات مختارة</h3>      
-    <p id="hospSub">اضغط على أي مستشفى لعرض موقعه على الخريطة</p>    <div class="hospital-list" id="hospitalList">      
-  <!-- hospitals injected by JS -->      
-</div>      <div class="map-frame">      
-  <iframe id="mapFrame" src="https://www.google.com/maps?q=18.0735,-15.9582&z=6&output=embed" width="100%" height="100%" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>      
-</div>    </div>      <div class="panel" style="margin-top:12px">      
-    <h3 id="aboutTitle">ℹ️ عن الموقع</h3>      
-    <p id="aboutText">هذا الموقع يهدف لنشر الوعي الصحي ومعلومات مبسطة. المعلومات توعوية وليست بديلاً عن استشارة الطبيب.</p>      
-    <p style="margin-top:8px;color:var(--muted);font-size:13px" id="contactText">للتواصل: مصمم الموقع محمد</p>      
-  </div>      
-</aside>    </main>    <footer>      
-    <div id="footerText">© 2025 صحتي – موريتانيا</div>      
-  </footer>    <script>      
-    /***************      
-     * Data store      
-     * Arabic / French / Hassaniya (approx.)      
-     ***************/      
-    const DATA = {      
-      meta: {      
-        title: {      
-          ar: "صحتي – موريتانيا",      
-          fr: "Ma Santé – Mauritanie",      
-          hs: "صَحتي - موريتانيا"      
-        },      
-        tagline: {      
-          ar: "موسوعة الصحة والتوعية للمجتمع الموريتاني",      
-          fr: "Encyclopédie santé pour la communauté mauritanienne",      
-          hs: "موسوعة صحيّة للمجتمع"      
-        },      
-        about: {      
-          ar: "هذا الموقع يهدف لنشر الوعي الصحي ومعلومات مبسطة. المعلومات توعوية وليست بديلاً عن استشارة الطبيب.",      
-          fr: "Ce site vise à sensibiliser et fournir des informations de santé. A titre informatif seulement, pas un substitut au médecin.",      
-          hs: "هاد الموقع يهدف للتوعية الصحيّة. المعلومات للتثقيف فقط."      
-        },      
-        contact: {      
-          ar: "للتواصل: محمد",      
-          fr: "Contact: Mohamed",      
-          hs: "تواصل: محمد"      
-        }      
-      },    categories: {      
-    ar: ["أمراض شائعة","تغذية","وقاية","صحة الطفل","صحة المرأة","حوادث وطفئة"],      
-    fr: ["Maladies courantes","Nutrition","Prévention","Santé de l'enfant","Santé des femmes","Urgences"],      
-    hs: ["أمراض","ماكلة","وقاية","صغار","نساء","حوادث"]      
-  },      diseases: [
-{
-id: "malaria",
-category: "أمراض شائعة",
-title: { ar:"الملاريا", fr:"Paludisme", hs:"الملاريا" },
-excerpt: {
-ar:"عدوى تنتقل عبر بعوضة الأنوفيلة. أعراض: حمى، قشعريرة، تعب. الوقاية: ناموسية، مبيدات.",
-fr:"Maladie transmise par moustiques. Fièvre, frissons. Prévention: moustiquaire, sprays.",
-hs:"مرض يجي عبر البعوض، حرارة وتعب. استعمل ناموسية."
-},
-content: {
-ar: "الملاريا مرض طفيلي ينتقل عبر لسعة بعوضة الأنوفيلة. عند الشك بالتعرض أو ظهور حمى عالية لا تتردد بزيارة المركز الصحي. الأدوية المخصصة يحددها الطبيب. الوقاية: نوم تحت ناموسية مشبعة بمبيد، رش البطح، وإزالة المياه الراكدة.",
-fr: "Le paludisme est causé par un parasite transmis par les moustiques. En cas de fièvre après exposition, consultez un centre de santé. La prévention inclut moustiquaires traitées et lutte anti-vectorielle.",
-hs: "الملاريا طفيلي يجي بالبعوض. كي تطيب حراره زور المركز. استعمل ناموسية ومبيدات."
-},
-tags: ["حمى","بعوض","وقاية"]
-},
-{
-id: "anemia",
-category: "تغذية",
-title:{ ar:"فقر الدم (أنيميا)", fr:"Anémie", hs:"فقر الدم" },
-excerpt:{
-ar:"نقص الحديد أو فيتامينات يؤدي لتعب، شحوب. علاج بالتغذية والمكملات.",
-fr:"Carence en fer/vitamines. Fatigue, pâleur. Traitement: alimentation et suppléments.",
-hs:"نقص الحديد يسبب تعب ووجه شاحب. لازم حديد وأكل مليح."
-},
-content:{
-ar:"فقر الدم شائع بين الأطفال والنساء الحوامل. تحاليل الدم البسيطة تحدد الحالة. زيادة الأغذية الغنية بالحديد (لحوم، بقول، سبانخ) ومكملات الحديد تحت إشراف طبي تساعد على الشفاء.",
-fr:"L'anémie est fréquente chez les enfants et femmes enceintes. Le diagnostic se fait par prise de sang. Favoriser aliments riches en fer et suppléments si nécessaire.",
-hs:"يظهر عند الصغار والنساء. فحص الدم مهم. كول أكل غني بالحديد."
-},
-tags:["حديد","تغذية"]
-},
-{
-id:"diabetes",
-category:"أمراض شائعة",
-title:{ ar:"السكري", fr:"Diabète", hs:"السكر" },
-excerpt:{
-ar:"مرض مزمن في تنظيم السكر. متابعة بالحمية والدواء.",
-fr:"Maladie chronique du sucre. Suivi régime et traitement.",
-hs:"مرض السكر لازم متابعة أكل ودواء."
-},
-content:{
-ar:"السكري يتطلب مراقبة مستوى السكر، الالتزام بالحمية، والنشاط البدني. الكشف المبكر والالتزام بالعلاج يقللان المخاطر.",
-fr:"Le diabète nécessite surveillance glycémique, hygiène de vie et traitement adapté.",
-hs:"راقب السكر، كل كويس، وتحرك."
-},
-tags:["سكري","مزمن"]
-},
-{
-id:"diarrhea",
-category:"أمراض شائعة",
-title:{ ar:"الإسهال", fr:"Diarrhée", hs:"اسهال" },
-excerpt:{
-ar:"فقدان سوائل سريع خصوصا عند الأطفال. تعويض سوائل وملح مهم.",
-fr:"Perte de liquides surtout chez enfants. Réhydratation orale cruciale.",
-hs:"يحتاج تعويض ماء وملح، راجع المركز لو طويل."
-},
-content:{
-ar:"الإسهال عند الأطفال يمكن أن يؤدي للجفاف السريع. حلول التعويض الفموي (ORS) متاحة ويجب استعمالها. تجنب الأطعمة غير المطهية واهتم بالنظافة.",
-fr:"La réhydratation orale (SRO) sauve des vies. Hygiène alimentaire indispensable.",
-hs:"استعمل محاليل تعويضية ومتابعة."
-},
-tags:["جفاف","أطفال"]
-},
-{
-id:"hypertension",
-category:"أمراض شائعة",
-title:{ ar:"ارتفاع ضغط الدم", fr:"Hypertension", hs:"ضغط الدم" },
-excerpt:{
-ar:"قد لا تظهر أعراض. الكشف الدوري مهم. العلاج دوائي أحيانًا.",
-fr:"Souvent asymptomatique. Dépistage régulier et traitement si nécessaire.",
-hs:"ما يبانش غالبا، افحص ضغطك دوريا."
-},
-content:{
-ar:"ارتفاع الضغط يزيد مخاطر السكتة القلبية والدماغية. تقليل الملح، ممارسة الرياضة، والأدوية حسب وصفة الطبيب ذات دور كبير.",
-fr:"Limiter sel, activité physique, et médicaments selon prescription.",
-hs:"نقص الملح وحركة وتنظيم مع الطبيب."
-},
-tags:["ضغط","مزمن"]
-},
-{
-id:"respiratory",
-category:"أمراض شائعة",
-title:{ ar:"التهابات الجهاز التنفسي", fr:"Infections respiratoires", hs:"برد وتنفس" },
-excerpt:{
-ar:"سعال، زكام، صعوبة تنفس في الحالات الحادة. العناية التنفسية مهمة.",
-fr:"Toux, rhume, parfois détresse respiratoire. Soins requis.",
-hs:"سعال وزكام، لو تنفس صعيب زور طبیب."
-},
-content:{
-ar:"تتراوح من نزلات برد بسيطة إلى التهابات رئوية خطيرة. العزل عند الضرورة، وترطيب المسالك، وطلب المساعدة الطبية للحالات الحرجة.",
-fr:"Varie du rhume à la pneumonie. Isolement si contagieux et prise en charge adaptée.",
-hs:"منزلي علاج بسيط، ولو يتعب تنفسه راجع المركز."
-},
-tags:["سعال","زكام"]
-},
-{
-id:"child_vacc",
-category:"صحة الطفل",
-title:{ ar:"لقاحات الأطفال", fr:"Vaccinations infantiles", hs:"تلقيحات الصغار" },
-excerpt:{
-ar:"الجدول الوطني يقي من أمراض خطيرة. راقب مواعيد التطعيم.",
-fr:"Calendrier national protège contre maladies graves. Respecter rendez-vous.",
-hs:"التلقيحات تحمي الصغار، راقب المواعيد."
-},
-content:{
-ar:"التطعيمات المنهجية مثل شلل الأطفال، الحصبة، والكديم ضرورية لحماية المجتمع بأكمله. راجع جدول التطعيم الوطني في المركز الصحي القريب.",
-fr:"Les vaccinations comme polio, rougeole, diphtérie protègent la population. Consultez le centre de santé.",
-hs:"التلقيحات الأساسية مهمة جدا."
-},
-tags:["أطفال","تلقيح"]
-},
-{
-id:"child_nutrition",
-category:"تغذية",
-title:{ ar:"سوء تغذية الأطفال", fr:"Malnutrition infantile", hs:"نقص ماكلة الصغار" },
-excerpt:{
-ar:"نقص السعرات أو العناصر. الوقاية بالتغذية المتوازنة ورصد النمو.",
-fr:"Déficit calorique ou nutritionnel. Prévention: alimentation équilibrée.",
-hs:"الصغار يحتاجو أكل متوازن وفحص النمو."
-},
-content:{
-ar:"سوء التغذية يؤدي لتأخر النمو وزيادة عرضة للأمراض. برامج التغذية والمكملات تحت إشراف الجهات الصحية تساعد في العلاج.",
-fr:"La malnutrition compromet le développement. Programmes de réhabilitation nutritionnelle existent.",
-hs:"لازم متابعة والنظام الغذائي."
-},
-tags:["أطفال","تغذية"]
-},
-{
-id:"breastfeeding",
-category:"صحة المرأة",
-title:{ ar:"الرضاعة الطبيعية", fr:"Allaitement maternel", hs:"حليب الأم" },
-excerpt:{
-ar:"أفضل غذاء للرضيع. مفيد للمناعة والأم.",
-fr:"Meilleure alimentation. Protège l'enfant et la mère.",
-hs:"حليب الأم أحسن، يساعد صغار والماما."
-},
-content:{
-ar:"الرضاعة الطبيعية تمنح الطفل مناعة وتقلل مخاطر العدوى. تشجيع الإرضاع الحصري لستة أشهر ثم إدخال الأغذية المناسبة.",
-fr:"Allaitement exclusif 6 mois recommandé, puis diversification alimentaire.",
-hs:"ننصح بالإرضاع الحصري لستة أشهر."
-},
-tags:["رضاعة","أم"]
-},
-{
-id:"injury",
-category:"حوادث وطفئة",
-title:{ ar:"الإسعافات الأولية للحوادث", fr:"Premiers secours", hs:"إسعافات أولية" },
-excerpt:{
-ar:"إيقاف النزيف، تثبيت الكسور، ونقل المصاب بسرعة عند الضرورة.",
-fr:"Arrêter saignement, immobiliser fractures, et diriger vers urgences.",
-hs:"وقف الدم وتثبيت لو في كسر."
-},
-content:{
-ar:"تعلم إسعافات أولية بسيطة تنقذ حياة: ضغط على الجرح للنزف، إسناد المصاب، وتجنب تحريك الناج. في حالة فقدان الوعي أو توقف التنفس: اتصل بالطوارئ فورًا.",
-fr:"Actions simples sauvent des vies. Compression pour hémorragie, immobilisation, et urgences si nécessaire.",
-hs:"إسعاف بسيط ينقذ، واتصل بالمركز."
-},
-tags:["طوارئ","نقل"]
-},
-{
-id:"covid",
-category:"أمراض شائعة",
-title:{ ar:"التهاب الجهاز التنفسي (كوفيد)", fr:"Infection respiratoire (COVID)", hs:"كوفيد" },
-excerpt:{
-ar:"فيروس يسبب أعراض تنفسية. الوقاية بالتباعد والتلقيح.",
-fr:"Virus respiratoire. Prévention: distanciation et vaccination.",
-hs:"فيروس يسبب سعال وحمى. التحصين مفيد."
-},
-content:{
-ar:"اتباع إرشادات الصحة العامة يساعد في الحد من الانتشار، مع طلب المشورة الطبية للحالات الشديدة.",
-fr:"Respecter mesures sanitaires et consulter si symptômes graves.",
-hs:"اتخاذ احتياطات الصحة العامة."
-},
-tags:["فيروس","وباء"]
-},
-{
-id:"eye_care",
-category:"صحة الطفل",
-title:{ ar:"صحة العين", fr:"Santé oculaire", hs:"صحة العين" },
-excerpt:{
-ar:"فحص النظر للأطفال والكبار مهم للكشف المبكر عن المشاكل.",
-fr:"Dépistage visuel important pour enfants et adultes.",
-hs:"اختبار النظر مهم للصغار والكبار."
-},
-content:{
-ar:"زيارة طبيب العيون عند الشك في ضعف الرؤية أو ألم العين. نظافة العين مهمة لتفادي العدوى.",
-fr:"Consulter un ophtalmo si troubles visuels ou douleur oculaire.",
-hs:"نظافة و متابعة الطبيب."
-},
-tags:["عين","فحص"]
-}
-],
+  // دعم تغيير اللغة
+  function changeLanguage() {
+    var lang = document.getElementById('languageSelect').value;
+    if(lang === 'ar'){
+      document.body.dir = 'rtl';
+      document.getElementById('navTitle').textContent = 'القائمة';
+      document.getElementById('btnHospitals').textContent = 'دليل المستشفيات';
+      document.getElementById('btnDiseases').textContent = 'الأمراض وطرق العلاج';
+      document.getElementById('btnAbout').textContent = 'عن الموقع والمطور';
+      document.getElementById('hospitalsTitle').textContent = 'دليل المستشفيات في موريتانيا';
+      document.getElementById('diseasesTitle').textContent = 'الأمراض وطرق العلاج';
+      document.getElementById('aboutTitle').textContent = 'عن الموقع والمطور';
+      document.getElementById('aboutText').innerHTML = `
+      موقع <strong>صحتي</strong> هو منصة شاملة تهدف إلى تقديم معلومات دقيقة وموثوقة حول المستشفيات في موريتانيا، بالإضافة إلى الأمراض وطرق العلاج والنصائح الصحية.  
+      تم تطوير الموقع بواسطة <strong>رضوان</strong>، مطور مبدع يسعى لنشر الوعي الصحي وتسهيل الوصول إلى المعلومات الطبية لجميع المستخدمين.  
+      يحتوي الموقع على واجهة سهلة الاستخدام، خريطة تفاعلية، ومقالات طبية دقيقة. هدفه تمكين المواطنين من اتخاذ قرارات صحية أفضل وتحسين جودة حياتهم.`;
+      document.getElementById('footer').textContent = 'تم تطوير الموقع بواسطة رضوان';
+    } else if(lang === 'fr'){
+      document.body.dir = 'ltr';
+      document.getElementById('navTitle').textContent = 'Menu';
+      document.getElementById('btnHospitals').textContent = 'Guide des hôpitaux';
+      document.getElementById('btnDiseases').textContent = 'Maladies et traitements';
+      document.getElementById('btnAbout').textContent = 'À propos du site et du développeur';
+      document.getElementById('hospitalsTitle').textContent = 'Guide des hôpitaux en Mauritanie';
+      document.getElementById('diseasesTitle').textContent = 'Maladies et traitements';
+      document.getElementById('aboutTitle').textContent = 'À propos du site et du développeur';
+      document.getElementById('aboutText').innerHTML = `
+      Le site <strong>Ma Santé</strong> est une plateforme complète fournissant des informations fiables sur les hôpitaux en Mauritanie, ainsi que sur les maladies, leurs traitements et des conseils de santé.  
+      Développé par <strong>Redouane</strong>, un développeur passionné visant à sensibiliser le public et faciliter l'accès aux informations médicales.  
+      Le site offre une interface facile à utiliser, une carte interactive et des articles médicaux précis. Son objectif est de permettre aux citoyens de prendre de meilleures décisions pour leur santé et d'améliorer leur qualité de vie.`;
+      document.getElementById('footer').textContent = 'Développé par Redouane';
+    } else {
+      document.body.dir = 'ltr';
+      document.getElementById('navTitle').textContent = 'Menu';
+      document.getElementById('btnHospitals').textContent = 'Hospital Guide';
+      document.getElementById('btnDiseases').textContent = 'Diseases and Treatments';
+      document.getElementById('btnAbout').textContent = 'About the Site & Developer';
+      document.getElementById('hospitalsTitle').textContent = 'Hospital Guide in Mauritania';
+      document.getElementById('diseasesTitle').textContent = 'Diseases and Treatments';
+      document.getElementById('aboutTitle').textContent = 'About the Site & Developer';
+      document.getElementById('aboutText').innerHTML = `
+      <strong>My Health</strong> is a comprehensive platform providing reliable information about hospitals in Mauritania, diseases, treatments, and health tips.  
+      Developed by <strong>Redouane</strong>, a dedicated developer aiming to raise health awareness and facilitate access to medical information.  
+      The site features an easy-to-use interface, interactive maps, and accurate medical articles. Its goal is to empower citizens to make better health decisions and improve quality of life.`;
+      document.getElementById('footer').textContent = 'Developed by Redouane';
+    }
+  }
+</script>
 
-hospitals: [
-// id, name{ar,fr,hs}, city, lat,lng, phone (optional)
-{ id:"h_nouak", name:{ar:"المستشفى الوطني بنواكشوط", fr:"Hôpital National Nouakchott", hs:"المستشفى الوطني - نواكشوط"}, city:"نواكشوط", lat:18.0858, lng:-15.9946, phone:"+222-----" },
-{ id:"h_oued", name:{ar:"مركز الاستقبال والطب الطارئ - نواكشوط", fr:"Centre des Urgences Nouakchott", hs:"مركز الطوارئ - نواكشوط"}, city:"نواكشوط", lat:18.0820, lng:-15.9780, phone:"" },
-{ id:"h_nouad", name:{ar:"المستشفى الجهوي نواذيبو", fr:"Hôpital Régional Nouadhibou", hs:"مستشفى نواذيبو"}, city:"نواذيبو", lat:20.9311, lng:-17.0315, phone:"+222-----" },
-{ id:"h_kiffa", name:{ar:"مستشفى كيفة", fr:"Hôpital de Kiffa", hs:"مستشفى كيفة"}, city:"كيفة", lat:16.6176, lng:-11.4030, phone:"" },
-{ id:"h_rosso", name:{ar:"مستشفى روصو", fr:"Hôpital de Rosso", hs:"مستشفى روصو"}, city:"روصو", lat:16.4815, lng:-15.8069, phone:"" },
-{ id:"h_kaedi", name:{ar:"مستشفى كيهيدي", fr:"Hôpital de Kaédi", hs:"مستشفى كيهيدي"}, city:"كيهيدي", lat:16.1670, lng:-13.4950, phone:"" },
-{ id:"h_aleg", name:{ar:"مستشفى ألاك/ألاك", fr:"Hôpital Aleg", hs:"مستشفى ألاك"}, city:"ألاك", lat:17.0419, lng:-14.0492, phone:"" }
-]
-};
-
-/*******************
-
-App state
-*******************/
-let STATE = {
-lang: 'ar', // ar | fr | hs
-mode: 'disease', // disease | hospital
-category: null,
-query: ''
-};
-
-
-/*******************
-
-Helpers
-*******************/
-function t(obj){
-if(typeof obj === 'string') return obj;
-return obj[STATE.lang] || obj['ar'] || Object.values(obj)[0];
-}
-
-
-function elem(id){return document.getElementById(id)}
-
-/*******************
-
-Render UI
-*******************/
-function renderMeta(){
-elem('siteTitle').textContent = t(DATA.meta.title);
-elem('siteTag').textContent = t(DATA.meta.tagline);
-elem('aboutText').textContent = t(DATA.meta.about);
-elem('contactText').textContent = t(DATA.meta.contact);
-elem('footerText').textContent = ${t(DATA.meta.title)} © 2025;
-// direction
-if(STATE.lang === 'fr'){
-document.documentElement.lang = 'fr';
-document.body.classList.add('ltr');
-document.body.dir = 'ltr';
-} else {
-document.body.classList.remove('ltr');
-document.body.dir = 'rtl';
-document.documentElement.lang = 'ar';
-}
-}
-
-
-function renderCategories(){
-const container = elem('categoryPills');
-container.innerHTML = '';
-const cats = DATA.categories[STATE.lang] || DATA.categories.ar;
-cats.forEach(c=>{
-const btn = document.createElement('button');
-btn.className = 'pill';
-if(STATE.category === c) btn.classList.add('secondary');
-btn.textContent = c;
-btn.onclick = ()=>{ STATE.category = (STATE.category===c?null:c); refresh(); };
-container.appendChild(btn);
-});
-}
-
-function buildArticleCard(d){
-const card = document.createElement('div');
-card.className = 'card';
-const h = document.createElement('h3');
-h.textContent = t(d.title);
-const p = document.createElement('p');
-p.textContent = t(d.excerpt);
-const a = document.createElement('a');
-a.href = '#';
-a.className = 'readmore';
-a.textContent = (STATE.lang==='fr') ? 'Lire plus' : (STATE.lang==='hs' ? 'ورش' : 'اقرأ المزيد');
-a.onclick = (e)=>{ e.preventDefault(); showArticleModal(d); };
-card.appendChild(h);card.appendChild(p);card.appendChild(a);
-return card;
-}
-
-function renderArticles(){
-const grid = elem('articlesGrid');
-grid.innerHTML = '';
-const q = STATE.query.trim().toLowerCase();
-let items = DATA.diseases.slice();
-
-if(STATE.category){
-items = items.filter(x => (x.category === STATE.category));
-}
-if(q){
-items = items.filter(x => {
-const matchesTitle = t(x.title).toLowerCase().includes(q);
-const matchesExcerpt = t(x.excerpt).toLowerCase().includes(q);
-const matchesTags = (x.tags || []).join(' ').toLowerCase().includes(q);
-return matchesTitle || matchesExcerpt || matchesTags;
-});
-}
-
-if(items.length === 0){
-elem('noResults').style.display = 'block';
-} else {
-elem('noResults').style.display = 'none';
-}
-
-items.forEach(d=>{
-grid.appendChild(buildArticleCard(d));
-});
-}
-
-function renderHospitals(){
-const list = elem('hospitalList');
-list.innerHTML = '';
-DATA.hospitals.forEach(h=>{
-const div = document.createElement('div');
-div.className = 'h-item';
-div.onclick = ()=>{ focusHospital(h); };
-const left = document.createElement('div');
-left.style.flex = '1';
-const title = document.createElement('div');
-title.className = 'h-title';
-title.textContent = t(h.name);
-const sub = document.createElement('div');
-sub.className = 'h-sub';
-sub.textContent = h.city + (h.phone ? (' • ' + h.phone) : '');
-left.appendChild(title);left.appendChild(sub);
-const icon = document.createElement('div');
-icon.textContent = '📍';
-icon.style.fontSize = '22px';
-div.appendChild(left);div.appendChild(icon);
-list.appendChild(div);
-});
-}
-
-function focusHospital(h){
-// show in map iframe with lat/lng
-const lat = h.lat, lng = h.lng;
-const zoom = 15;
-const src = https://www.google.com/maps?q=${lat},${lng}&z=${zoom}&output=embed;
-elem('mapFrame').src = src;
-// also open small popup card? just scroll to map
-elem('mapFrame').scrollIntoView({behavior:'smooth',block:'center'});
-}
-
-/*******************
-
-Article modal (simple)
-*******************/
-function showArticleModal(d){
-// create overlay
-const overlay = document.createElement('div');
-overlay.style.position='fixed';
-overlay.style.inset='0';
-overlay.style.background='rgba(0,0,0,0.45)';
-overlay.style.display='flex';
-overlay.style.alignItems='center';
-overlay.style.justifyContent='center';
-overlay.style.zIndex=9999;
-
-
-const box = document.createElement('div');
-box.style.maxWidth='900px';
-box.style.width='92%';
-box.style.maxHeight='85%';
-box.style.overflow='auto';
-box.style.background='white';
-box.style.borderRadius='12px';
-box.style.padding='18px';
-box.style.boxShadow='0 20px 60px rgba(11,123,123,0.18)';
-box.className = (STATE.lang === 'fr') ? 'ltr' : '';
-
-const title = document.createElement('h2');
-title.textContent = t(d.title);
-const cat = document.createElement('div');
-cat.textContent = (STATE.lang==='fr') ? ('Catégorie: ' + d.category) : ('التصنيف: ' + d.category);
-cat.style.color='var(--muted)';
-cat.style.marginBottom='12px';
-const content = document.createElement('p');
-content.textContent = t(d.content);
-content.style.lineHeight='1.6';
-const close = document.createElement('button');
-close.textContent = (STATE.lang==='fr') ? 'Fermer' : (STATE.lang==='hs' ? 'سدي' : 'إغلاق');
-close.style.marginTop='12px';
-close.style.padding='8px 12px';
-close.style.border='0';
-close.style.background='var(--accent)';
-close.style.color='white';
-close.style.borderRadius='8px';
-close.onclick = ()=>{ document.body.removeChild(overlay); };
-
-box.appendChild(title);box.appendChild(cat);box.appendChild(content);box.appendChild(close);
-overlay.appendChild(box);
-document.body.appendChild(overlay);
-}
-
-/*******************
-
-Search handling
-*******************/
-const searchInput = elem('globalSearch');
-const tabDisease = elem('tabDisease');
-const tabHospital = elem('tabHospital');
-
-
-function setMode(mode){
-STATE.mode = mode;
-tabDisease.classList.toggle('active', mode==='disease');
-tabHospital.classList.toggle('active', mode==='hospital');
-searchInput.placeholder = (mode==='hospital') ? ((STATE.lang==='fr')? 'Rechercher un hôpital...':'ابحث عن مستشفى...') : ((STATE.lang==='fr')? 'Rechercher une maladie...':'ابحث عن مرض أو مقال...');
-refresh();
-}
-
-searchInput.addEventListener('input', (e)=>{
-STATE.query = e.target.value;
-refresh();
-});
-
-tabDisease.addEventListener('click', ()=>setMode('disease'));
-tabHospital.addEventListener('click', ()=>setMode('hospital'));
-
-/*******************
-
-Language switching
-*******************/
-const langs = document.querySelectorAll('.lang-btn');
-langs.forEach(btn=>{
-btn.addEventListener('click', ()=>{
-langs.forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
-STATE.lang = btn.dataset.lang;
-applyLanguage();
-});
-});
-
-
-function applyLanguage(){
-renderMeta();
-renderCategories();
-renderArticles();
-renderHospitals();
-// update placeholders and buttons
-searchInput.placeholder = (STATE.mode==='hospital') ? ((STATE.lang==='fr')? 'Rechercher un hôpital...':'ابحث عن مستشفى...') : ((STATE.lang==='fr')? 'Rechercher une maladie...':'ابحث عن مرض أو مقال...');
-elem('heroTitle').textContent = (STATE.lang==='fr') ? 'Encyclopédie des maladies et conseils' : (STATE.lang==='hs' ? 'موسوعة الأمراض' : 'موسوعة الأمراض ونصائح الوقاية');
-elem('heroSub').textContent = (STATE.lang==='fr') ? 'Articles simples, vidéos de sensibilisation et carte des hôpitaux.' : (STATE.lang==='hs' ? 'مقالات وفيديوهات وخريطة المستشفيات' : 'مقالات مبسطة، فيديوهات توعوية، وخريطة لجميع المستشفيات.');
-elem('hospTitle').textContent = (STATE.lang==='fr') ? 'Hôpitaux sélectionnés' : '🏥 مستشفيات مختارة';
-elem('hospSub').textContent = (STATE.lang==='fr') ? 'Cliquez pour voir sur la carte' : 'اضغط على أي مستشفى لعرض موقعه على الخريطة';
-elem('aboutTitle').textContent = (STATE.lang==='fr') ? 'À propos' : 'ℹ️ عن الموقع';
-elem('siteTitle').textContent = t(DATA.meta.title);
-elem('brand').querySelector('.logo').textContent = (STATE.lang==='fr') ? 'S' : 'ص';
-// direction handled in renderMeta
-}
-
-/*******************
-
-Hospital search filtering (when mode is hospital)
-*******************/
-function renderHospitalSearch(){
-const q = STATE.query.trim().toLowerCase();
-const list = elem('hospitalList');
-list.innerHTML = '';
-const filtered = DATA.hospitals.filter(h=>{
-const name = t(h.name).toLowerCase();
-const city = (h.city||'').toLowerCase();
-return name.includes(q) || city.includes(q) || (!q);
-});
-if(filtered.length === 0){
-const no = document.createElement('div');
-no.className='nores';
-no.textContent = (STATE.lang==='fr') ? 'Aucun hôpital trouvé.' : 'لا يوجد مستشفى';
-list.appendChild(no);
-return;
-}
-filtered.forEach(h=>{
-const div = document.createElement('div');
-div.className='h-item';
-div.onclick = ()=>{ focusHospital(h); };
-const left = document.createElement('div'); left.style.flex='1';
-const title = document.createElement('div'); title.className='h-title'; title.textContent = t(h.name);
-const sub = document.createElement('div'); sub.className='h-sub'; sub.textContent = h.city + (h.phone ? (' • ' + h.phone) : '');
-left.appendChild(title); left.appendChild(sub);
-const icon = document.createElement('div'); icon.textContent='📍'; icon.style.fontSize='20px';
-div.appendChild(left); div.appendChild(icon);
-list.appendChild(div);
-});
-}
-
-
-/*******************
-
-Refresh main view
-*******************/
-function refresh(){
-if(STATE.mode === 'disease'){
-renderCategories();
-renderArticles();
-} else {
-renderHospitalSearch();
-}
-}
-
-
-/*******************
-
-Initial setup
-*******************/
-function init(){
-renderMeta();
-renderCategories();
-renderArticles();
-renderHospitals();
-// events
-// quick keyboard: Enter focuses first result
-document.addEventListener('keydown', (e)=>{
-if(e.key === 'Enter'){
-// if hospital mode and there is a first hospital, focus it
-if(STATE.mode === 'hospital'){
-const first = DATA.hospitals[0];
-if(first) focusHospital(first);
-}
-}
-});
-}
-
-
-init();
-
-</script>  </body>
-
-</html>    
+</body>
+</html>  
