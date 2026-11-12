@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق تحويل الأموال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #111315;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 480px;
+            margin: 0 auto;
+            border-left: 1px solid #222;
+            border-right: 1px solid #222;
+        }
+
+        .page {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        .top-header {
+            background-color: #0eb4c2;
+            padding: 18px 20px 25px;
+            color: #ffffff;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .menu-icon, .back-icon {
+            font-size: 22px;
+            color: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        /* الواجهة 1: لوحة القيادة */
+        .top-actions {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .circle-icon {
+            width: 58px;
+            height: 58px;
+            background-color: #0a8d99;
+            border: 1.5px solid #c5e063;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .action-item span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dashboard-grid {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            flex-grow: 1;
+            align-content: start;
+        }
+
+        .grid-card {
+            background-color: #16181a;
+            border: 1px solid #3a3d40;
+            border-radius: 4px;
+            padding: 22px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #e0e0e0;
+            gap: 14px;
+            min-height: 125px;
+            cursor: pointer;
+        }
+
+        .grid-card i { font-size: 32px; }
+        .icon-teal { color: #0eb4c2; }
+        .icon-gold { color: #eab308; }
+
+        .gimtel-badge {
+            width: 44px;
+            height: 44px;
+            background-color: #0eb4c2;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .grid-card span { font-size: 12.5px; font-weight: 600; line-height: 1.3; }
+
+        .bottom-nav {
+            background-color: #1c1e21;
+            border-top: 1px solid #2c2f33;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 8px;
+            margin-top: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #888b8e;
+            font-size: 12px;
+            gap: 4px;
+        }
+        .nav-item i { font-size: 20px; }
+        .nav-item.active { color: #0eb4c2; }
+
+        /* الواجهة 2: تحويل الأموال */
+        .action-buttons-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .top-btn {
+            background-color: #0a8d99;
+            border: none;
+            border-radius: 4px;
+            padding: 16px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        .top-btn.yellow { background-color: #facc15; color: #111315; }
+        .top-btn i { font-size: 22px; }
+        .top-btn span { font-size: 13.5px; font-weight: 700; }
+
+        .main-content {
+            padding: 20px 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-title { font-size: 15px; color: #c0c0c0; text-align: center; margin-bottom: 5px; }
+        .quick-transfer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .quick-card {
+            background-color: #16181a;
+            border: 1px solid #3a3d40;
+            border-radius: 4px;
+            padding: 24px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #e0e0e0;
+            gap: 14px;
+        }
+        .quick-card i { font-size: 28px; color: #0eb4c2; }
+        .quick-card span { font-size: 14px; font-weight: 600; }
+
+        .board-section { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
+        .board-desc { font-size: 12.5px; color: #9ca3af; text-align: center; margin-bottom: 15px; line-height: 1.5; }
+        .add-board-box {
+            width: 100%;
+            max-width: 260px;
+            height: 130px;
+            border: 2px dashed #0eb4c2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(14, 180, 194, 0.03);
+            cursor: pointer;
+        }
+        .add-board-box i { font-size: 36px; color: #0eb4c2; }
+
+        /* الواجهة 3: إرسال الأموال */
+        .top-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #ffffff;
+            gap: 6px;
+            opacity: 0.7;
+        }
+        .tab-item.active { opacity: 1; }
+        .tab-circle {
+            width: 44px;
+            height: 44px;
+            background-color: #0a8d99;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .form-content {
+            padding: 20px 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            background-color: #16181a;
+            border: 1px solid #3a3d40;
+            border-radius: 4px;
+            padding: 12px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .input-label { font-size: 13px; color: #9ca3af; }
+        .input-field-wrapper { display: flex; align-items: center; justify-content: space-between; }
+        .input-field { background: transparent; border: none; color: #ffffff; font-size: 15px; width: 100%; outline: none; font-family: 'Cairo', sans-serif; }
+        .input-field::placeholder { color: #6b7280; }
+        .input-icon-left { color: #eab308; font-size: 18px; background-color: #1f2327; padding: 8px; border-radius: 4px; }
+
+        .submit-container { padding: 15px; margin-top: auto; }
+        .submit-btn {
+            width: 100%;
+            background-color: #facc15;
+            color: #111315;
+            border: none;
+            border-radius: 4px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* الواجهة 4: مراجعة التفاصيل */
+        .review-card {
+            background-color: #ffffff;
+            color: #111315;
+            border-radius: 8px;
+            margin: 20px 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .review-phone { font-weight: 700; font-size: 18px; color: #111315; }
+        .review-amount-box {
+            background-color: #f3f4f6;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .review-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #4b5563;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .review-row:last-child { border-bottom: none; }
+        .review-row span:last-child { font-weight: 700; color: #111315; }
+
+        /* نافذة خطأ إدخال الرقم */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .modal-box {
+            background-color: #ffffff;
+            color: #111315;
+            width: 85%;
+            max-width: 300px;
+            border-radius: 6px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .modal-header-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            padding: 20px 20px 10px 20px;
+        }
+        .modal-body-text {
+            font-size: 14px;
+            color: #4b5563;
+            padding: 0 20px 20px 20px;
+        }
+        .modal-action-btn {
+            background-color: #0eb4c2;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* نافذة الرمز السري */
+        .pin-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .pin-modal-box {
+            background-color: #ffffff;
+            color: #111315;
+            width: 88%;
+            max-width: 310px;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .pin-close-icon {
+            position: absolute;
+            top: 12px; left: 12px;
+            font-size: 18px;
+            color: #4b5563;
+            cursor: pointer;
+        }
+        .pin-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+        .pin-lines-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .pin-line {
+            width: 35px;
+            border-bottom: 2px solid #1f2937;
+            font-size: 20px;
+            height: 30px;
+            line-height: 30px;
+            font-weight: bold;
+        }
+        .pin-submit-btn {
+            background-color: #0eb4c2;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* ================= الوصل النهائي (مطابق بالحرف والنقطة للصورة الأخيرة 7) ================= */
+        .success-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .success-modal-box {
+            background-color: #ffffff;
+            color: #111315;
+            width: 86%;
+            max-width: 315px;
+            border-radius: 6px;
+            padding: 24px 18px 18px 18px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+        .success-check-icon {
+            width: 60px; height: 60px;
+            border: 3px solid #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #22c55e;
+            font-size: 28px;
+            margin: 0 auto 10px auto;
+        }
+        .success-heading {
+            font-weight: 700;
+            font-size: 17px;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+        .receipt-details-text {
+            font-size: 14px;
+            color: #1f2937;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .receipt-meta-box {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 12px;
+            text-align: right;
+            font-size: 13px;
+            color: #4b5563;
+            line-height: 1.8;
+        }
+        .receipt-meta-box div {
+            display: flex;
+            justify-content: space-between;
+        }
+        .receipt-meta-box span {
+            color: #111315;
+            font-weight: 700;
+        }
+        .receipt-favorite-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 13.5px;
+            color: #4b5563;
+        }
+        .receipt-favorite-bar i {
+            color: #9ca3af;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .receipt-favorite-bar i.active {
+            color: #eab308;
+        }
+        .success-done-btn {
+            background-color: #0eb4c2;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 11px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= الواجهة 1: الرئيسية ================= -->
+    <div id="page1" class="page active">
+        <header class="top-header">
+            <div class="navbar">
+                <i class="fa-solid fa-bars menu-icon"></i>
+                <h1 class="page-title">لوحة القيادة</h1>
+            </div>
+            <div class="top-actions">
+                <div class="action-item">
+                    <div class="circle-icon"><i class="fa-solid fa-cash-register"></i></div>
+                    <span>تسديد مشتريات</span>
+                </div>
+                <div class="action-item" onclick="showPage('page2')">
+                    <div class="circle-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                    <span>تحويل الأموال</span>
+                </div>
+                <div class="action-item">
+                    <div class="circle-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <span>حسابي</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <div class="grid-card"><i class="fa-solid fa-mobile-screen-button icon-teal"></i><span>تعبئة رصيد الهاتف</span></div>
+            <div class="grid-card"><i class="fa-solid fa-file-invoice icon-gold"></i><span>تسديد الفواتير</span></div>
+            <div class="grid-card"><i class="fa-solid fa-money-check icon-teal"></i><span>طلب دفتر شيكات</span></div>
+            <div class="grid-card"><i class="fa-regular fa-credit-card icon-gold"></i><span>البطاقات البنكية</span></div>
+            <div class="grid-card"><i class="fa-solid fa-money-bills icon-teal"></i><span>سحب النقود</span></div>
+            <div class="grid-card"><i class="fa-solid fa-mobile-retro icon-gold"></i><span>ب-باي</span></div>
+            <div class="grid-card"><div class="gimtel-badge">G</div><span>جيمتل</span></div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
+            <a href="#" class="nav-item"><i class="fa-regular fa-star"></i><span>المفضلة</span></a>
+            <a href="#" class="nav-item"><i class="fa-regular fa-bell"></i><span>الإشعارات</span></a>
+            <a href="#" class="nav-item"><i class="fa-regular fa-circle-question"></i><span>المساعدة</span></a>
+        </nav>
+    </div>
+
+    <!-- ================= الواجهة 2: تحويل الأموال ================= -->
+    <div id="page2" class="page">
+        <header class="top-header">
+            <div class="navbar">
+                <h1 class="page-title">تحويل الأموال</h1>
+                <i class="fa-solid fa-arrow-left back-icon" onclick="showPage('page1')"></i>
+            </div>
+            <div class="action-buttons-top">
+                <button class="top-btn">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>طلب المال</span>
+                </button>
+                <button class="top-btn yellow" onclick="showPage('page3')">
+                    <i class="fa-solid fa-right-left"></i>
+                    <span>إرسال الأموال</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div>
+                <h3 class="section-title">التحويل السريع</h3>
+                <div class="quick-transfer-grid" style="margin-top: 10px;">
+                    <div class="quick-card"><i class="fa-solid fa-qrcode"></i><span>رمز QR</span></div>
+                    <div class="quick-card"><i class="fa-solid fa-wifi"></i><span>تقنية NFC</span></div>
+                </div>
+            </div>
+
+            <div class="board-section">
+                <h3 class="section-title">اللوحة</h3>
+                <p class="board-desc">أنشئ مجموعة جديدة أو حدد مجموعة حالية لتقسيم المبلغ</p>
+                <div class="add-board-box"><i class="fa-solid fa-plus"></i></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ================= الواجهة 3: إرسال الأموال ================= -->
+    <div id="page3" class="page">
+        <header class="top-header" style="background-color: #0eb4c2;">
+            <div class="navbar">
+                <h1 class="page-title">إرسال الأموال</h1>
+                <i class="fa-solid fa-arrow-left back-icon" onclick="showPage('page2')"></i>
+            </div>
+            <div class="top-tabs">
+                <div class="tab-item active">
+                    <div class="tab-circle"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <span style="font-size:11px;">رقم الهاتف</span>
+                </div>
+                <div class="tab-item"><div class="tab-circle"><i class="fa-solid fa-user"></i></div><span style="font-size:11px;">اسم المستخدم</span></div>
+                <div class="tab-item"><div class="tab-circle"><i class="fa-solid fa-building-columns"></i></div><span style="font-size:11px;">بنك</span></div>
+                <div class="tab-item"><div class="tab-circle"><i class="fa-brands fa-facebook-f"></i></div><span style="font-size:11px;">فيسبوك</span></div>
+            </div>
+        </header>
+
+        <main class="form-content">
+            <div class="input-group">
+                <span class="input-label">رقم الهاتف</span>
+                <div class="input-field-wrapper">
+                    <input type="text" id="phoneInput" class="input-field" placeholder="أدخل رقم الهاتف" maxlength="8">
+                    <i class="fa-solid fa-address-book input-icon-left"></i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <span class="input-label">المبلغ</span>
+                <div class="input-field-wrapper">
+                    <input type="number" id="amountInput" class="input-field" placeholder="أدخل المبلغ">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <span class="input-label">ملاحظة (اختياري)</span>
+                <div class="input-field-wrapper">
+                    <input type="text" class="input-field" placeholder="أدخل ملاحظة">
+                </div>
+            </div>
+        </main>
+
+        <div class="submit-container">
+            <button type="button" class="submit-btn" onclick="validateAndProceed()">إرسال</button>
+        </div>
+    </div>
+
+    <!-- نافذة خطأ إدخال الرقم -->
+    <div id="errorModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header-text">خطأ</div>
+            <div class="modal-body-text">أدخل رقم هاتف صالح</div>
+            <button type="button" class="modal-action-btn" onclick="closeErrorModal()">تم</button>
+        </div>
+    </div>
+
+    <!-- ================= الواجهة 4: تأكيد تحويل الأموال ================= -->
+    <div id="page4" class="page">
+        <header class="top-header" style="background-color: #0eb4c2;">
+            <div class="navbar">
+                <h1 class="page-title">تأكيد تحويل الأموال</h1>
+                <i class="fa-solid fa-arrow-left back-icon" onclick="showPage('page3')"></i>
+            </div>
+            <div style="text-align: center; font-size: 13px; color: #e6fffa; padding-bottom: 5px;">مراجعة التفاصيل المدخلة</div>
+        </header>
+
+        <div class="review-card">
+            <div class="review-header">
+                <span id="reviewPhoneDisplay" class="review-phone">44444400</span>
+                <i class="fa-solid fa-mobile-screen-button" style="font-size: 24px; color: #4b5563;"></i>
+            </div>
+
+            <div class="review-amount-box">
+                <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">المبلغ</div>
+                <div id="reviewAmountDisplay" style="font-size: 18px; font-weight: 700; color: #111315;">MRU 50</div>
+            </div>
+
+            <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">تفاصيل تكلفة الخدمة</div>
+            <div class="review-row"><span>تكلفة الخدمة</span><span>MRU 17.25</span></div>
+            <div class="review-row"><span>العمولة</span><span>MRU 0</span></div>
+            <div class="review-row"><span>الضريبة</span><span>MRU 3.45</span></div>
+        </div>
+
+        <div class="submit-container" style="background-color: transparent;">
+            <button type="button" class="submit-btn" onclick="openPinModal()">أتمم</button>
+        </div>
+    </div>
+
+    <!-- ================= الواجهة 5: نافذة الرمز السري ================= -->
+    <div id="pinModal" class="pin-modal-overlay">
+        <div class="pin-modal-box">
+            <i class="fa-solid fa-xmark pin-close-icon" onclick="closePinModal()"></i>
+            <div class="pin-title">الرجاء إدخال الرمز السري</div>
+            
+            <input type="number" id="hiddenPinInput" style="position: absolute; opacity: 0; pointer-events: none;" maxlength="4" oninput="updatePinDisplay(this.value)">
+
+            <div class="pin-lines-container" onclick="document.getElementById('hiddenPinInput').focus();" style="cursor: pointer;">
+                <div class="pin-line" id="d1">_</div>
+                <div class="pin-line" id="d2">_</div>
+                <div class="pin-line" id="d3">_</div>
+                <div class="pin-line" id="d4">_</div>
+            </div>
+
+            <button type="button" class="pin-submit-btn" onclick="submitPin()">ارسل الطلب</button>
+        </div>
+    </div>
+
+    <!-- ================= الواجهة 6: الوصل النهائي (المطابق تماماً للصورة الأخيرة) ================= -->
+    <div id="successModal" class="success-modal-overlay">
+        <div class="success-modal-box">
+            <div class="success-check-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="success-heading">النقل ناجح!</div>
+
+            <div class="receipt-details-text">
+                المستفيد: <span id="finalPhone" style="font-weight: 700;">43487195</span> المبلغ المرسل: <span id="finalAmount" style="font-weight: 700;">310</span> MRU
+            </div>
+
+            <div class="receipt-meta-box">
+                <div>معرف المعاملة : <span id="transactionId">1326111208050680000</span></div>
+                <div style="margin-top: 4px;">التاريخ والوقت : <span id="transactionDateTime">26-11-12 08:05:09</span></div>
+            </div>
+
+            <div class="receipt-favorite-bar">
+                <span>إضافة إلى المفضلة</span>
+                <i class="fa-solid fa-star" id="favStar" onclick="toggleFavorite()"></i>
+            </div>
+
+            <button type="button" class="success-done-btn" onclick="closeSuccessModal()">تم</button>
+        </div>
+    </div>
+
+    <!-- البرمجة -->
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function validateAndProceed() {
+            const phone = document.getElementById('phoneInput').value.trim();
+            const amount = document.getElementById('amountInput').value.trim();
+            const mauritanianPhoneRegex = /^[234]\d{7}$/;
+
+            if (!mauritanianPhoneRegex.test(phone)) {
+                document.getElementById('errorModal').style.display = 'flex';
+                return;
+            }
+
+            if (amount === '' || Number(amount) <= 0) {
+                alert("الرجاء إدخال مبلغ صالح");
+                return;
+            }
+
+            document.getElementById('reviewPhoneDisplay').innerText = phone;
+            document.getElementById('reviewAmountDisplay').innerText = 'MRU ' + amount;
+
+            showPage('page4');
+        }
+
+        function closeErrorModal() {
+            document.getElementById('errorModal').style.display = 'none';
+        }
+
+        function openPinModal() {
+            document.getElementById('hiddenPinInput').value = '';
+            updatePinDisplay('');
+            document.getElementById('pinModal').style.display = 'flex';
+            setTimeout(() => document.getElementById('hiddenPinInput').focus(), 100);
+        }
+
+        function closePinModal() {
+            document.getElementById('pinModal').style.display = 'none';
+        }
+
+        function updatePinDisplay(val) {
+            val = val.slice(0, 4);
+            document.getElementById('hiddenPinInput').value = val;
+            for (let i = 1; i <= 4; i++) {
+                const dot = document.getElementById('d' + i);
+                if (i <= val.length) {
+                    dot.innerText = '•';
+                    dot.style.fontSize = '28px';
+                    dot.style.lineHeight = '20px';
+                } else {
+                    dot.innerText = '_';
+                    dot.style.fontSize = '20px';
+                    dot.style.lineHeight = '30px';
+                }
+            }
+        }
+
+        function submitPin() {
+            const pin = document.getElementById('hiddenPinInput').value.trim();
+            if (pin.length < 4) {
+                alert("الرجاء إدخال الرمز السري كاملاً (4 أرقام)");
+                return;
+            }
+
+            closePinModal();
+
+            const phone = document.getElementById('phoneInput').value;
+            const amount = document.getElementById('amountInput').value;
+
+            document.getElementById('finalPhone').innerText = phone;
+            document.getElementById('finalAmount').innerText = amount;
+
+            const randomTransId = '1326' + Math.floor(100000000000000 + Math.random() * 900000000000000);
+            document.getElementById('transactionId').innerText = randomTransId;
+
+            const now = new Date();
+            const year = now.getFullYear().toString().slice(-2);
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('transactionDateTime').innerText = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+
+            document.getElementById('successModal').style.display = 'flex';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+            showPage('page1');
+        }
+
+        function toggleFavorite() {
+            const star = document.getElementById('favStar');
+            star.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
