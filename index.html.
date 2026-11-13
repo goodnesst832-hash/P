@@ -91,15 +91,19 @@
 
         /* تعديل الدائرة لتطابق الصورة (حدود خضراء) */
         .circle-icon {
-            width: 56px;
-            height: 56px;
+            width: 60px;
+            height: 60px;
             background-color: #0a8d99;
             border: 2px solid #c5e063; /* اللون الأخضر الفاتح */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+        }
+
+        .circle-icon svg {
+            width: 32px;
+            height: 32px;
         }
 
         .action-item span {
@@ -620,16 +624,40 @@
             </div>
             <div class="top-actions">
                 <!-- تم الترتيب ليطابق الصورة: حسابي - تحويل الأموال - تسديد مشتريات -->
+                <!-- 1. حسابي (يسار) -->
                 <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="7" y="4" width="10" height="16" rx="1" stroke="white" stroke-width="1.5"/>
+                            <rect x="9" y="2" width="10" height="16" rx="1" stroke="white" stroke-width="1.5"/>
+                            <path d="M11 6H17M11 9H17M11 12H15" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
                     <span>حسابي</span>
                 </div>
+                <!-- 2. تحويل الأموال (وسط) -->
                 <div class="action-item" onclick="showPage('page2')">
-                    <div class="circle-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="6" width="18" height="12" rx="1.5" stroke="white" stroke-width="1.5"/>
+                            <circle cx="12" cy="12" r="2.5" stroke="white" stroke-width="1.5"/>
+                            <path d="M7 12H4M17 12H20M7 9H4M17 9H20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M3 15L5 13M3 15L5 17" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
                     <span>تحويل الأموال</span>
                 </div>
+                <!-- 3. تسديد مشتريات (يمين) -->
                 <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 4V7C12 8.1 11.1 9 10 9H7C5.9 9 5 8.1 5 7V4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M19 6V9C19 10.1 18.1 11 17 11H14" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M8 10V20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M16 12V20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            <rect x="5" y="2" width="14" height="20" rx="2" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                    </div>
                     <span>تسديد مشتريات</span>
                 </div>
             </div>
