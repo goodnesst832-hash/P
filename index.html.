@@ -644,7 +644,27 @@
                 </svg>
                 <span>تعبئة رصيد الهاتف</span>
             </div>
-            <div class="grid-card"><i class="fa-solid fa-file-invoice-dollar icon-gold"></i><span>تسديد الفواتير</span></div>
+            <!-- الرمز الثاني الحقيقي: تسديد الفواتير -->
+            <div class="grid-card">
+                <svg viewBox="0 0 44 44" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 5H30V31H11" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M11 5V21" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+                    <rect x="14.5" y="9" width="12" height="4.5" stroke="#facc15" stroke-width="1.7"/>
+                    <line x1="19" y1="17.5" x2="26.5" y2="17.5" stroke="#facc15" stroke-width="1.7" stroke-linecap="round"/>
+                    <line x1="19" y1="21" x2="26.5" y2="21" stroke="#facc15" stroke-width="1.7" stroke-linecap="round"/>
+                    <line x1="19" y1="24.5" x2="26.5" y2="24.5" stroke="#facc15" stroke-width="1.7" stroke-linecap="round"/>
+                    <line x1="15" y1="17.5" x2="16.2" y2="17.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="15" y1="21" x2="16.2" y2="21" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="15" y1="24.5" x2="16.2" y2="24.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
+                    <!-- الجزء الملتف يمين الفاتورة -->
+                    <path d="M30 18H36V27.5C36 29.5 34.5 31 32.5 31H29" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/>
+                    <!-- اليد الممسكة بالورقة من اليسار -->
+                    <path d="M11 20C8.5 21.5 7 24 7 27V38" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M11 24.5L13.5 23.5C14.8 23 15.8 24.3 14.8 25.5L11.5 28.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 31V35.5C16 36.8 15 38 13.5 38" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span>تسديد الفواتير</span>
+            </div>
             <div class="grid-card"><i class="fa-solid fa-money-check-dollar icon-teal"></i><span>طلب دفتر شيكات</span></div>
             <div class="grid-card"><i class="fa-regular fa-credit-card icon-gold"></i><span>البطاقات البنكية</span></div>
             <div class="grid-card"><i class="fa-solid fa-money-bill-wave icon-teal"></i><span>سحب النقود</span></div>
