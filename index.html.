@@ -399,7 +399,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 10px;
+            gap: 12px;
             padding: 0 20px 14px;
             direction: ltr;
             flex-shrink: 0;
@@ -410,9 +410,14 @@
             color: #1f2937;
             letter-spacing: 0.5px;
         }
+        /* تصميم الدائرة الداكنة لأيقونة الهاتف تماماً مثل الصورة الحقيقية */
         .recipient-phone-icon-match {
-            font-size: 20px;
-            color: #4b5563;
+            width: 38px;
+            height: 38px;
+            background-color: #2b3137;
+            border-radius: 50%;
+            color: #9ca3af;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -561,7 +566,7 @@
             color: #111315;
         }
 
-        /* ================= تصميم الوصل (مطابق تماماً للصورة الحقيقية وبقيمة اللون #111111) ================= */
+        /* ================= تصميم الوصل (مطابق تماماً للصورة الحقيقية) ================= */
         .receipt-box {
             background-color: #ffffff;
             width: 88%;
@@ -1066,7 +1071,6 @@
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const day = String(now.getDate()).padStart(2, '0');
 
-            // ترتيب التاريخ والوقت بالشكل المطلوب: الوقت أولاً (على اليسار)، ثم السنة-الشهر-اليوم
             document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${year}-${month}-${day}`;
             document.getElementById('favStar').classList.remove('starred');
 
