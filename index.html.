@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق تحويل الأموال</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Noto Kufi Arabic', 'Droid Arabic Kufi', sans-serif;
         }
 
         body {
@@ -61,8 +61,8 @@
         }
 
         .page-title {
-            font-size: 19px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 500;
             position: absolute;
             left: 0;
             right: 0;
@@ -102,8 +102,8 @@
         }
 
         .action-item span {
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 12.5px;
+            font-weight: 500;
         }
 
         .dashboard-grid {
@@ -146,13 +146,13 @@
             justify-content: center;
             font-size: 25px;
             font-weight: 700;
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
         }
 
         .grid-card span {
-            font-size: 12.5px;
-            font-weight: 600;
-            line-height: 1.3;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.4;
             color: #374151;
         }
 
@@ -171,9 +171,9 @@
             align-items: center;
             text-decoration: none;
             color: #9ca3af;
-            font-size: 11.5px;
+            font-size: 11px;
             gap: 4px;
-            font-weight: 600;
+            font-weight: 500;
         }
         .nav-item i { font-size: 19px; }
         .nav-item.active { color: #0eb4c2; }
@@ -206,14 +206,14 @@
         .top-btn i {
             font-size: 28px;
         }
-        .top-btn span { font-size: 14px; font-weight: 600; }
+        .top-btn span { font-size: 13.5px; font-weight: 500; }
 
         .grey-divider-bar {
             background-color: #eeeeee;
             padding: 10px;
             text-align: center;
-            font-size: 14.5px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
             color: #4b5563;
         }
 
@@ -232,8 +232,8 @@
             color: #0eb4c2;
         }
         .qr-center-box span {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13.5px;
+            font-weight: 500;
             color: #374151;
         }
 
@@ -246,7 +246,7 @@
             flex-grow: 1;
         }
         .board-desc {
-            font-size: 13px;
+            font-size: 12.5px;
             color: #6b7280;
             text-align: center;
             margin-bottom: 25px;
@@ -305,8 +305,8 @@
             font-size: 24px;
         }
         .tab-item span {
-            font-size: 11.5px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 500;
         }
 
         .form-content {
@@ -324,8 +324,8 @@
             gap: 8px;
         }
         .clean-label {
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 13.5px;
+            font-weight: 600;
             color: #374151;
             text-align: right;
         }
@@ -339,14 +339,16 @@
             border: none;
             outline: none;
             width: 100%;
-            font-size: 16px;
+            font-size: 15.5px;
             color: #111315;
             background: transparent;
             text-align: right;
+            font-family: 'Roboto', 'Noto Kufi Arabic', sans-serif;
         }
         .clean-input::placeholder {
             color: #9ca3af;
-            font-size: 15px;
+            font-size: 14px;
+            font-family: 'Noto Kufi Arabic', sans-serif;
         }
         .contacts-book-icon {
             color: #fbc02d;
@@ -361,8 +363,8 @@
             color: #ffffff;
             border: none;
             padding: 15px;
-            font-size: 17px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
             text-align: center;
             margin-top: auto;
@@ -372,8 +374,8 @@
         .review-subtitle {
             text-align: right;
             padding: 18px 20px 10px;
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 14.5px;
+            font-weight: 600;
             color: #374151;
         }
 
@@ -386,10 +388,11 @@
             direction: ltr;
         }
         .recipient-number {
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 17px;
+            font-weight: 500;
             color: #1f2937;
             letter-spacing: 0.5px;
+            font-family: 'Roboto', sans-serif;
         }
         .recipient-phone-icon-match {
             font-size: 22px;
@@ -412,22 +415,23 @@
             text-align: right;
         }
         .review-amount-label {
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 13.5px;
+            font-weight: 600;
             color: #374151;
             margin-bottom: 6px;
         }
         .review-amount-val {
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 15.5px;
+            font-weight: 500;
             color: #111315;
             direction: ltr;
             text-align: right;
+            font-family: 'Roboto', sans-serif;
         }
 
         .fee-details-title {
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 13.5px;
+            font-weight: 600;
             color: #374151;
             margin-bottom: 14px;
             text-align: right;
@@ -438,17 +442,18 @@
             justify-content: space-between;
             align-items: center;
             padding: 8px 0;
-            font-size: 14.5px;
+            font-size: 14px;
             color: #374151;
-            font-weight: 600;
+            font-weight: 500;
         }
         .fee-dash {
             color: #6b7280;
         }
         .fee-val {
             direction: ltr;
-            font-weight: 700;
+            font-weight: 500;
             color: #1f2937;
+            font-family: 'Roboto', sans-serif;
         }
 
         /* ================= النوافذ المنبثقة ================= */
@@ -472,13 +477,13 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
         .error-title {
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 15.5px;
+            font-weight: 600;
             padding: 18px 15px 8px;
             color: #111315;
         }
         .error-msg {
-            font-size: 14px;
+            font-size: 13.5px;
             color: #4b5563;
             padding: 0 15px 20px;
         }
@@ -487,9 +492,9 @@
             color: #ffffff;
             border: none;
             width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 13px;
+            font-size: 15px;
+            font-weight: 500;
             cursor: pointer;
             display: block;
         }
@@ -514,8 +519,8 @@
             line-height: 1;
         }
         .pin-prompt-text {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 500;
             color: #374151;
             margin: 42px 15px 30px;
         }
@@ -538,28 +543,28 @@
             color: #111315;
         }
 
-        /* تصميم الوصل المطابق للصورة الحقيقية تماماً */
+        /* ================= الوصل النهائي المطابق للصورة تماماً ================= */
         .receipt-box {
             background-color: #ffffff;
             width: 86%;
-            max-width: 340px;
-            border-radius: 6px;
+            max-width: 335px;
+            border-radius: 4px;
             overflow: hidden;
             text-align: center;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
         .receipt-body {
-            padding: 24px 20px 16px;
+            padding: 22px 18px 14px;
         }
         .receipt-title {
-            font-size: 18px;
+            font-size: 17.5px;
             font-weight: 400;
-            color: #1f2937;
+            color: #222222;
             margin-bottom: 14px;
         }
         .receipt-check-circle {
-            width: 60px;
-            height: 60px;
+            width: 58px;
+            height: 58px;
             border: 3px solid #4caf50;
             border-radius: 50%;
             display: flex;
@@ -567,17 +572,44 @@
             justify-content: center;
             margin: 0 auto 18px;
             color: #4caf50;
-            font-size: 26px;
+            font-size: 25px;
         }
+
+        /* تنسيق السطر الأول والثاني بحيث تكون MRU تحت بداية الرقم مباشرة */
         .receipt-summary {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 400;
             color: #333333;
-            line-height: 1.6;
-            margin-bottom: 16px;
+            line-height: 1.65;
+            margin-bottom: 14px;
             text-align: center;
             direction: rtl;
         }
+        .receipt-num {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 13.5px;
+            letter-spacing: 0.3px;
+            direction: ltr;
+            display: inline-block;
+        }
+        /* كتلة المبلغ والعملة تحت بعضهما لتكون MRU أسفل بداية الرقم */
+        .amount-stack {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-end; /* في سياق RTL، flex-end يضع MRU تحت بداية الرقم من اليمين */
+            vertical-align: top;
+            line-height: 1.45;
+        }
+        .currency-under {
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: #333333;
+            direction: ltr;
+            margin-top: 1px;
+        }
+
         .receipt-info-block {
             font-size: 13px;
             font-weight: 400;
@@ -585,15 +617,29 @@
             margin-bottom: 12px;
             text-align: center;
             direction: rtl;
-            line-height: 1.5;
+            line-height: 1.6;
         }
-        .receipt-info-block span {
+        /* معرف المعاملة ممتد وغير مضغوط */
+        .trans-id-extended {
+            font-family: 'Roboto', sans-serif;
             font-weight: 400;
-            letter-spacing: normal;
-            unicode-bidi: plaintext;
+            font-size: 13.5px;
+            letter-spacing: 0.9px;
             direction: ltr;
             display: inline-block;
+            margin-top: 2px;
+            color: #222222;
         }
+        .datetime-extended {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 13.5px;
+            letter-spacing: 0.4px;
+            direction: ltr;
+            display: inline-block;
+            color: #222222;
+        }
+
         .receipt-fav-row {
             display: flex;
             align-items: center;
@@ -601,7 +647,7 @@
             gap: 8px;
             margin-top: 18px;
             margin-bottom: 6px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 400;
             color: #4b5563;
             cursor: pointer;
@@ -873,7 +919,7 @@
         </div>
     </div>
 
-    <!-- الوصل النهائي المطابق تماماً -->
+    <!-- الوصل النهائي المطابق تماماً للصورة -->
     <div id="successModal" class="modal-overlay">
         <div class="receipt-box">
             <div class="receipt-body">
@@ -881,11 +927,21 @@
                 <div class="receipt-check-circle"><i class="fa-solid fa-check"></i></div>
 
                 <div class="receipt-summary">
-                    المستفيد: <span id="finalPhone"></span> المبلغ المرسل: <span id="finalAmount"></span> MRU
+                    المستفيد: <span id="finalPhone" class="receipt-num"></span> المبلغ المرسل:
+                    <span class="amount-stack">
+                        <span id="finalAmount" class="receipt-num"></span>
+                        <span class="currency-under">MRU</span>
+                    </span>
                 </div>
 
-                <div class="receipt-info-block">معرف المعاملة :<br><span id="transactionId"></span></div>
-                <div class="receipt-info-block">التاريخ والوقت : <span id="transactionDateTime"></span></div>
+                <div class="receipt-info-block">
+                    معرف المعاملة :<br>
+                    <span id="transactionId" class="trans-id-extended"></span>
+                </div>
+
+                <div class="receipt-info-block">
+                    التاريخ والوقت : <span id="transactionDateTime" class="datetime-extended"></span>
+                </div>
 
                 <div class="receipt-fav-row" onclick="toggleFavorite()">
                     <i class="fa-solid fa-star" id="favStar"></i>
@@ -980,21 +1036,21 @@
             document.getElementById('finalPhone').innerText = phone;
             document.getElementById('finalAmount').innerText = amount;
 
-            // توليد معرف المعاملة (طويل وغير مضغوط)
-            const randomTransId = '10261113' + Math.floor(10000000000 + Math.random() * 90000000000);
+            // توليد معرف المعاملة الطويل (20 رقماً) بشكل ممتد وواضح
+            const now = new Date();
+            const yy = String(now.getFullYear()).slice(-2);
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const randomPart = String(Math.floor(100000000000 + Math.random() * 900000000000));
+            const randomTransId = `01${yy}${mm}${dd}${randomPart}`;
             document.getElementById('transactionId').innerText = randomTransId;
 
-            // ترتيب التاريخ والوقت بحيث يظهر الوقت أولاً في اليسار ثم التاريخ في اليمين (مثال: 15:25:33 13-11-26)
-            const now = new Date();
+            // الوقت والتاريخ بنفس الترتيب الحقيقي
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
-            
-            const day = String(now.getDate()).padStart(2, '0');
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const year = String(now.getFullYear()).slice(-2);
 
-            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
+            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${dd}-${mm}-${yy}`;
             document.getElementById('favStar').classList.remove('starred');
 
             document.getElementById('successModal').style.display = 'flex';
