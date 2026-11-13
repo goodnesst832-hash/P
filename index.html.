@@ -483,7 +483,7 @@
             padding: 0 15px 20px;
         }
         .modal-cyan-btn {
-            background-color: #00bcd4; /* لون الزر المطابق للصورة */
+            background-color: #00bcd4;
             color: #ffffff;
             border: none;
             width: 100%;
@@ -556,7 +556,7 @@
         .receipt-title {
             font-size: 19px;
             font-weight: 500;
-            color: #222222;
+            color: #222222; /* لون داكن متناسق */
             margin-bottom: 18px;
         }
         .receipt-check-circle {
@@ -573,8 +573,8 @@
         }
         .receipt-summary {
             font-size: 15px;
-            font-weight: 500;
-            color: #222222;
+            font-weight: 500; /* وزن متوسط ليناسب الصورة */
+            color: #333333; /* رمادي داكن */
             line-height: 1.6;
             margin-bottom: 20px;
             text-align: center;
@@ -583,8 +583,8 @@
         .receipt-summary .mru-label {
             display: block;
             font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            color: #333333; /* لون رمادي داكن مطابق للصورة */
+            font-weight: 400; /* وزن عادي لإزالة السواد الشديد */
+            color: #333333; /* رمادي داكن مطابق */
             margin-top: 2px;
             letter-spacing: 0.5px;
             font-size: 16px;
@@ -594,7 +594,7 @@
         .receipt-info-block {
             font-size: 14.5px;
             font-weight: 500;
-            color: #333333; /* لون رمادي داكن */
+            color: #333333; /* رمادي داكن */
             margin-bottom: 6px;
             text-align: center;
             direction: rtl;
@@ -611,10 +611,10 @@
         }
         .transaction-id-value {
             font-family: 'Roboto', sans-serif;
-            font-weight: 500;
+            font-weight: 500; /* متوسط ليكون واضحاً وليس سميكاً جداً */
             letter-spacing: 0.6px;
             font-size: 16px;
-            color: #333333;
+            color: #333333; /* رمادي داكن */
             direction: ltr;
             display: inline-block;
             white-space: nowrap;
