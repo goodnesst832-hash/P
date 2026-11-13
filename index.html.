@@ -565,7 +565,7 @@
         .receipt-title {
             font-size: 19px;
             font-weight: 600;
-            color: #333333; /* رمادي داكن */
+            color: #333333;
             margin-bottom: 18px;
         }
         .receipt-check-circle {
@@ -581,11 +581,10 @@
             font-size: 40px;
         }
         
-        /* تنسيق السطر الأول (المستفيد والمبلغ) */
         .receipt-summary {
             font-size: 16px;
             font-weight: 500;
-            color: #333333; /* رمادي داكن */
+            color: #333333;
             line-height: 1.6;
             margin-bottom: 22px;
             text-align: center;
@@ -605,18 +604,17 @@
             width: 100%;
         }
         
-        /* الأرقام: رمادي داكن، حجم كبير، سُمك متوسط */
         #finalPhone, #finalAmount {
             font-size: 17px; 
             font-weight: 500; 
             font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
-            color: #333333; /* رمادي داكن */
+            color: #333333;
         }
 
         .mru-label {
             font-family: 'Roboto', sans-serif;
             font-weight: 500;
-            color: #333333; /* رمادي داكن */
+            color: #333333;
             margin-top: 2px;
             letter-spacing: 0.5px;
             font-size: 17px;
@@ -626,7 +624,7 @@
         .receipt-info-block {
             font-size: 16px;
             font-weight: 500;
-            color: #333333; /* رمادي داكن */
+            color: #333333;
             margin-bottom: 8px;
             text-align: center;
             direction: rtl;
@@ -642,13 +640,12 @@
             display: inline-block;
         }
         
-        /* رقم المعاملة: رمادي داكن، نفس الحجم */
         .transaction-id-value {
             font-family: 'Roboto', sans-serif;
             font-weight: 500; 
             letter-spacing: 0.5px; 
             font-size: 17px;
-            color: #333333; /* رمادي داكن */
+            color: #333333;
             direction: ltr;
             display: inline-block;
             white-space: nowrap;
