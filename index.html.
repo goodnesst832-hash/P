@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>تطبيق تحويل الأموال</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@300;400;500;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -564,7 +564,7 @@
         }
         .receipt-title {
             font-size: 19px;
-            font-weight: 500;
+            font-weight: 600; /* خط أعرض قليلاً */
             color: #222222;
             margin-bottom: 18px;
         }
@@ -581,11 +581,11 @@
             font-size: 40px;
         }
         
-        /* تنسيق السطر الأول لمنع النزول لسطر جديد */
+        /* تنسيق السطر الأول (المستفيد والمبلغ) */
         .receipt-summary {
-            font-size: 15px;
+            font-size: 16px; /* تكبير الخط الأساسي */
             font-weight: 500;
-            color: #333333;
+            color: #333333; /* لون رمادي داكن جداً ومريح */
             line-height: 1.6;
             margin-bottom: 20px;
             text-align: center;
@@ -597,27 +597,25 @@
         }
 
         .summary-top-line {
-            white-space: nowrap; /* يمنع النزول لسطر جديد تماماً */
+            white-space: nowrap; 
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
             width: 100%;
-            font-size: 15px;
         }
         
-        /* تنسيق طبيعي جداً للأرقام */
+        /* أرقام المستفيد والمبلغ */
         #finalPhone, #finalAmount {
-            font-size: 15px; /* حجم طبيعي */
-            font-weight: 500; /* سُمك متوسط مريح */
+            font-size: 16px; /* حجم كبير وواضح مطابق للصورة */
+            font-weight: 500; /* سُمك متوسط وليس رقيقاً */
             font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
-            color: #333333; /* لون رمادي داكن جداً ومريح */
-            transition: font-size 0.2s ease; /* انتقال سلس عند التصغير */
+            color: #333333; 
         }
 
         .mru-label {
             font-family: 'Roboto', sans-serif;
-            font-weight: 400;
+            font-weight: 500;
             color: #333333;
             margin-top: 2px;
             letter-spacing: 0.5px;
@@ -627,9 +625,9 @@
         
         .receipt-info-block {
             font-size: 15px;
-            font-weight: 400;
+            font-weight: 500; /* تحسين السُمك ليكون مقروءاً */
             color: #333333;
-            margin-bottom: 6px;
+            margin-bottom: 8px; /* مسافة بسيطة للفصل */
             text-align: center;
             direction: rtl;
             line-height: 1.5;
@@ -638,38 +636,40 @@
             margin-bottom: 20px;
         }
         .receipt-info-block span {
-            font-weight: 400;
+            font-weight: 500;
             unicode-bidi: plaintext;
             direction: ltr;
             display: inline-block;
         }
         
-        /* رقم المعاملة: خط طبيعي وواضح */
+        /* رقم المعاملة: تكبير الخط وإضافة تباعد ليصبح واضحاً وطويلاً */
         .transaction-id-value {
             font-family: 'Roboto', sans-serif;
-            font-weight: 400; 
-            letter-spacing: 0.5px; 
-            font-size: 15px;
+            font-weight: 400; /* سُمك طبيعي لا يبدو رقيقاً */
+            letter-spacing: 0.8px; /* زيادة التباعد بين الأرقام */
+            font-size: 16px; /* تكبير الخط */
             color: #333333;
             direction: ltr;
             display: inline-block;
             white-space: nowrap;
             unicode-bidi: plaintext;
         }
+        
         .receipt-fav-row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             margin-top: 15px;
-            font-size: 14px;
+            margin-bottom: 5px;
+            font-size: 15px;
             font-weight: 500;
             color: #555555;
             cursor: pointer;
             flex-direction: row;
         }
         .receipt-fav-row i {
-            font-size: 20px;
+            font-size: 22px;
             color: #9ca3af;
             transition: color 0.2s;
         }
@@ -1028,16 +1028,6 @@
             }
         }
 
-        // دالة ذكية لتصغير حجم الخط إذا كان النص طويلاً (مثل تطبيق بنكيلي)
-        function autoShrinkFont(element, defaultSize, minSize, threshold) {
-            const textLength = element.innerText.length;
-            if (textLength > threshold) {
-                element.style.fontSize = minSize + 'px';
-            } else {
-                element.style.fontSize = defaultSize + 'px';
-            }
-        }
-
         function submitPin() {
             const pin = document.getElementById('hiddenPinInput').value.trim();
             if (pin.length < 4) {
@@ -1050,15 +1040,8 @@
             const phone = document.getElementById('phoneInput').value.trim();
             const amount = document.getElementById('amountInput').value.trim();
 
-            const phoneEl = document.getElementById('finalPhone');
-            const amountEl = document.getElementById('finalAmount');
-
-            phoneEl.innerText = phone;
-            amountEl.innerText = amount;
-
-            // تطبيق التصغير التلقائي (الحجم الافتراضي 15px، الحجم الأدنى 11px، إذا تجاوز 5 أرقام يصغر)
-            autoShrinkFont(phoneEl, 15, 13, 8); 
-            autoShrinkFont(amountEl, 15, 11, 4); 
+            document.getElementById('finalPhone').innerText = phone;
+            document.getElementById('finalAmount').innerText = amount;
 
             const randomTransId = '10261113' + Math.floor(10000000000 + Math.random() * 90000000000);
             document.getElementById('transactionId').innerText = randomTransId;
