@@ -561,12 +561,12 @@
             color: #111315;
         }
 
-        /* ================= تصميم الوصل (مطابق تماماً للصورة الحقيقية المرفقة) ================= */
+        /* ================= تصميم الوصل (مطابق تماماً للصورة الحقيقية) ================= */
         .receipt-box {
             background-color: #ffffff;
             width: 88%;
             max-width: 325px;
-            border-radius: 4px; /* زوايا مربعة أكثر مطابقة للصورة الأصلية */
+            border-radius: 4px;
             overflow: hidden;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -597,11 +597,22 @@
             font-size: 32px;
         }
         
-        /* تنسيق سطر المستفيد والمبلغ ليطابق الصورة الأصلية تماماً بسطر واحد متناسق */
+        /* توحيد لون وحجم وتنسيق كل نصوص وكلمات وأرقام الوصل ليتطابق مع الصورة الحقيقية */
+        .receipt-summary, 
+        .receipt-summary *, 
+        #finalPhone, 
+        #finalAmount, 
+        .mru-label, 
+        .receipt-info-block, 
+        .receipt-info-block *, 
+        .transaction-id-value {
+            color: #222222 !important;
+            font-family: 'Noto Sans Arabic', 'Roboto', sans-serif !important;
+            font-size: 15px !important;
+            font-weight: 500 !important;
+        }
+
         .receipt-summary {
-            font-size: 14.5px;
-            font-weight: 500;
-            color: #222222; 
             line-height: 1.4;
             margin-bottom: 14px;
             text-align: center;
@@ -619,20 +630,6 @@
             justify-content: center;
             gap: 4px;
             width: 100%;
-        }
-        
-        /* توحيد تام لخط الحجم واللون ونوع الخط في الوصل بناءً على الصورة الحقيقية */
-        .receipt-summary, 
-        #finalPhone, 
-        #finalAmount, 
-        .mru-label, 
-        .receipt-info-block, 
-        .transaction-id-value,
-        .receipt-info-block span {
-            color: #222222 !important;
-            font-family: 'Roboto', 'Noto Sans Arabic', sans-serif !important;
-            font-size: 15px !important;
-            font-weight: 500 !important;
         }
 
         .mru-label {
