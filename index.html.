@@ -580,6 +580,8 @@
             color: #4caf50;
             font-size: 40px;
         }
+        
+        /* تنسيق السطر الأول (المستفيد والمبلغ) لمنع النزول لسطر جديد */
         .receipt-summary {
             font-size: 15px;
             font-weight: 500;
@@ -588,25 +590,38 @@
             margin-bottom: 20px;
             text-align: center;
             direction: rtl;
-        }
-        
-        /* تكبير رقم الهاتف والمبلغ */
-        #finalPhone, #finalAmount {
-            font-size: 19px; /* تكبير الخط */
-            font-weight: 500; /* سُمك متوسط غير غليظ */
-            font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
-            color: #111315; /* لون داكن واضح */
-            margin: 0 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
         }
 
-        .receipt-summary .mru-label {
-            display: block;
+        .summary-top-line {
+            white-space: nowrap; /* منع النزول لسطر جديد مهما كان المبلغ طويلاً */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: 100%;
+            font-size: 15px;
+        }
+        
+        /* حجم طبيعي لرقم الهاتف والمبلغ */
+        #finalPhone, #finalAmount {
+            font-size: 16px; /* حجم طبيعي مطابق للصورة */
+            font-weight: 500;
+            font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
+            color: #111315;
+        }
+
+        .mru-label {
             font-family: 'Roboto', sans-serif;
             font-weight: 400;
             color: #333333;
             margin-top: 2px;
             letter-spacing: 0.5px;
             font-size: 16px;
+            display: block;
         }
         
         .receipt-info-block {
@@ -628,12 +643,12 @@
             display: inline-block;
         }
         
-        /* ترقيق رقم المعاملة وإطالته */
+        /* رقم المعاملة: خط عادي، بدون تمديد، يظهر بشكل طبيعي ومقروء */
         .transaction-id-value {
             font-family: 'Roboto', sans-serif;
-            font-weight: 300; /* خط رقيق */
-            letter-spacing: 0.8px; /* تباعد الأحرف ليبقى طويلاً */
-            font-size: 17px;
+            font-weight: 400; 
+            letter-spacing: 0.5px; 
+            font-size: 15px;
             color: #333333;
             direction: ltr;
             display: inline-block;
@@ -926,7 +941,9 @@
                 <div class="receipt-check-circle"><i class="fa-solid fa-check"></i></div>
 
                 <div class="receipt-summary">
-                    المستفيد: <span id="finalPhone"></span> المبلغ المرسل: <span id="finalAmount"></span>
+                    <div class="summary-top-line">
+                        المستفيد: <span id="finalPhone"></span> المبلغ المرسل: <span id="finalAmount"></span>
+                    </div>
                     <span class="mru-label">MRU</span>
                 </div>
 
