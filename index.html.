@@ -586,6 +586,8 @@
             margin-bottom: 8px;
             direction: rtl;
         }
+        
+        /* تعديلات النجمة لتكون مطابقة للصورة */
         .receipt-fav-row {
             display: flex;
             align-items: center;
@@ -597,11 +599,13 @@
             font-weight: 600;
             color: #4b5563;
             cursor: pointer;
+            direction: rtl;
         }
         .receipt-fav-row i {
             font-size: 26px;
             color: #9ca3af;
             transition: color 0.2s;
+            margin-left: 10px;
         }
         .receipt-fav-row i.starred {
             color: #fbc02d;
@@ -610,7 +614,7 @@
 </head>
 <body>
 
-    <!-- ================= الواجهة 1: لوحة القيادة (بدون عكس) ================= -->
+    <!-- ================= الواجهة 1: لوحة القيادة ================= -->
     <div id="page1" class="page active">
         <header class="top-header">
             <div class="navbar">
@@ -724,7 +728,7 @@
                 </svg>
                 <span>ب-باي</span>
             </div>
-            <!-- 7. الرمز السابع والأخير: جيمتل (مُدقق ومطابق بدقة تامة للصورة) -->
+            <!-- 7. الرمز السابع: جيمتل -->
             <div class="grid-card">
                 <div class="gimtel-badge-match">G</div>
                 <span>جيمتل</span>
@@ -928,9 +932,10 @@
                 <div class="receipt-info-line">معرف المعاملة : <span id="transactionId"></span></div>
                 <div class="receipt-info-line">التاريخ والوقت : <span id="transactionDateTime"></span></div>
 
+                <!-- تعديل ترتيب النجمة لتكون على اليسار -->
                 <div class="receipt-fav-row" onclick="toggleFavorite()">
+                    <i class="fa-regular fa-star" id="favStar"></i>
                     <span>إضافة إلى المفضلة</span>
-                    <i class="fa-solid fa-star" id="favStar"></i>
                 </div>
             </div>
 
@@ -1025,15 +1030,20 @@
             document.getElementById('transactionId').innerText = randomTransId;
 
             const now = new Date();
-            const year = now.getFullYear().toString().slice(-2);
+            const year = now.getFullYear();
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const day = String(now.getDate()).padStart(2, '0');
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
 
-            document.getElementById('transactionDateTime').innerText = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-            document.getElementById('favStar').classList.remove('starred');
+            // تعديل تنسيق التاريخ ليظهر بشكل احترافي
+            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
+            
+            // إعادة تعيين النجمة إلى حالتها الأصلية (مفرغة) عند كل عملية جديدة
+            const star = document.getElementById('favStar');
+            star.classList.remove('starred', 'fa-solid');
+            star.classList.add('fa-regular');
 
             document.getElementById('successModal').style.display = 'flex';
         }
@@ -1044,8 +1054,18 @@
             showPage('page1');
         }
 
+        // تحديث دالة المفضلة لتغيير شكل النجمة عند الضغط
         function toggleFavorite() {
-            document.getElementById('favStar').classList.toggle('starred');
+            const star = document.getElementById('favStar');
+            star.classList.toggle('starred');
+            
+            if (star.classList.contains('starred')) {
+                star.classList.remove('fa-regular');
+                star.classList.add('fa-solid');
+            } else {
+                star.classList.remove('fa-solid');
+                star.classList.add('fa-regular');
+            }
         }
     </script>
 </body>
