@@ -803,20 +803,20 @@
                     </svg>
                     <span>طلب المال</span>
                 </button>
-                <!-- زر إرسال الأموال (تم تحديثه ليعكس الصورة المرفقة) -->
+                <!-- زر إرسال الأموال (تم تحديث الرمز ليطابق الصورة) -->
                 <button class="top-btn" onclick="openSendMoneyPage()">
                     <svg viewBox="0 0 60 32" width="52" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- الشكل الأيسر مع الرمز ₹ -->
-                        <path d="M6 6H16L12 16L16 26H6L2 16L6 6Z" fill="#ffffff"/>
-                        <text x="7" y="20" fill="#007b8a" font-size="12" font-weight="bold" font-family="Arial">₹</text>
+                        <!-- الشكل شبه المنحرف الأيسر مع الرمز ₹ -->
+                        <path d="M14 6H4L8 16L4 26H14L18 16L14 6Z" fill="#ffffff"/>
+                        <text x="8" y="20" fill="#007b8a" font-size="12" font-weight="bold" font-family="Arial">₹</text>
                         
-                        <!-- الشكل الأيمن المشابه للخطوط المتصلة -->
-                        <path d="M22 6H34L30 16L34 26H22L18 16L22 6Z" fill="#ffffff"/>
+                        <!-- الشكل شبه المنحرف الأيمن المتصل -->
+                        <path d="M18 6H30L34 16L30 26H18L14 16L18 6Z" fill="#ffffff"/>
                         
                         <!-- الخطوط الأفقية على اليمين -->
-                        <line x1="38" y1="9" x2="56" y2="9" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-                        <line x1="38" y1="16" x2="56" y2="16" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-                        <line x1="38" y1="23" x2="56" y2="23" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="36" y1="9" x2="56" y2="9" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="36" y1="16" x2="56" y2="16" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="36" y1="23" x2="56" y2="23" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
                     </svg>
                     <span>إرسال الأموال</span>
                 </button>
@@ -847,12 +847,4 @@
 
     <!-- ================= الواجهة 3: إرسال الأموال ================= -->
     <div id="page3" class="page">
-        <header class="top-header" style="padding-bottom: 0;">
-            <div class="navbar">
-                <i class="fa-solid fa-arrow-right back-icon" onclick="showPage('page2')"></i>
-                <h1 class="page-title">إرسال الأموال</h1>
-            </div>
-            <div class="top-tabs">
-                <!-- 1. رقم الهاتف -->
-                <div class="tab-item active">
-                    <div class="tab-icon
+        <header class="top-header" style="padding
