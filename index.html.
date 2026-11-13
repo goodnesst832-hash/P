@@ -565,7 +565,7 @@
         .receipt-title {
             font-size: 19px;
             font-weight: 600;
-            color: #333333;
+            color: #1f2937; /* تم التعديل إلى الرمادي الداكن جداً (Dark Charcoal) */
             margin-bottom: 18px;
         }
         .receipt-check-circle {
