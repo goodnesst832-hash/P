@@ -656,16 +656,28 @@
                     <line x1="15" y1="17.5" x2="16.2" y2="17.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
                     <line x1="15" y1="21" x2="16.2" y2="21" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
                     <line x1="15" y1="24.5" x2="16.2" y2="24.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
-                    <!-- الجزء الملتف يمين الفاتورة -->
                     <path d="M30 18H36V27.5C36 29.5 34.5 31 32.5 31H29" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/>
-                    <!-- اليد الممسكة بالورقة من اليسار -->
                     <path d="M11 20C8.5 21.5 7 24 7 27V38" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
                     <path d="M11 24.5L13.5 23.5C14.8 23 15.8 24.3 14.8 25.5L11.5 28.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M16 31V35.5C16 36.8 15 38 13.5 38" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 <span>تسديد الفواتير</span>
             </div>
-            <div class="grid-card"><i class="fa-solid fa-money-check-dollar icon-teal"></i><span>طلب دفتر شيكات</span></div>
+            <!-- الرمز الثالث الحقيقي: طلب دفتر شيكات -->
+            <div class="grid-card">
+                <svg viewBox="0 0 44 44" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 10H33V34H13C11.3 34 10 32.7 10 31V13C10 11.3 11.3 10 13 10Z" stroke="#0eb4c2" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M10 28H33" stroke="#0eb4c2" stroke-width="2"/>
+                    <path d="M10 33H33" stroke="#0eb4c2" stroke-width="2"/>
+                    <line x1="18" y1="16" x2="28" y2="16" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="18" y1="21" x2="25" y2="21" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
+                    <!-- القلم العمودي على اليسار -->
+                    <path d="M7 11V29C7 29.5 7.5 30 8 30C8.5 30 9 29.5 9 29V11C9 10.5 8.5 10 8 10C7.5 10 7 10.5 7 11Z" fill="#0eb4c2"/>
+                    <path d="M7 30L8 34L9 30" fill="#0eb4c2"/>
+                    <path d="M7.5 7H8.5V10H7.5V7Z" fill="#0eb4c2"/>
+                </svg>
+                <span>طلب دفتر شيكات</span>
+            </div>
             <div class="grid-card"><i class="fa-regular fa-credit-card icon-gold"></i><span>البطاقات البنكية</span></div>
             <div class="grid-card"><i class="fa-solid fa-money-bill-wave icon-teal"></i><span>سحب النقود</span></div>
             <div class="grid-card"><i class="fa-solid fa-mobile-retro icon-gold"></i><span>ب-باي</span></div>
