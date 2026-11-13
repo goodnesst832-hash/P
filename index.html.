@@ -561,7 +561,7 @@
             color: #111315;
         }
 
-        /* ================= تصميم الوصل (مطابق تماماً للصورة الحقيقية) ================= */
+        /* ================= تصميم الوصل (مطابق تماماً للصورة الحقيقية وبقيمة اللون #111111) ================= */
         .receipt-box {
             background-color: #ffffff;
             width: 88%;
@@ -581,7 +581,7 @@
         .receipt-title {
             font-size: 17.5px;
             font-weight: 600;
-            color: #222222; 
+            color: #111111; 
             margin-bottom: 14px;
         }
         .receipt-check-circle {
@@ -597,7 +597,7 @@
             font-size: 32px;
         }
         
-        /* توحيد لون وحجم وتنسيق كل نصوص وكلمات وأرقام الوصل ليتطابق مع الصورة الحقيقية */
+        /* توحيد تام للون وحجم ونوع الخط لجميع النصوص والأرقام في الوصل إلى #111111 */
         .receipt-summary, 
         .receipt-summary *, 
         #finalPhone, 
@@ -606,7 +606,7 @@
         .receipt-info-block, 
         .receipt-info-block *, 
         .transaction-id-value {
-            color: #222222 !important;
+            color: #111111 !important;
             font-family: 'Noto Sans Arabic', 'Roboto', sans-serif !important;
             font-size: 15px !important;
             font-weight: 500 !important;
@@ -1062,11 +1062,12 @@
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             
-            const day = String(now.getDate()).padStart(2, '0');
-            const month = String(now.getMonth() + 1).padStart(2, '0');
             const year = String(now.getFullYear()).slice(-2);
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
 
-            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
+            // ترتيب التاريخ والوقت بالشكل المطلوب: الوقت أولاً (على اليسار)، ثم السنة-الشهر-اليوم
+            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${year}-${month}-${day}`;
             document.getElementById('favStar').classList.remove('starred');
 
             document.getElementById('successModal').style.display = 'flex';
