@@ -557,7 +557,6 @@
             overflow: hidden;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            /* استخدام نفس الخط لكل العناصر */
             font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
         }
         .receipt-body {
@@ -566,7 +565,7 @@
         .receipt-title {
             font-size: 19px;
             font-weight: 600;
-            color: #111315; 
+            color: #333333; /* رمادي داكن */
             margin-bottom: 18px;
         }
         .receipt-check-circle {
@@ -585,8 +584,8 @@
         /* تنسيق السطر الأول (المستفيد والمبلغ) */
         .receipt-summary {
             font-size: 16px;
-            font-weight: 600; /* زيادة السُمك قليلاً ليتوحد مع الأرقام */
-            color: #111315;
+            font-weight: 500;
+            color: #333333; /* رمادي داكن */
             line-height: 1.6;
             margin-bottom: 22px;
             text-align: center;
@@ -606,19 +605,18 @@
             width: 100%;
         }
         
-        /* توحيد خط الأرقام مع الخط العربي لمنع اختلاف السُمك */
+        /* الأرقام: رمادي داكن، حجم كبير، سُمك متوسط */
         #finalPhone, #finalAmount {
-            font-size: 17px;
-            font-weight: 600; /* نفس سُمك النص العربي المحيط */
-            font-family: 'Noto Sans Arabic', sans-serif; /* استخدام نفس الخط */
-            color: #111315; 
+            font-size: 17px; 
+            font-weight: 500; 
+            font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
+            color: #333333; /* رمادي داكن */
         }
 
         .mru-label {
-            /* توحيد خط MRU مع الباقي */
-            font-family: 'Noto Sans Arabic', sans-serif;
-            font-weight: 600;
-            color: #111315;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            color: #333333; /* رمادي داكن */
             margin-top: 2px;
             letter-spacing: 0.5px;
             font-size: 17px;
@@ -627,8 +625,8 @@
         
         .receipt-info-block {
             font-size: 16px;
-            font-weight: 600;
-            color: #111315;
+            font-weight: 500;
+            color: #333333; /* رمادي داكن */
             margin-bottom: 8px;
             text-align: center;
             direction: rtl;
@@ -638,19 +636,19 @@
             margin-bottom: 24px;
         }
         .receipt-info-block span {
-            font-weight: 600;
+            font-weight: 500;
             unicode-bidi: plaintext;
             direction: ltr;
             display: inline-block;
         }
         
-        /* توحيد رقم المعاملة مع الباقي */
+        /* رقم المعاملة: رمادي داكن، نفس الحجم */
         .transaction-id-value {
-            font-family: 'Noto Sans Arabic', sans-serif; /* نفس الخط */
-            font-weight: 600; /* نفس السُمك */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500; 
             letter-spacing: 0.5px; 
             font-size: 17px;
-            color: #111315;
+            color: #333333; /* رمادي داكن */
             direction: ltr;
             display: inline-block;
             white-space: nowrap;
