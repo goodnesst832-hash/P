@@ -264,12 +264,13 @@
             font-weight: 300;
         }
 
-        /* ================= الواجهة 3: إرسال الأموال ================= */
+        /* ================= الواجهة 3: إرسال الأموال (التبويبات المطابقة للصورة) ================= */
         .top-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             text-align: center;
-            margin-top: 10px;
+            margin-top: 14px;
+            position: relative;
         }
         .tab-item {
             display: flex;
@@ -278,10 +279,11 @@
             color: #ffffff;
             gap: 6px;
             opacity: 0.6;
-            padding-bottom: 8px;
             cursor: pointer;
             position: relative;
+            padding-bottom: 10px;
         }
+        /* التبويب النشط (رقم الهاتف) مطابق تماماً للصورة */
         .tab-item.active {
             opacity: 1;
         }
@@ -289,19 +291,19 @@
             content: '';
             position: absolute;
             bottom: 0;
-            left: 10%;
-            right: 10%;
-            height: 3px;
+            left: 0;
+            right: 0;
+            height: 4px;
             background-color: #ffffff;
         }
         .tab-icon-wrap {
-            height: 32px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .tab-item span {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
         }
 
@@ -839,7 +841,7 @@
         </div>
     </div>
 
-    <!-- ================= الواجهة 3: إرسال الأموال ================= -->
+    <!-- ================= الواجهة 3: إرسال الأموال (التبويبات متطابقة 100% مع الصورة الأخيرة) ================= -->
     <div id="page3" class="page">
         <header class="top-header" style="padding-bottom: 0;">
             <div class="navbar">
@@ -847,46 +849,49 @@
                 <h1 class="page-title">إرسال الأموال</h1>
             </div>
             <div class="top-tabs">
+                <!-- 1. رقم الهاتف (نشط مع أيقونة الهاتف الصفراء والخط الأبيض السفلي تماماً كالصورة) -->
                 <div class="tab-item active">
                     <div class="tab-icon-wrap">
-                        <svg viewBox="0 0 32 38" width="22" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="2" width="24" height="34" rx="3" fill="#fbc02d"/>
-                            <rect x="6" y="6" width="20" height="23" rx="1" fill="#ffffff"/>
-                            <circle cx="16" cy="32.5" r="1.3" fill="#ffffff"/>
-                            <line x1="12" y1="4" x2="20" y2="4" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round"/>
+                        <svg viewBox="0 0 28 34" width="20" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="2" width="22" height="30" rx="3" fill="#fbc02d"/>
+                            <rect x="5" y="5" width="18" height="20" rx="1" fill="#ffffff"/>
+                            <circle cx="14" cy="28.5" r="1.2" fill="#ffffff"/>
+                            <line x1="10" y1="3.5" x2="18" y2="3.5" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round"/>
                         </svg>
                     </div>
                     <span>رقم الهاتف</span>
                 </div>
+                <!-- 2. اسم المستخدم (أبيض شفاف) -->
                 <div class="tab-item">
                     <div class="tab-icon-wrap">
-                        <svg viewBox="0 0 36 36" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 10C15.2 10 13 12.2 13 15C13 17.8 15.2 20 18 20C20.8 20 23 17.8 23 15C23 12.2 20.8 10 18 10Z" fill="#ffffff"/>
-                            <path d="M9 25.5C9 22.5 13.1 21 18 21C22.9 21 27 22.5 27 25.5V27H9V25.5Z" fill="#ffffff"/>
+                        <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 9C13.5 9 11.5 11 11.5 13.5C11.5 16 13.5 18 16 18C18.5 18 20.5 16 20.5 13.5C20.5 11 18.5 9 16 9Z" fill="#ffffff"/>
+                            <path d="M8 24.5C8 21.5 11.6 20 16 20C20.4 20 24 21.5 24 24.5V26H8V24.5Z" fill="#ffffff"/>
                         </svg>
                     </div>
                     <span>اسم المستخدم</span>
                 </div>
-                <!-- أيقونة تبويب بنك المطابقة تماماً للصورة الأخيرة -->
+                <!-- 3. بنك (أبيض شفاف) -->
                 <div class="tab-item">
                     <div class="tab-icon-wrap">
-                        <svg viewBox="0 0 38 36" width="28" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 31H34" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M2 27H36" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M19 3L35 11H3V3L19 3Z" fill="#ffffff"/>
-                            <line x1="8" y1="13" x2="8" y2="25" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-                            <line x1="15" y1="13" x2="15" y2="25" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-                            <line x1="23" y1="13" x2="23" y2="25" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-                            <line x1="30" y1="13" x2="30" y2="25" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+                        <svg viewBox="0 0 36 32" width="24" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 28H33" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M1 24H35" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M18 2L33 9H3L18 2Z" fill="#ffffff"/>
+                            <line x1="7" y1="12" x2="7" y2="21" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="14" y1="12" x2="14" y2="21" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="22" y1="12" x2="22" y2="21" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="29" y1="12" x2="29" y2="21" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
                     <span>بنك</span>
                 </div>
+                <!-- 4. فيسبوك (أبيض شفاف) -->
                 <div class="tab-item">
                     <div class="tab-icon-wrap">
-                        <svg viewBox="0 0 36 36" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="18" cy="18" r="17" fill="#ffffff"/>
-                            <path d="M20.5 19.5H22.5L23.5 15.5H20.5V13.8C20.5 12.8 21 12 22.5 12H23.5V9C23.2 8.9 22.1 8.8 21 8.8C18.8 8.8 17.3 10.1 17.3 12.8V15.5H14V19.5H17.3V29H20.5V19.5Z" fill="#0eb4c2"/>
+                        <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="15" fill="#ffffff"/>
+                            <path d="M18.5 17.5H20.5L21.3 14H18.5V12.5C18.5 11.7 19 11.2 20 11.2H21V8.5C20.7 8.5 19.8 8.4 18.9 8.4C16.9 8.4 15.5 9.6 15.5 12V14H13V17.5H15.5V25.5H18.5V17.5Z" fill="#0eb4c2"/>
                         </svg>
                     </div>
                     <span>فيسبوك</span>
