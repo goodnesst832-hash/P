@@ -867,6 +867,7 @@
                     </div>
                     <span>اسم المستخدم</span>
                 </div>
+                <!-- تبويب بنك مع الأيقونة المطابقة تماماً للصورة الأخيرة -->
                 <div class="tab-item">
                     <div class="tab-icon-wrap">
                         <svg viewBox="0 0 38 36" width="28" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
