@@ -453,7 +453,7 @@
             color: #1f2937;
         }
 
-        /* ================= النوافذ المنبثقة ================= */
+        /* ================= النوافذ المنبثقة (الخطأ + الرمز السري + الوصل) ================= */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -464,6 +464,7 @@
             z-index: 1000;
         }
 
+        /* نافذة الخطأ الموحدة */
         .error-box {
             background-color: #ffffff;
             width: 82%;
@@ -496,6 +497,7 @@
             display: block;
         }
 
+        /* نافذة الرمز السري */
         .pin-box {
             background-color: #ffffff;
             width: 85%;
@@ -540,6 +542,7 @@
             color: #111315;
         }
 
+        /* الوصل النهائي (النقل ناجح!) */
         .receipt-box {
             background-color: #ffffff;
             width: 86%;
@@ -608,7 +611,7 @@
 </head>
 <body>
 
-    <!-- ================= الواجهة 1: لوحة القيادة (مع تعديل ترتيب الأيقونات حسب الصورة) ================= -->
+    <!-- ================= الواجهة 1: لوحة القيادة ================= -->
     <div id="page1" class="page active">
         <header class="top-header">
             <div class="navbar">
@@ -617,30 +620,28 @@
             </div>
             <div class="top-actions">
                 <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-file-invoice"></i></div>
-                    <span>حسابي</span>
+                    <div class="circle-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <span>تسديد مشتريات</span>
                 </div>
                 <div class="action-item" onclick="showPage('page2')">
                     <div class="circle-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
                     <span>تحويل الأموال</span>
                 </div>
                 <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-                    <span>تسديد مشتريات</span>
+                    <div class="circle-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                    <span>حسابي</span>
                 </div>
             </div>
         </header>
 
         <main class="dashboard-grid">
-            <div class="grid-card"><i class="fa-solid fa-money-check-dollar icon-teal"></i><span>طلب دفتر شيكات</span></div>
-            <div class="grid-card"><i class="fa-solid fa-file-invoice-dollar icon-gold"></i><span>تسديد الفواتير</span></div>
             <div class="grid-card"><i class="fa-solid fa-mobile-screen-button icon-teal"></i><span>تعبئة رصيد الهاتف</span></div>
-            <div class="grid-card"><i class="fa-solid fa-mobile-retro icon-gold"></i><span>ب-باي</span></div>
-            <div class="grid-card"><i class="fa-solid fa-money-bill-wave icon-teal"></i><span>سحب النقود</span></div>
+            <div class="grid-card"><i class="fa-solid fa-file-invoice-dollar icon-gold"></i><span>تسديد الفواتير</span></div>
+            <div class="grid-card"><i class="fa-solid fa-money-check-dollar icon-teal"></i><span>طلب دفتر شيكات</span></div>
             <div class="grid-card"><i class="fa-regular fa-credit-card icon-gold"></i><span>البطاقات البنكية</span></div>
-            <div class="grid-card" style="grid-column: span 3; min-height: 90px; flex-direction: row; gap: 15px; justify-content: center;">
-                <div class="gimtel-badge">G</div><span>جيمتل</span>
-            </div>
+            <div class="grid-card"><i class="fa-solid fa-money-bill-wave icon-teal"></i><span>سحب النقود</span></div>
+            <div class="grid-card"><i class="fa-solid fa-mobile-retro icon-gold"></i><span>ب-باي</span></div>
+            <div class="grid-card"><div class="gimtel-badge">G</div><span>جيمتل</span></div>
         </main>
 
         <nav class="bottom-nav">
@@ -651,7 +652,7 @@
         </nav>
     </div>
 
-    <!-- ================= الواجهة 2: تحويل الأموال (تم تصحيح الأماكن: إرسال يمين، طلب يسار) ================= -->
+    <!-- ================= الواجهة 2: تحويل الأموال (تم تبديل أماكن الزرين) ================= -->
     <div id="page2" class="page">
         <header class="top-header" style="padding-bottom: 16px;">
             <div class="navbar">
@@ -659,13 +660,13 @@
                 <h1 class="page-title">تحويل الأموال</h1>
             </div>
             <div class="action-buttons-top">
-                <button class="top-btn" onclick="openSendMoneyPage()">
-                    <i class="fa-solid fa-money-bill-transfer"></i>
-                    <span>إرسال الأموال</span>
-                </button>
                 <button class="top-btn yellow">
                     <i class="fa-solid fa-hand-holding-dollar"></i>
                     <span>طلب المال</span>
+                </button>
+                <button class="top-btn" onclick="openSendMoneyPage()">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>إرسال الأموال</span>
                 </button>
             </div>
         </header>
@@ -783,7 +784,7 @@
         <button type="button" class="bottom-full-btn" onclick="openPinModal()">أتمم</button>
     </div>
 
-    <!-- نافذة الخطأ -->
+    <!-- نافذة الخطأ الموحدة (للرقم وللمبلغ) -->
     <div id="errorModal" class="modal-overlay">
         <div class="error-box">
             <div class="error-title">خطأ</div>
@@ -792,7 +793,7 @@
         </div>
     </div>
 
-    <!-- ================= الرمز السري ================= -->
+    <!-- ================= الواجهتان 5 و 6: نافذة الرمز السري ================= -->
     <div id="pinModal" class="modal-overlay">
         <div class="pin-box">
             <i class="fa-solid fa-xmark pin-close-btn" onclick="closePinModal()"></i>
@@ -811,7 +812,7 @@
         </div>
     </div>
 
-    <!-- ================= الوصل النهائي ================= -->
+    <!-- ================= الواجهة 7: الوصل النهائي (النقل ناجح!) ================= -->
     <div id="successModal" class="modal-overlay">
         <div class="receipt-box">
             <div class="receipt-body">
