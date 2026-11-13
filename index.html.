@@ -581,7 +581,7 @@
             font-size: 40px;
         }
         
-        /* تنسيق السطر الأول (المستفيد والمبلغ) لمنع النزول لسطر جديد */
+        /* تنسيق السطر الأول لمنع النزول لسطر جديد */
         .receipt-summary {
             font-size: 15px;
             font-weight: 500;
@@ -597,7 +597,7 @@
         }
 
         .summary-top-line {
-            white-space: nowrap; /* منع النزول لسطر جديد مهما كان المبلغ طويلاً */
+            white-space: nowrap; /* يمنع النزول لسطر جديد تماماً */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -606,12 +606,13 @@
             font-size: 15px;
         }
         
-        /* حجم طبيعي لرقم الهاتف والمبلغ */
+        /* تنسيق طبيعي جداً للأرقام */
         #finalPhone, #finalAmount {
-            font-size: 16px; /* حجم طبيعي مطابق للصورة */
-            font-weight: 500;
+            font-size: 15px; /* حجم طبيعي */
+            font-weight: 500; /* سُمك متوسط مريح */
             font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
-            color: #111315;
+            color: #333333; /* لون رمادي داكن جداً ومريح */
+            transition: font-size 0.2s ease; /* انتقال سلس عند التصغير */
         }
 
         .mru-label {
@@ -643,7 +644,7 @@
             display: inline-block;
         }
         
-        /* رقم المعاملة: خط عادي، بدون تمديد، يظهر بشكل طبيعي ومقروء */
+        /* رقم المعاملة: خط طبيعي وواضح */
         .transaction-id-value {
             font-family: 'Roboto', sans-serif;
             font-weight: 400; 
@@ -1027,6 +1028,16 @@
             }
         }
 
+        // دالة ذكية لتصغير حجم الخط إذا كان النص طويلاً (مثل تطبيق بنكيلي)
+        function autoShrinkFont(element, defaultSize, minSize, threshold) {
+            const textLength = element.innerText.length;
+            if (textLength > threshold) {
+                element.style.fontSize = minSize + 'px';
+            } else {
+                element.style.fontSize = defaultSize + 'px';
+            }
+        }
+
         function submitPin() {
             const pin = document.getElementById('hiddenPinInput').value.trim();
             if (pin.length < 4) {
@@ -1039,8 +1050,15 @@
             const phone = document.getElementById('phoneInput').value.trim();
             const amount = document.getElementById('amountInput').value.trim();
 
-            document.getElementById('finalPhone').innerText = phone;
-            document.getElementById('finalAmount').innerText = amount;
+            const phoneEl = document.getElementById('finalPhone');
+            const amountEl = document.getElementById('finalAmount');
+
+            phoneEl.innerText = phone;
+            amountEl.innerText = amount;
+
+            // تطبيق التصغير التلقائي (الحجم الافتراضي 15px، الحجم الأدنى 11px، إذا تجاوز 5 أرقام يصغر)
+            autoShrinkFont(phoneEl, 15, 13, 8); 
+            autoShrinkFont(amountEl, 15, 11, 4); 
 
             const randomTransId = '10261113' + Math.floor(10000000000 + Math.random() * 90000000000);
             document.getElementById('transactionId').innerText = randomTransId;
