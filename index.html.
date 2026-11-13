@@ -204,7 +204,10 @@
             background-color: #fbc02d;
             color: #ffffff;
         }
-        .top-btn i { font-size: 26px; }
+        .top-btn svg {
+            height: 30px;
+            width: auto;
+        }
         .top-btn span { font-size: 14px; font-weight: 600; }
 
         .grey-divider-bar {
@@ -382,7 +385,7 @@
             justify-content: flex-end;
             gap: 10px;
             padding: 5px 20px 18px;
-            direction: ltr; /* لضمان ظهور الرقم بجانب الأيقونة بشكل متطابق للصورة */
+            direction: ltr;
         }
         .recipient-number {
             font-size: 18px;
@@ -647,7 +650,7 @@
         </nav>
     </div>
 
-    <!-- الواجهة 2: تحويل الأموال -->
+    <!-- الواجهة 2: تحويل الأموال (تم عكس مكان الزرين ونقل الأيقونات كما في الصورة) -->
     <div id="page2" class="page">
         <header class="top-header" style="padding-bottom: 16px;">
             <div class="navbar">
@@ -655,13 +658,30 @@
                 <h1 class="page-title">تحويل الأموال</h1>
             </div>
             <div class="action-buttons-top">
-                <button class="top-btn yellow">
-                    <i class="fa-solid fa-hand-holding-dollar"></i>
-                    <span>طلب المال</span>
-                </button>
+                <!-- الزر الأيمن: إرسال الأموال -->
                 <button class="top-btn" onclick="openSendMoneyPage()">
-                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <svg viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 4H60L65 34H10L5 4Z" fill="white"/>
+                        <path d="M22 8C17.5 14 17.5 24 22 30" stroke="#007b8a" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M48 8C52.5 14 52.5 24 48 30" stroke="#007b8a" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M31 11H41M31 16H39M33 11V19L39 27M31 21H37" stroke="#007b8a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="70" y="6" width="32" height="4.5" rx="1" fill="white"/>
+                        <rect x="72" y="17.5" width="32" height="4.5" rx="1" fill="white"/>
+                        <rect x="74" y="29" width="32" height="4.5" rx="1" fill="white"/>
+                    </svg>
                     <span>إرسال الأموال</span>
+                </button>
+                <!-- الزر الأيسر: طلب المال -->
+                <button class="top-btn yellow">
+                    <svg viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4H67L72 34H17L12 4Z" fill="white"/>
+                        <path d="M29 8C24.5 14 24.5 24 29 30" stroke="#fbc02d" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M55 8C59.5 14 59.5 24 55 30" stroke="#fbc02d" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M38 11H48M38 16H46M40 11V19L46 27M38 21H44" stroke="#fbc02d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M58 29C63 20 71 16 81 16V10L93 19.5L81 29V23C73 23 66 25 58 29Z" fill="white" stroke="#fbc02d" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M90 10L101 19.5L90 29" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>طلب المال</span>
                 </button>
             </div>
         </header>
@@ -735,7 +755,7 @@
         <button type="button" class="bottom-full-btn" onclick="validateAndProceed()">إرسال</button>
     </div>
 
-    <!-- الواجهة 4: تأكيد تحويل الأموال (مطابقة تماماً للصورة الحقيقية) -->
+    <!-- الواجهة 4: تأكيد تحويل الأموال -->
     <div id="page4" class="page">
         <header class="top-header" style="padding-bottom: 16px;">
             <div class="navbar" style="margin-bottom: 0;">
