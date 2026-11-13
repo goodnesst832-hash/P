@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -541,7 +542,7 @@
             color: #111315;
         }
 
-        /* ================= تصميم الوصل النهائي (مطابق للصورة الحقيقية) ================= */
+        /* ================= تصميم الوصل النهائي (مطابق للصورة الحقيقية تماماً) ================= */
         .receipt-box {
             background-color: #ffffff;
             width: 88%;
@@ -558,14 +559,14 @@
             font-size: 18px;
             font-weight: 700;
             color: #111315;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
-        /* علامة الصح المطابقة للصورة باستخدام SVG */
+        /* علامة الصح المطابقة للصورة (أصغر قليلاً) */
         .receipt-check-svg {
-            width: 75px;
-            height: 75px;
-            margin: 0 auto 25px;
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 20px;
             display: block;
         }
 
@@ -575,7 +576,7 @@
             font-weight: 700;
             color: #111315;
             line-height: 1.8;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             direction: rtl;
         }
         .receipt-summary span {
@@ -583,15 +584,16 @@
             color: #111315;
         }
         
+        /* إصلاح جذري لمعرف المعاملة والتاريخ (كل واحد في سطرين) */
         .receipt-info-group {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             direction: rtl;
             text-align: right;
-            padding: 0 10px;
+            padding: 0 5px;
         }
         
         .receipt-info-label {
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 700;
             color: #111315;
             display: block;
@@ -607,24 +609,24 @@
             text-align: right;
         }
 
-        /* تنسيق النجمة والمفضلة */
+        /* تنسيق النجمة والمفضلة (ملتصقة ولون رمادي داكن) */
         .receipt-fav-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px; /* مسافة صغيرة جداً بين النجمة والكلمة */
-            margin-top: 20px;
+            gap: 2px; /* مسافة شبه معدومة لالتصاق الكلمة بالنجمة */
+            margin-top: 25px;
             padding-top: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4b5563;
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #111315;
             cursor: pointer;
             direction: rtl;
         }
         
         .receipt-fav-row i {
             font-size: 24px;
-            color: #9ca3af; /* لون رمادي داكن مطابق للصورة */
+            color: #6b7280; /* لون رمادي داكن مطابق للصورة */
             transition: color 0.2s;
         }
         
@@ -1079,7 +1081,7 @@
             // إعادة تعيين النجمة إلى لونها الرمادي الداكن عند كل عملية جديدة
             const star = document.getElementById('favStar');
             star.classList.remove('starred');
-            star.style.color = '#9ca3af';
+            star.style.color = '#6b7280';
 
             document.getElementById('successModal').style.display = 'flex';
         }
@@ -1097,7 +1099,7 @@
             if (star.classList.contains('starred')) {
                 star.style.color = '#fbc02d'; // لون ذهبي عند التحديد
             } else {
-                star.style.color = '#9ca3af'; // لون رمادي داكن (مطابق للصورة)
+                star.style.color = '#6b7280'; // لون رمادي داكن (مطابق للصورة)
             }
         }
     </script>
