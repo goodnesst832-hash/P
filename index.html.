@@ -89,16 +89,15 @@
             width: 33.3%;
         }
 
-        .circle-icon {
-            width: 56px;
-            height: 56px;
-            background-color: #0a8d99;
-            border: 1.5px solid #c5e063;
+        .circle-icon-match {
+            width: 58px;
+            height: 58px;
+            background-color: #0ab2bf;
+            border: 2px solid #a4df64;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
         }
 
         .action-item span {
@@ -618,16 +617,29 @@
                 <h1 class="page-title">لوحة القيادة</h1>
             </div>
             <div class="top-actions">
+                <!-- زر تسديد مشتريات العلوي المحدث بدقة مطابقة للصورة -->
                 <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div class="circle-icon-match">
+                        <svg viewBox="0 0 36 36" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- ورقة الفاتورة/النقود العمودية الخلفية -->
+                            <rect x="7" y="6" width="16" height="22" rx="2" stroke="#ffffff" stroke-width="1.8"/>
+                            <path d="M15 12H19M15 16H19" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="15" cy="21" r="2.5" stroke="#ffffff" stroke-width="1.5"/>
+                            <!-- ورقة نقدية ثانية خلفية -->
+                            <path d="M12 4H24C25.1 4 26 4.9 26 6V24" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+                            <!-- اليد الحاملة من الأمام -->
+                            <path d="M11 20H21C22.1 20 23 20.9 23 22V28C23 29.1 22.1 30 21 30H11C9.9 30 9 29.1 9 28V22C9 20.9 9.9 20 11 20Z" stroke="#ffffff" stroke-width="1.8" fill="#0ab2bf"/>
+                            <path d="M13 24H19M13 26H17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
                     <span>تسديد مشتريات</span>
                 </div>
                 <div class="action-item" onclick="showPage('page2')">
-                    <div class="circle-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                    <div class="circle-icon-match"><i class="fa-solid fa-money-bill-transfer" style="color:#ffffff; font-size:22px;"></i></div>
                     <span>تحويل الأموال</span>
                 </div>
                 <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                    <div class="circle-icon-match"><i class="fa-solid fa-file-invoice" style="color:#ffffff; font-size:22px;"></i></div>
                     <span>حسابي</span>
                 </div>
             </div>
@@ -724,7 +736,7 @@
                 </svg>
                 <span>ب-باي</span>
             </div>
-            <!-- 7. الرمز السابع والأخير: جيمتل (مُدقق ومطابق بدقة تامة للصورة) -->
+            <!-- 7. جيمتل -->
             <div class="grid-card">
                 <div class="gimtel-badge-match">G</div>
                 <span>جيمتل</span>
