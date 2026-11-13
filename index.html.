@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>تطبيق تحويل الأموال</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -16,591 +15,155 @@
         }
 
         body {
-            background-color: #f3f4f6;
-            color: #111315;
+            background-color: #111315;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            max-width: 480px;
-            margin: 0 auto;
-            border-left: 1px solid #e5e7eb;
-            border-right: 1px solid #e5e7eb;
-            position: relative;
+            margin: 0;
         }
 
-        .page {
-            display: none;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #ffffff;
-        }
-
-        .page.active {
-            display: flex;
-        }
-
-        /* الهيدر العلوي */
-        .top-header {
-            background-color: #0eb4c2;
-            padding: 16px 18px 22px;
-            color: #ffffff;
-        }
-
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .menu-icon, .back-icon {
-            font-size: 22px;
-            color: #ffffff;
-            cursor: pointer;
-            z-index: 2;
-        }
-
-        .page-title {
-            font-size: 19px;
-            font-weight: 600;
-            position: absolute;
-            left: 0;
-            right: 0;
-            text-align: center;
-            pointer-events: none;
-        }
-
-        /* ================= الواجهة 1: لوحة القيادة ================= */
-        .top-actions {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            text-align: center;
-            padding-top: 5px;
-        }
-
-        .action-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #ffffff;
-            gap: 8px;
-            cursor: pointer;
-            width: 33.3%;
-        }
-
-        .circle-icon {
-            width: 56px;
-            height: 56px;
-            background-color: #0a8d99;
-            border: 1.5px solid #c5e063;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
-
-        .action-item span {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .dashboard-grid {
-            padding: 14px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            flex-grow: 1;
-            align-content: start;
-            background-color: #ffffff;
-        }
-
-        .grid-card {
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 3px;
-            padding: 20px 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #1f2937;
-            gap: 12px;
-            min-height: 120px;
-            cursor: pointer;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-        }
-
-        .grid-card i { font-size: 30px; }
-        .icon-teal { color: #0eb4c2; }
-        .icon-gold { color: #facc15; }
-
-        .gimtel-badge-match {
-            width: 44px;
-            height: 44px;
-            background-color: #0eb4c2;
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-            font-weight: 700;
-            font-family: Arial, sans-serif;
-        }
-
-        .grid-card span {
-            font-size: 12.5px;
-            font-weight: 600;
-            line-height: 1.3;
-            color: #374151;
-        }
-
-        .bottom-nav {
-            background-color: #ffffff;
-            border-top: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0 6px;
-            margin-top: auto;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #9ca3af;
-            font-size: 11.5px;
-            gap: 4px;
-            font-weight: 600;
-        }
-        .nav-item i { font-size: 19px; }
-        .nav-item.active { color: #0eb4c2; }
-
-        /* ================= الواجهة 2: تحويل الأموال ================= */
-        .action-buttons-top {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .top-btn {
-            background-color: #007b8a;
-            border: none;
-            border-radius: 2px;
-            padding: 20px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: #ffffff;
-            cursor: pointer;
-        }
-        .top-btn.yellow {
-            background-color: #fbc02d;
-            color: #ffffff;
-        }
-        .top-btn svg {
-            height: 30px;
-            width: auto;
-        }
-        .top-btn span { font-size: 14px; font-weight: 600; }
-
-        .grey-divider-bar {
-            background-color: #eeeeee;
-            padding: 10px;
-            text-align: center;
-            font-size: 14.5px;
-            font-weight: 600;
-            color: #4b5563;
-        }
-
-        .qr-center-box {
-            padding: 28px 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background-color: #ffffff;
-            cursor: pointer;
-        }
-        .qr-center-box i {
-            font-size: 40px;
-            color: #0eb4c2;
-        }
-        .qr-center-box span {
-            font-size: 14px;
-            font-weight: 600;
-            color: #374151;
-        }
-
-        .board-section {
-            padding: 22px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #ffffff;
-            flex-grow: 1;
-        }
-        .board-desc {
-            font-size: 13px;
-            color: #6b7280;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .add-board-box {
-            width: 145px;
-            height: 135px;
-            border: 2.5px dotted #0eb4c2;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        .add-board-box i {
-            font-size: 38px;
-            color: #0eb4c2;
-            font-weight: 300;
-        }
-
-        /* ================= الواجهة 3: إرسال الأموال ================= */
-        .top-tabs {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            text-align: center;
-            margin-top: 15px;
-        }
-        .tab-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #ffffff;
-            gap: 8px;
-            opacity: 0.65;
-            padding-bottom: 10px;
-            cursor: pointer;
-            position: relative;
-        }
-        .tab-item.active {
-            opacity: 1;
-        }
-        .tab-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 10%;
-            right: 10%;
-            height: 3px;
-            background-color: #ffffff;
-        }
-        .tab-icon-wrap {
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-        .tab-item span {
-            font-size: 11.5px;
-            font-weight: 600;
-        }
-
-        .form-content {
-            padding: 25px 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            background-color: #ffffff;
-        }
-
-        .clean-input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .clean-label {
-            font-size: 14px;
-            font-weight: 700;
-            color: #374151;
-            text-align: right;
-        }
-        .clean-input-row {
-            display: flex;
-            align-items: center;
-            border-bottom: 1.5px solid #9ca3af;
-            padding-bottom: 8px;
-        }
-        .clean-input {
-            border: none;
-            outline: none;
+        /* محاكاة شاشة الهاتف */
+        .phone-screen {
             width: 100%;
-            font-size: 16px;
-            color: #111315;
-            background: transparent;
-            text-align: right;
-        }
-        .clean-input::placeholder {
-            color: #9ca3af;
-            font-size: 15px;
-        }
-        .contacts-book-icon {
-            color: #fbc02d;
-            font-size: 22px;
-            padding-right: 10px;
-            cursor: pointer;
-        }
-
-        .bottom-full-btn {
-            width: 100%;
-            background-color: #fbc02d;
-            color: #ffffff;
-            border: none;
-            padding: 15px;
-            font-size: 17px;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        /* ================= الواجهة 4: تأكيد تحويل الأموال ================= */
-        .review-subtitle {
-            text-align: right;
-            padding: 18px 20px 10px;
-            font-size: 15px;
-            font-weight: 700;
-            color: #374151;
-        }
-
-        .recipient-row {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 10px;
-            padding: 5px 20px 18px;
-            direction: ltr;
-        }
-        .recipient-number {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1f2937;
-            letter-spacing: 0.5px;
-        }
-        .recipient-phone-icon-match {
-            font-size: 22px;
-            color: #4b5563;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .review-box-card {
-            background-color: #f3f4f6;
-            margin: 0 15px;
-            border-radius: 6px;
-            padding: 18px;
-        }
-        .review-amount-section {
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 14px;
-            margin-bottom: 14px;
-            text-align: right;
-        }
-        .review-amount-label {
-            font-size: 14px;
-            font-weight: 700;
-            color: #374151;
-            margin-bottom: 6px;
-        }
-        .review-amount-val {
-            font-size: 16px;
-            font-weight: 700;
-            color: #111315;
-            direction: ltr;
-            text-align: right;
-        }
-
-        .fee-details-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #374151;
-            margin-bottom: 14px;
-            text-align: right;
-        }
-
-        .fee-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            font-size: 14.5px;
-            color: #374151;
-            font-weight: 600;
-        }
-        .fee-dash {
-            color: #6b7280;
-        }
-        .fee-val {
-            direction: ltr;
-            font-weight: 700;
-            color: #1f2937;
-        }
-
-        /* ================= النوافذ المنبثقة ================= */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.45);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .error-box {
+            max-width: 400px;
+            height: 800px;
             background-color: #ffffff;
-            width: 82%;
-            max-width: 310px;
-            border-radius: 4px;
+            position: relative;
             overflow: hidden;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* شريط الحالة العلوي (الساعة والشبكة) */
+        .status-bar {
+            height: 28px;
+            background-color: #004d5a; /* لون داكن يطابق أعلى الصورة */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* الهيدر */
+        .header {
+            height: 50px;
+            background-color: #006b7a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .header i {
+            font-size: 20px;
+        }
+
+        /* الخلفية الرمادية الشفافة */
+        .overlay-bg {
+            flex-grow: 1;
+            background-color: #808080;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* النص الرمادي في الخلفية */
+        .bg-text {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #333;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .bg-phone {
+            position: absolute;
+            top: 50px;
+            right: 30px;
+            color: #333;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .bg-phone i {
+            font-size: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* المربع الأبيض المنبثق (الوصل) */
+        .receipt-modal {
+            width: 90%;
+            background-color: #ffffff;
+            border-radius: 2px;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-        .error-title {
-            font-size: 16px;
-            font-weight: 700;
-            padding: 18px 15px 8px;
-            color: #111315;
-        }
-        .error-msg {
-            font-size: 14px;
-            color: #4b5563;
-            padding: 0 15px 20px;
-        }
-        .modal-cyan-btn {
-            background-color: #0eb4c2;
-            color: #ffffff;
-            border: none;
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: block;
-        }
 
-        .pin-box {
-            background-color: #ffffff;
-            width: 85%;
-            max-width: 320px;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-            text-align: center;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.25);
-        }
-        .pin-close-btn {
-            position: absolute;
-            top: 10px;
-            left: 12px;
-            font-size: 22px;
-            color: #9ca3af;
-            cursor: pointer;
-            line-height: 1;
-        }
-        .pin-prompt-text {
-            font-size: 16px;
-            font-weight: 600;
-            color: #374151;
-            margin: 42px 15px 30px;
-        }
-        .pin-slots {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 35px;
-            direction: ltr;
-            cursor: pointer;
-        }
-        .pin-slot {
-            width: 36px;
-            height: 28px;
-            border-bottom: 1.5px solid #374151;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            color: #111315;
-        }
-
-        /* ================= تصميم الوصل النهائي (مطابق للصورة الحقيقية تماماً) ================= */
-        .receipt-box {
-            background-color: #ffffff;
-            width: 88%;
-            max-width: 340px;
-            border-radius: 6px;
-            overflow: hidden;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
-        .receipt-body {
+        .receipt-content {
             padding: 25px 15px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
+
         .receipt-title {
             font-size: 18px;
             font-weight: 700;
             color: #111315;
             margin-bottom: 15px;
         }
-        
-        /* علامة الصح المطابقة للصورة (أصغر قليلاً) */
-        .receipt-check-svg {
-            width: 65px;
-            height: 65px;
-            margin: 0 auto 20px;
+
+        /* علامة الصح الخضراء */
+        .check-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
             display: block;
         }
 
-        /* تنسيق النصوص في الوصل */
-        .receipt-summary {
+        /* نصوص الوصل */
+        .receipt-info {
             font-size: 15px;
             font-weight: 700;
             color: #111315;
             line-height: 1.8;
             margin-bottom: 20px;
-            direction: rtl;
         }
-        .receipt-summary span {
+
+        .receipt-info span {
             font-weight: 700;
-            color: #111315;
         }
-        
-        /* إصلاح جذري لمعرف المعاملة والتاريخ (كل واحد في سطرين) */
-        .receipt-info-group {
-            margin-bottom: 15px;
-            direction: rtl;
+
+        .info-block {
+            width: 100%;
             text-align: right;
-            padding: 0 5px;
+            padding: 0 10px;
+            margin-bottom: 5px;
         }
-        
-        .receipt-info-label {
-            font-size: 14.5px;
+
+        .info-label {
+            font-size: 15px;
             font-weight: 700;
             color: #111315;
             display: block;
-            margin-bottom: 2px;
         }
-        
-        .receipt-info-value {
+
+        .info-value {
             font-size: 15px;
             font-weight: 700;
             color: #111315;
@@ -609,499 +172,138 @@
             text-align: right;
         }
 
-        /* تنسيق النجمة والمفضلة (ملتصقة ولون رمادي داكن) */
-        .receipt-fav-row {
+        /* النجمة والمفضلة */
+        .fav-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 2px; /* مسافة شبه معدومة لالتصاق الكلمة بالنجمة */
+            gap: 8px;
             margin-top: 25px;
-            padding-top: 10px;
-            font-size: 14.5px;
+            font-size: 14px;
             font-weight: 700;
             color: #111315;
             cursor: pointer;
-            direction: rtl;
         }
-        
-        .receipt-fav-row i {
-            font-size: 24px;
-            color: #6b7280; /* لون رمادي داكن مطابق للصورة */
-            transition: color 0.2s;
+
+        .fav-row i {
+            font-size: 22px;
+            color: #808080; /* رمادي داكن */
         }
-        
-        .receipt-fav-row i.starred {
-            color: #fbc02d;
+
+        /* زر تم */
+        .btn-done {
+            width: 100%;
+            height: 55px;
+            background-color: #00bcd4;
+            color: #ffffff;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 0 0 2px 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+        /* الشريط السفلي للهاتف */
+        .bottom-nav {
+            height: 40px;
+            background-color: #a88b45;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        /* الساعة والموقت */
+        .time-stamp {
+            position: absolute;
+            top: 30px;
+            right: 15px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 700;
+            direction: ltr;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- ================= الواجهة 1: لوحة القيادة ================= -->
-    <div id="page1" class="page active">
-        <header class="top-header">
-            <div class="navbar">
-                <i class="fa-solid fa-bars menu-icon"></i>
-                <h1 class="page-title">لوحة القيادة</h1>
-            </div>
-            <div class="top-actions">
-                <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-                    <span>تسديد مشتريات</span>
-                </div>
-                <div class="action-item" onclick="showPage('page2')">
-                    <div class="circle-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-                    <span>تحويل الأموال</span>
-                </div>
-                <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-file-invoice"></i></div>
-                    <span>حسابي</span>
-                </div>
-            </div>
-        </header>
-
-        <main class="dashboard-grid">
-            <!-- 1. تعبئة رصيد الهاتف -->
-            <div class="grid-card">
-                <svg viewBox="0 0 40 44" width="38" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="8" y="3" width="24" height="38" rx="3" stroke="#0eb4c2" stroke-width="2"/>
-                    <line x1="17" y1="6.5" x2="23" y2="6.5" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
-                    <rect x="11.5" y="10" width="17" height="23.5" stroke="#0eb4c2" stroke-width="1.6"/>
-                    <circle cx="20" cy="37.2" r="1.3" fill="#0eb4c2"/>
-                    <path d="M20 14L26 20.5H22.6V28.5H17.4V20.5H14L20 14Z" stroke="#0eb4c2" stroke-width="1.7" stroke-linejoin="round"/>
-                </svg>
-                <span>تعبئة رصيد الهاتف</span>
-            </div>
-            <!-- 2. تسديد الفواتير -->
-            <div class="grid-card">
-                <svg viewBox="0 0 44 44" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11 5H30V31H11" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M11 5V21" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
-                    <rect x="14.5" y="9" width="12" height="4.5" stroke="#facc15" stroke-width="1.7"/>
-                    <line x1="19" y1="17.5" x2="26.5" y2="17.5" stroke="#facc15" stroke-width="1.7" stroke-linecap="round"/>
-                    <line x1="19" y1="21" x2="26.5" y2="21" stroke="#facc15" stroke-width="1.7" stroke-linecap="round"/>
-                    <line x1="19" y1="24.5" x2="26.5" y2="24.5" stroke="#facc15" stroke-width="1.7" stroke-linecap="round"/>
-                    <line x1="15" y1="17.5" x2="16.2" y2="17.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="15" y1="21" x2="16.2" y2="21" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="15" y1="24.5" x2="16.2" y2="24.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M30 18H36V27.5C36 29.5 34.5 31 32.5 31H29" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M11 20C8.5 21.5 7 24 7 27V38" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M11 24.5L13.5 23.5C14.8 23 15.8 24.3 14.8 25.5L11.5 28.5" stroke="#facc15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 31V35.5C16 36.8 15 38 13.5 38" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span>تسديد الفواتير</span>
-            </div>
-            <!-- 3. طلب دفتر شيكات -->
-            <div class="grid-card">
-                <svg viewBox="0 0 46 42" width="44" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="8.5" y="7" width="3.6" height="22" rx="1" stroke="#0eb4c2" stroke-width="1.9"/>
-                    <path d="M10.3 4.5V7" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <path d="M8.5 29L10.3 33.5L12.1 29" stroke="#0eb4c2" stroke-width="1.9" stroke-linejoin="round"/>
-                    <path d="M12.1 10.5H14.2V18.5" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6 12H8.5" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <path d="M6 12V28" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <path d="M14.2 12H36.5" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <path d="M36.5 12C39 12 40.5 13.5 40.5 16V29C40.5 31.2 38.8 33 36.5 33H6" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <path d="M36.5 12V25.5" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <path d="M13 25.5H37.5C39.2 25.5 40.5 26.8 40.5 28.5" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <path d="M13 29.2H37.5" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="6" y1="25.5" x2="8.5" y2="25.5" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <line x1="6" y1="29.2" x2="8.5" y2="29.2" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
-                    <line x1="27.5" y1="15.8" x2="33" y2="15.8" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="20.5" y1="19" x2="33" y2="19" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="16" y1="22.2" x2="17.8" y2="22.2" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
-                    <line x1="24.5" y1="22.2" x2="33" y2="22.2" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-                <span>طلب دفتر شيكات</span>
-            </div>
-            <!-- 4. البطاقات البنكية -->
-            <div class="grid-card">
-                <svg viewBox="0 0 46 36" width="42" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="3" width="40" height="30" rx="4" stroke="#facc15" stroke-width="2.2"/>
-                    <rect x="26" y="9" width="10" height="8" rx="1.5" stroke="#facc15" stroke-width="1.6"/>
-                    <line x1="26" y1="13" x2="36" y2="13" stroke="#facc15" stroke-width="1.4"/>
-                    <line x1="31" y1="9" x2="31" y2="17" stroke="#facc15" stroke-width="1.4"/>
-                    <line x1="8" y1="24" x2="18" y2="24" stroke="#facc15" stroke-width="2.2" stroke-linecap="round"/>
-                </svg>
-                <span>البطاقات البنكية</span>
-            </div>
-            <!-- 5. سحب النقود -->
-            <div class="grid-card">
-                <svg viewBox="0 0 44 42" width="42" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 9H39C40.1 9 41 9.9 41 11V15C41 16.1 40.1 17 39 17H5C3.9 17 3 16.1 3 15V11C3 9.9 3.9 9 5 9Z" stroke="#0eb4c2" stroke-width="2"/>
-                    <path d="M12 9V13C12 14.1 12.9 15 14 15H30C31.1 15 32 14.1 32 13V9" stroke="#0eb4c2" stroke-width="1.8"/>
-                    <path d="M16 16V33C16 34.1 16.9 35 18 35H28C29.1 35 30 34.1 30 33V16" stroke="#0eb4c2" stroke-width="1.8"/>
-                    <path d="M20 16V30C20 30.5 20.5 31 21 31H25C25.5 31 26 30.5 26 30V16" stroke="#0eb4c2" stroke-width="1.5" stroke-dasharray="2 2"/>
-                    <circle cx="23" cy="23" r="1.5" fill="#0eb4c2"/>
-                    <path d="M13 18V31" stroke="#0eb4c2" stroke-width="1.5"/>
-                </svg>
-                <span>سحب النقود</span>
-            </div>
-            <!-- 6. ب-باي -->
-            <div class="grid-card">
-                <svg viewBox="0 0 40 46" width="36" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="5" y="4" width="30" height="38" rx="4" fill="#facc15"/>
-                    <rect x="8" y="8" width="24" height="26" fill="#ffffff" rx="1"/>
-                    <circle cx="20" cy="38" r="1.5" fill="#facc15"/>
-                    <path d="M13 16H15.5L17.5 24H25.5L27.5 16H13Z" stroke="#facc15" stroke-width="1.4" stroke-linejoin="round"/>
-                    <path d="M17.5 24L16 28H26.5" stroke="#facc15" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="18.5" cy="30" r="1.2" fill="#facc15"/>
-                    <circle cx="24.5" cy="30" r="1.2" fill="#facc15"/>
-                    <path d="M27.5 16H29.5" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
-                </svg>
-                <span>ب-باي</span>
-            </div>
-            <!-- 7. الرمز السابع: جيمتل -->
-            <div class="grid-card">
-                <div class="gimtel-badge-match">G</div>
-                <span>جيمتل</span>
-            </div>
-        </main>
-
-        <nav class="bottom-nav">
-            <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
-            <a href="#" class="nav-item"><i class="fa-regular fa-star"></i><span>المفضلة</span></a>
-            <a href="#" class="nav-item"><i class="fa-regular fa-bell"></i><span>الإشعارات</span></a>
-            <a href="#" class="nav-item"><i class="fa-regular fa-circle-question"></i><span>المساعدة</span></a>
-        </nav>
-    </div>
-
-    <!-- ================= الواجهة 2: تحويل الأموال ================= -->
-    <div id="page2" class="page">
-        <header class="top-header" style="padding-bottom: 16px;">
-            <div class="navbar">
-                <i class="fa-solid fa-arrow-right back-icon" onclick="showPage('page1')"></i>
-                <h1 class="page-title">تحويل الأموال</h1>
-            </div>
-            <div class="action-buttons-top">
-                <button class="top-btn" onclick="openSendMoneyPage()">
-                    <svg viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 4H60L65 34H10L5 4Z" fill="white"/>
-                        <path d="M22 8C17.5 14 17.5 24 22 30" stroke="#007b8a" stroke-width="2.5" stroke-linecap="round"/>
-                        <path d="M48 8C52.5 14 52.5 24 48 30" stroke="#007b8a" stroke-width="2.5" stroke-linecap="round"/>
-                        <path d="M31 11H41M31 16H39M33 11V19L39 27M31 21H37" stroke="#007b8a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <rect x="70" y="6" width="32" height="4.5" rx="1" fill="white"/>
-                        <rect x="72" y="17.5" width="32" height="4.5" rx="1" fill="white"/>
-                        <rect x="74" y="29" width="32" height="4.5" rx="1" fill="white"/>
-                    </svg>
-                    <span>إرسال الأموال</span>
-                </button>
-                <button class="top-btn yellow">
-                    <svg viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 4H67L72 34H17L12 4Z" fill="white"/>
-                        <path d="M29 8C24.5 14 24.5 24 29 30" stroke="#fbc02d" stroke-width="2.5" stroke-linecap="round"/>
-                        <path d="M55 8C59.5 14 59.5 24 55 30" stroke="#fbc02d" stroke-width="2.5" stroke-linecap="round"/>
-                        <path d="M38 11H48M38 16H46M40 11V19L46 27M38 21H44" stroke="#fbc02d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M58 29C63 20 71 16 81 16V10L93 19.5L81 29V23C73 23 66 25 58 29Z" fill="white" stroke="#fbc02d" stroke-width="1.5" stroke-linejoin="round"/>
-                        <path d="M90 10L101 19.5L90 29" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>طلب المال</span>
-                </button>
-            </div>
-        </header>
-
-        <div class="grey-divider-bar">التحويل السريع</div>
-
-        <div class="qr-center-box">
-            <i class="fa-solid fa-qrcode"></i>
-            <span>رمز QR</span>
+    <div class="phone-screen">
+        <!-- شريط الحالة -->
+        <div class="status-bar">
+            <span>12:07</span>
+            <span><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span>
         </div>
 
-        <div class="grey-divider-bar">اللوحة</div>
-
-        <div class="board-section">
-            <p class="board-desc">أنشئ مجموعة جديدة أو حدد مجموعة حالية لتقسيم المبلغ</p>
-            <div class="add-board-box"><i class="fa-solid fa-plus"></i></div>
-        </div>
-    </div>
-
-    <!-- ================= الواجهة 3: إرسال الأموال ================= -->
-    <div id="page3" class="page">
-        <header class="top-header" style="padding-bottom: 0;">
-            <div class="navbar">
-                <i class="fa-solid fa-arrow-right back-icon" onclick="showPage('page2')"></i>
-                <h1 class="page-title">إرسال الأموال</h1>
-            </div>
-            <div class="top-tabs">
-                <div class="tab-item active">
-                    <div class="tab-icon-wrap"><i class="fa-solid fa-mobile-screen"></i></div>
-                    <span>رقم الهاتف</span>
-                </div>
-                <div class="tab-item">
-                    <div class="tab-icon-wrap"><i class="fa-solid fa-circle-user"></i></div>
-                    <span>اسم المستخدم</span>
-                </div>
-                <div class="tab-item">
-                    <div class="tab-icon-wrap"><i class="fa-solid fa-landmark"></i></div>
-                    <span>بنك</span>
-                </div>
-                <div class="tab-item">
-                    <div class="tab-icon-wrap"><i class="fa-brands fa-facebook"></i></div>
-                    <span>فيسبوك</span>
-                </div>
-            </div>
-        </header>
-
-        <main class="form-content">
-            <div class="clean-input-group">
-                <label class="clean-label">رقم الهاتف</label>
-                <div class="clean-input-row">
-                    <input type="tel" id="phoneInput" inputmode="numeric" pattern="[0-9]*" class="clean-input" placeholder="أدخل رقم الهاتف" maxlength="8" autocomplete="off" oninput="this.value = this.value.replace(/\D/g, '')">
-                    <i class="fa-solid fa-address-book contacts-book-icon"></i>
-                </div>
-            </div>
-
-            <div class="clean-input-group">
-                <label class="clean-label">المبلغ</label>
-                <div class="clean-input-row">
-                    <input type="tel" id="amountInput" inputmode="numeric" pattern="[0-9]*" class="clean-input" placeholder="أدخل المبلغ" autocomplete="off" oninput="this.value = this.value.replace(/\D/g, '')">
-                </div>
-            </div>
-
-            <div class="clean-input-group">
-                <label class="clean-label">ملاحظة (اختياري)</label>
-                <div class="clean-input-row">
-                    <input type="text" id="noteInput" class="clean-input" placeholder="أدخل ملاحظة" autocomplete="off">
-                </div>
-            </div>
-        </main>
-
-        <button type="button" class="bottom-full-btn" onclick="validateAndProceed()">إرسال</button>
-    </div>
-
-    <!-- ================= الواجهة 4: تأكيد تحويل الأموال ================= -->
-    <div id="page4" class="page">
-        <header class="top-header" style="padding-bottom: 16px;">
-            <div class="navbar" style="margin-bottom: 0;">
-                <i class="fa-solid fa-arrow-right back-icon" onclick="showPage('page3')"></i>
-                <h1 class="page-title">تأكيد تحويل الأموال</h1>
-            </div>
-        </header>
-
-        <div class="review-subtitle">مراجعة التفاصيل المدخلة</div>
-
-        <div class="recipient-row">
-            <span id="reviewPhoneDisplay" class="recipient-number"></span>
-            <div class="recipient-phone-icon-match"><i class="fa-solid fa-mobile-screen"></i></div>
+        <!-- الهيدر -->
+        <div class="header">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>تأكيد تحويل الأموال</span>
+            <span></span>
         </div>
 
-        <div class="review-box-card">
-            <div class="review-amount-section">
-                <div class="review-amount-label">المبلغ</div>
-                <div id="reviewAmountDisplay" class="review-amount-val"></div>
-            </div>
-
-            <div class="fee-details-title">تفاصيل تكلفة الخدمة</div>
-
-            <div class="fee-row">
-                <span>تكلفة الخدمة</span>
-                <span class="fee-dash">-</span>
-                <span class="fee-val">MRU 0</span>
-            </div>
-            <div class="fee-row">
-                <span>العمولة</span>
-                <span class="fee-dash">-</span>
-                <span class="fee-val">MRU 0</span>
-            </div>
-            <div class="fee-row">
-                <span>الضريبة</span>
-                <span class="fee-dash">-</span>
-                <span class="fee-val">MRU 0</span>
-            </div>
-        </div>
-
-        <button type="button" class="bottom-full-btn" onclick="openPinModal()">أتمم</button>
-    </div>
-
-    <!-- نافذة الخطأ -->
-    <div id="errorModal" class="modal-overlay">
-        <div class="error-box">
-            <div class="error-title">خطأ</div>
-            <div id="errorMessageText" class="error-msg">أدخل رقم هاتف صالح</div>
-            <button type="button" class="modal-cyan-btn" onclick="closeErrorModal()">تم</button>
-        </div>
-    </div>
-
-    <!-- نافذة الرمز السري -->
-    <div id="pinModal" class="modal-overlay">
-        <div class="pin-box">
-            <i class="fa-solid fa-xmark pin-close-btn" onclick="closePinModal()"></i>
-            <div class="pin-prompt-text">الرجاء إدخال الرمز السري</div>
-
-            <input type="tel" id="hiddenPinInput" inputmode="numeric" pattern="[0-9]*" style="position: absolute; opacity: 0; pointer-events: none;" maxlength="4" oninput="updatePinDisplay(this.value)">
-
-            <div class="pin-slots" onclick="document.getElementById('hiddenPinInput').focus();">
-                <div class="pin-slot" id="d1"></div>
-                <div class="pin-slot" id="d2"></div>
-                <div class="pin-slot" id="d3"></div>
-                <div class="pin-slot" id="d4"></div>
-            </div>
-
-            <button type="button" class="modal-cyan-btn" onclick="submitPin()">ارسل الطلب</button>
-        </div>
-    </div>
-
-    <!-- الوصل النهائي (تم تعديله ليطابق الصورة الحقيقية) -->
-    <div id="successModal" class="modal-overlay">
-        <div class="receipt-box">
-            <div class="receipt-body">
-                <div class="receipt-title">النقل ناجح!</div>
-                
-                <!-- علامة صح مطابقة للصورة (SVG) -->
-                <svg class="receipt-check-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="42" stroke="#5cb85c" stroke-width="8" fill="none"/>
-                    <path d="M30 50 L45 65 L70 35" stroke="#5cb85c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-
-                <div class="receipt-summary">
-                    المستفيد: <span id="finalPhone"></span> المبلغ المرسل: <span id="finalAmount"></span><br>MRU
-                </div>
-
-                <!-- معرف المعاملة في سطرين كما في الصورة -->
-                <div class="receipt-info-group">
-                    <span class="receipt-info-label">معرف المعاملة :</span>
-                    <span class="receipt-info-value" id="transactionId"></span>
-                </div>
-                
-                <div class="receipt-info-group">
-                    <span class="receipt-info-label" style="display:inline;">التاريخ والوقت : </span>
-                    <span class="receipt-info-value" style="display:inline;" id="transactionDateTime"></span>
-                </div>
-
-                <!-- النجمة ملتصقة بكلمة المفضلة ولونها رمادي داكن -->
-                <div class="receipt-fav-row" onclick="toggleFavorite()">
-                    <i class="fa-solid fa-star" id="favStar"></i>
-                    <span>إضافة إلى المفضلة</span>
-                </div>
-            </div>
-
-            <button type="button" class="modal-cyan-btn" onclick="closeSuccessModal()">تم</button>
-        </div>
-    </div>
-
-    <script>
-        function clearFormFields() {
-            document.getElementById('phoneInput').value = '';
-            document.getElementById('amountInput').value = '';
-            document.getElementById('noteInput').value = '';
-        }
-
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        function openSendMoneyPage() {
-            clearFormFields();
-            showPage('page3');
-        }
-
-        function showErrorPopup(message) {
-            document.getElementById('errorMessageText').innerText = message;
-            document.getElementById('errorModal').style.display = 'flex';
-        }
-
-        function validateAndProceed() {
-            const phone = document.getElementById('phoneInput').value.trim();
-            const amount = document.getElementById('amountInput').value.trim();
-            const mauritanianPhoneRegex = /^[234]\d{7}$/;
-
-            if (!mauritanianPhoneRegex.test(phone)) {
-                showErrorPopup('أدخل رقم هاتف صالح');
-                return;
-            }
-
-            if (amount === '' || Number(amount) <= 0) {
-                showErrorPopup('أدخل مبلغ صالح');
-                return;
-            }
-
-            document.getElementById('reviewPhoneDisplay').innerText = phone;
-            document.getElementById('reviewAmountDisplay').innerText = 'MRU ' + amount;
-
-            showPage('page4');
-        }
-
-        function closeErrorModal() {
-            document.getElementById('errorModal').style.display = 'none';
-        }
-
-        function openPinModal() {
-            document.getElementById('hiddenPinInput').value = '';
-            updatePinDisplay('');
-            document.getElementById('pinModal').style.display = 'flex';
-            setTimeout(() => document.getElementById('hiddenPinInput').focus(), 100);
-        }
-
-        function closePinModal() {
-            document.getElementById('pinModal').style.display = 'none';
-        }
-
-        function updatePinDisplay(val) {
-            val = val.replace(/\D/g, '').slice(0, 4);
-            document.getElementById('hiddenPinInput').value = val;
-            for (let i = 1; i <= 4; i++) {
-                const slot = document.getElementById('d' + i);
-                slot.innerText = i <= val.length ? '•' : '';
-            }
-        }
-
-        function submitPin() {
-            const pin = document.getElementById('hiddenPinInput').value.trim();
-            if (pin.length < 4) {
-                showErrorPopup('الرجاء إدخال الرمز السري كاملاً (4 أرقام)');
-                return;
-            }
-
-            closePinModal();
-
-            const phone = document.getElementById('phoneInput').value.trim();
-            const amount = document.getElementById('amountInput').value.trim();
-
-            document.getElementById('finalPhone').innerText = phone;
-            document.getElementById('finalAmount').innerText = amount;
-
-            // توليد رقم معاملة طويل مثل الصورة الحقيقية
-            const randomTransId = Math.floor(1000000000000000000 + Math.random() * 9000000000000000000);
-            document.getElementById('transactionId').innerText = randomTransId;
-
-            // توليد التاريخ والوقت بتنسيق الصورة الحقيقية (سنة-شهر-يوم ساعة:دقيقة:ثانية)
-            const now = new Date();
-            const year = now.getFullYear().toString().slice(-2);
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-
-            // التنسيق: 12:53:54 26-11-13
-            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${year}-${month}-${day}`;
+        <!-- الخلفية الرمادية -->
+        <div class="overlay-bg">
             
-            // إعادة تعيين النجمة إلى لونها الرمادي الداكن عند كل عملية جديدة
-            const star = document.getElementById('favStar');
-            star.classList.remove('starred');
-            star.style.color = '#6b7280';
-
-            document.getElementById('successModal').style.display = 'flex';
-        }
-
-        function closeSuccessModal() {
-            document.getElementById('successModal').style.display = 'none';
-            clearFormFields();
-            showPage('page1');
-        }
-
-        function toggleFavorite() {
-            const star = document.getElementById('favStar');
-            star.classList.toggle('starred');
+            <!-- نصوص الخلفية -->
+            <div class="bg-text">مراجعة التفاصيل المدخلة</div>
+            <div class="bg-phone">
+                <span>36069139</span> <i class="fa-solid fa-mobile-screen"></i>
+            </div>
             
-            if (star.classList.contains('starred')) {
-                star.style.color = '#fbc02d'; // لون ذهبي عند التحديد
-            } else {
-                star.style.color = '#6b7280'; // لون رمادي داكن (مطابق للصورة)
-            }
-        }
-    </script>
+            <!-- الوقت والتاريخ -->
+            <div class="time-stamp">12:53:54 26-11-13</div>
+
+            <!-- المربع الأبيض -->
+            <div class="receipt-modal">
+                <div class="receipt-content">
+                    <div class="receipt-title">النقل ناجح!</div>
+                    
+                    <!-- علامة الصح -->
+                    <svg class="check-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="42" stroke="#5cb85c" stroke-width="6" fill="none"/>
+                        <path d="M30 50 L45 65 L70 35" stroke="#5cb85c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+
+                    <!-- معلومات التحويل -->
+                    <div class="receipt-info">
+                        المستفيد: 36069139 المبلغ المرسل: 30<br>MRU
+                    </div>
+
+                    <!-- معرف المعاملة -->
+                    <div class="info-block">
+                        <span class="info-label">معرف المعاملة :</span>
+                        <span class="info-value">1026111312535260000</span>
+                    </div>
+                    
+                    <!-- التاريخ والوقت -->
+                    <div class="info-block">
+                        <span class="info-label">التاريخ والوقت :</span>
+                        <span class="info-value">12:53:54 26-11-13</span>
+                    </div>
+
+                    <!-- المفضلة -->
+                    <div class="fav-row">
+                        <span>إضافة إلى المفضلة</span>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- زر تم -->
+                <button class="btn-done">تم</button>
+            </div>
+
+        </div>
+
+        <!-- الشريط السفلي -->
+        <div class="bottom-nav">
+            أنتم
+        </div>
+    </div>
+
 </body>
 </html>
