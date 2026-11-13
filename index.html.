@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>تطبيق تحويل الأموال</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>تأكيد تحويل الأموال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,7 +16,7 @@
         }
 
         body {
-            background-color: #111315;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,47 +29,54 @@
             width: 100%;
             max-width: 400px;
             height: 800px;
-            background-color: #ffffff;
+            background-color: #f0f0f0;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        /* شريط الحالة العلوي (الساعة والشبكة) */
-        .status-bar {
-            height: 28px;
-            background-color: #004d5a; /* لون داكن يطابق أعلى الصورة */
+        /* الشريط العلوي الداكن مع الساعة الحقيقية */
+        .top-dark-bar {
+            height: 60px;
+            background-color: #10505a;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: flex-end;
             padding: 0 15px;
-            color: #ffffff;
-            font-size: 12px;
+            color: #fff;
+        }
+
+        .top-dark-bar .clock {
+            font-size: 13px;
+            direction: ltr;
             font-weight: 600;
         }
 
-        /* الهيدر */
-        .header {
+        /* شريط العنوان */
+        .header-title {
             height: 50px;
-            background-color: #006b7a;
+            background-color: #10505a;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
-            color: #ffffff;
+            justify-content: center;
+            position: relative;
+            color: #b0c4c7;
             font-size: 18px;
             font-weight: 600;
         }
-
-        .header i {
+        
+        .header-title .back-arrow {
+            position: absolute;
+            right: 20px;
             font-size: 20px;
+            color: #b0c4c7;
         }
 
-        /* الخلفية الرمادية الشفافة */
+        /* الخلفية الرمادية */
         .overlay-bg {
             flex-grow: 1;
-            background-color: #808080;
+            background-color: #888888;
             position: relative;
             display: flex;
             justify-content: center;
@@ -76,45 +84,52 @@
             padding: 20px;
         }
 
-        /* النص الرمادي في الخلفية */
-        .bg-text {
+        /* نصوص الخلفية */
+        .bg-text-top {
             position: absolute;
             top: 20px;
-            right: 25px;
-            color: #333;
-            font-size: 16px;
+            right: 20px;
+            color: #222;
+            font-size: 17px;
             font-weight: 700;
         }
 
-        .bg-phone {
+        .bg-phone-num {
             position: absolute;
-            top: 50px;
-            right: 30px;
-            color: #333;
+            top: 60px;
+            right: 20px;
+            color: #222;
             font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bg-time-stamp {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            color: #222;
+            font-size: 13px;
             font-weight: 700;
+            direction: ltr;
         }
 
-        .bg-phone i {
-            font-size: 24px;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        /* المربع الأبيض المنبثق (الوصل) */
+        /* المربع الأبيض (الوصل) */
         .receipt-modal {
-            width: 90%;
+            width: 92%;
             background-color: #ffffff;
-            border-radius: 2px;
+            border-radius: 4px;
             position: relative;
             z-index: 10;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .receipt-content {
-            padding: 25px 15px 20px;
+            padding: 25px 20px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -122,141 +137,121 @@
         }
 
         .receipt-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: #111315;
             margin-bottom: 15px;
         }
 
-        /* علامة الصح الخضراء */
+        /* علامة الصح */
         .check-icon {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 15px;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
             display: block;
         }
 
         /* نصوص الوصل */
-        .receipt-info {
-            font-size: 15px;
+        .receipt-summary {
+            font-size: 16px;
             font-weight: 700;
             color: #111315;
             line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .receipt-info span {
-            font-weight: 700;
+            margin-bottom: 25px;
         }
 
         .info-block {
             width: 100%;
             text-align: right;
-            padding: 0 10px;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .info-label {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             color: #111315;
             display: block;
+            margin-bottom: 2px;
         }
 
         .info-value {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             color: #111315;
             display: block;
             direction: ltr;
             text-align: right;
+            letter-spacing: 0.5px;
+            min-height: 24px;
         }
 
-        /* النجمة والمفضلة */
+        /* المفضلة والنجمة */
         .fav-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: 25px;
-            font-size: 14px;
+            gap: 5px; 
+            margin-top: 30px;
+            font-size: 16px;
             font-weight: 700;
             color: #111315;
             cursor: pointer;
         }
 
         .fav-row i {
-            font-size: 22px;
-            color: #808080; /* رمادي داكن */
+            font-size: 24px;
+            color: #888888; 
         }
 
         /* زر تم */
         .btn-done {
             width: 100%;
-            height: 55px;
+            height: 60px;
             background-color: #00bcd4;
             color: #ffffff;
             border: none;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            border-radius: 0 0 2px 2px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border-radius: 0 0 4px 4px;
         }
 
-        /* الشريط السفلي للهاتف */
+        /* الشريط السفلي */
         .bottom-nav {
-            height: 40px;
+            height: 60px;
             background-color: #a88b45;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #ffffff;
-            font-size: 16px;
+            color: #ccc;
+            font-size: 18px;
         }
-
-        /* الساعة والموقت */
-        .time-stamp {
-            position: absolute;
-            top: 30px;
-            right: 15px;
-            color: #333;
-            font-size: 14px;
-            font-weight: 700;
-            direction: ltr;
-        }
-
     </style>
 </head>
 <body>
 
     <div class="phone-screen">
-        <!-- شريط الحالة -->
-        <div class="status-bar">
-            <span>12:07</span>
-            <span><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span>
+        <!-- الشريط العلوي الداكن مع الساعة الحقيقية -->
+        <div class="top-dark-bar">
+            <span class="clock" id="device-clock">--:--</span>
         </div>
 
-        <!-- الهيدر -->
-        <div class="header">
-            <i class="fa-solid fa-arrow-right"></i>
+        <!-- شريط العنوان -->
+        <div class="header-title">
             <span>تأكيد تحويل الأموال</span>
-            <span></span>
+            <i class="fa-solid fa-arrow-right back-arrow"></i>
         </div>
 
         <!-- الخلفية الرمادية -->
         <div class="overlay-bg">
             
             <!-- نصوص الخلفية -->
-            <div class="bg-text">مراجعة التفاصيل المدخلة</div>
-            <div class="bg-phone">
-                <span>36069139</span> <i class="fa-solid fa-mobile-screen"></i>
+            <div class="bg-text-top">مراجعة التفاصيل المدخلة</div>
+            <div class="bg-phone-num">
+                <span id="bg-phone-display">36069139</span>
+                <i class="fa-solid fa-mobile-screen"></i>
             </div>
-            
-            <!-- الوقت والتاريخ -->
-            <div class="time-stamp">12:53:54 26-11-13</div>
+            <div class="bg-time-stamp" id="bg-time-display">--:--:-- --/--/--</div>
 
             <!-- المربع الأبيض -->
             <div class="receipt-modal">
@@ -270,20 +265,20 @@
                     </svg>
 
                     <!-- معلومات التحويل -->
-                    <div class="receipt-info">
-                        المستفيد: 36069139 المبلغ المرسل: 30<br>MRU
+                    <div class="receipt-summary">
+                        المستفيد: <span id="main-phone-display">36069139</span> المبلغ المرسل: <span id="main-amount-display">30</span><br>MRU
                     </div>
 
                     <!-- معرف المعاملة -->
                     <div class="info-block">
                         <span class="info-label">معرف المعاملة :</span>
-                        <span class="info-value">1026111312535260000</span>
+                        <span class="info-value" id="transaction-id">جارٍ التوليد...</span>
                     </div>
                     
                     <!-- التاريخ والوقت -->
                     <div class="info-block">
                         <span class="info-label">التاريخ والوقت :</span>
-                        <span class="info-value">12:53:54 26-11-13</span>
+                        <span class="info-value" id="transaction-time">جارٍ التوليد...</span>
                     </div>
 
                     <!-- المفضلة -->
@@ -294,7 +289,7 @@
                 </div>
 
                 <!-- زر تم -->
-                <button class="btn-done">تم</button>
+                <button class="btn-done" onclick="generateTransaction()">تم</button>
             </div>
 
         </div>
@@ -305,5 +300,52 @@
         </div>
     </div>
 
+    <script>
+        // 1. تحديث الساعة في أعلى الشاشة (الساعة الحقيقية للجهاز)
+        function updateDeviceClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('device-clock').innerText = `${hours}:${minutes}`;
+        }
+        setInterval(updateDeviceClock, 1000);
+        updateDeviceClock();
+
+        // 2. دالة توليد عملية جديدة (وقت وتاريخ ومعرف عشوائي)
+        function generateTransaction() {
+            const now = new Date();
+            
+            // تنسيق التاريخ والوقت (سنة-شهر-يوم ساعة:دقيقة:ثانية)
+            const year = String(now.getFullYear()).slice(-2);
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            const formattedDate = `${hours}:${minutes}:${seconds} ${year}-${month}-${day}`;
+
+            // توليد معرف معاملة عشوائي (19 رقم)
+            const randomId = Math.floor(1000000000000000000 + Math.random() * 9000000000000000000);
+
+            // وضع القيم في المربع الأبيض
+            document.getElementById('transaction-time').innerText = formattedDate;
+            document.getElementById('transaction-id').innerText = randomId;
+
+            // وضع القيم في الخلفية الرمادية
+            document.getElementById('bg-time-display').innerText = formattedDate;
+            
+            // تحديث الرقم والمبلغ
+            document.getElementById('main-phone-display').innerText = "36069139";
+            document.getElementById('bg-phone-display').innerText = "36069139";
+            document.getElementById('main-amount-display').innerText = "30";
+
+            // رسالة تأكيد
+            alert("تمت العملية بنجاح!\nرقم المعاملة: " + randomId);
+        }
+
+        // تشغيل الدالة تلقائياً عند فتح الصفحة
+        generateTransaction();
+    </script>
 </body>
 </html>
