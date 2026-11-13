@@ -803,20 +803,15 @@
                     </svg>
                     <span>طلب المال</span>
                 </button>
-                <!-- زر إرسال الأموال (تم تحديث الرمز ليطابق الصورة) -->
+                <!-- زر إرسال الأموال (تم نقل الشعار بدقة) -->
                 <button class="top-btn" onclick="openSendMoneyPage()">
-                    <svg viewBox="0 0 60 32" width="52" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- الشكل شبه المنحرف الأيسر مع الرمز ₹ -->
-                        <path d="M14 6H4L8 16L4 26H14L18 16L14 6Z" fill="#ffffff"/>
-                        <text x="8" y="20" fill="#007b8a" font-size="12" font-weight="bold" font-family="Arial">₹</text>
-                        
-                        <!-- الشكل شبه المنحرف الأيمن المتصل -->
-                        <path d="M18 6H30L34 16L30 26H18L14 16L18 6Z" fill="#ffffff"/>
-                        
-                        <!-- الخطوط الأفقية على اليمين -->
-                        <line x1="36" y1="9" x2="56" y2="9" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-                        <line x1="36" y1="16" x2="56" y2="16" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-                        <line x1="36" y1="23" x2="56" y2="23" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                    <svg viewBox="0 0 80 30" width="64" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 3H8L13 15L8 27H20L15 15L20 3Z" fill="#ffffff"/>
+                        <text x="10" y="19" fill="#007b8a" font-size="13" font-weight="bold" font-family="Arial, sans-serif">₹</text>
+                        <path d="M25 3H37L42 15L37 27H25L30 15L25 3Z" fill="#ffffff"/>
+                        <rect x="47" y="5" width="28" height="4" rx="1" fill="#ffffff"/>
+                        <rect x="47" y="13" width="20" height="4" rx="1" fill="#ffffff"/>
+                        <rect x="47" y="21" width="28" height="4" rx="1" fill="#ffffff"/>
                     </svg>
                     <span>إرسال الأموال</span>
                 </button>
@@ -847,4 +842,13 @@
 
     <!-- ================= الواجهة 3: إرسال الأموال ================= -->
     <div id="page3" class="page">
-        <header class="top-header" style="padding
+        <header class="top-header" style="padding-bottom: 0;">
+            <div class="navbar">
+                <i class="fa-solid fa-arrow-right back-icon" onclick="showPage('page2')"></i>
+                <h1 class="page-title">إرسال الأموال</h1>
+            </div>
+            <div class="top-tabs">
+                <div class="tab-item active">
+                    <div class="tab-icon-wrap">
+                        <svg viewBox="0 0 28 34" width="20" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3"
