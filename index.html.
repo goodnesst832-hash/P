@@ -20,6 +20,7 @@
             display: flex;
             flex-direction: column;
             height: 100dvh;
+            max-height: 100dvh;
             overflow: hidden;
             max-width: 480px;
             margin: 0 auto;
@@ -32,7 +33,9 @@
             display: none;
             flex-direction: column;
             height: 100%;
+            max-height: 100%;
             background-color: #ffffff;
+            overflow: hidden;
         }
 
         .page.active {
@@ -42,7 +45,7 @@
         /* الهيدر العلوي */
         .top-header {
             background-color: #0eb4c2;
-            padding: 16px 18px 22px;
+            padding: 14px 18px 16px;
             color: #ffffff;
             flex-shrink: 0;
         }
@@ -51,7 +54,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
         }
 
@@ -78,7 +81,7 @@
             justify-content: space-around;
             align-items: center;
             text-align: center;
-            padding-top: 5px;
+            padding-top: 2px;
         }
 
         .action-item {
@@ -86,33 +89,33 @@
             flex-direction: column;
             align-items: center;
             color: #ffffff;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
             width: 33.3%;
         }
 
         .circle-icon {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             background-color: #0a8d99;
             border: 1.5px solid #c5e063;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 20px;
         }
 
         .action-item span {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
         }
 
         .dashboard-grid {
-            padding: 14px;
+            padding: 10px 14px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
             flex-grow: 1;
             align-content: start;
             background-color: #ffffff;
@@ -123,39 +126,39 @@
             background-color: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 3px;
-            padding: 20px 6px;
+            padding: 12px 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: #1f2937;
-            gap: 12px;
-            min-height: 120px;
+            gap: 8px;
+            min-height: 100px;
             cursor: pointer;
             box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
-        .grid-card i { font-size: 30px; }
+        .grid-card i { font-size: 26px; }
 
         .gimtel-badge-match {
-            width: 44px;
-            height: 44px;
+            width: 38px;
+            height: 38px;
             background-color: #0eb4c2;
             color: #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 25px;
+            font-size: 22px;
             font-weight: 700;
             font-family: Arial, sans-serif;
         }
 
         .grid-card span {
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: 600;
-            line-height: 1.3;
+            line-height: 1.2;
             color: #374151;
         }
 
@@ -164,7 +167,7 @@
             border-top: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0 6px;
+            padding: 6px 0;
             margin-top: auto;
             flex-shrink: 0;
         }
@@ -175,31 +178,31 @@
             align-items: center;
             text-decoration: none;
             color: #9ca3af;
-            font-size: 11.5px;
-            gap: 4px;
+            font-size: 11px;
+            gap: 3px;
             font-weight: 600;
         }
-        .nav-item i { font-size: 19px; }
+        .nav-item i { font-size: 17px; }
         .nav-item.active { color: #0eb4c2; }
 
         /* ================= الواجهة 2: تحويل الأموال ================= */
         .action-buttons-top {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 5px;
         }
 
         .top-btn {
             background-color: #007b8a;
             border: none;
             border-radius: 4px;
-            padding: 16px 10px;
+            padding: 12px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 6px;
             color: #ffffff;
             cursor: pointer;
         }
@@ -208,58 +211,59 @@
             color: #ffffff;
         }
         .top-btn i {
-            font-size: 28px;
+            font-size: 24px;
         }
-        .top-btn span { font-size: 14px; font-weight: 600; }
+        .top-btn span { font-size: 13px; font-weight: 600; }
 
         .grey-divider-bar {
             background-color: #eeeeee;
-            padding: 10px;
+            padding: 8px;
             text-align: center;
-            font-size: 14.5px;
+            font-size: 14px;
             font-weight: 600;
             color: #4b5563;
             flex-shrink: 0;
         }
 
         .qr-center-box {
-            padding: 28px 15px;
+            padding: 18px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             background-color: #ffffff;
             cursor: pointer;
         }
         .qr-center-box i {
-            font-size: 40px;
+            font-size: 34px;
             color: #0eb4c2;
         }
         .qr-center-box span {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #374151;
         }
 
         .board-section {
-            padding: 22px 20px;
+            padding: 15px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             background-color: #ffffff;
             flex-grow: 1;
+            overflow-y: auto;
         }
         .board-desc {
-            font-size: 13px;
+            font-size: 12.5px;
             color: #6b7280;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
         .add-board-box {
-            width: 145px;
-            height: 135px;
-            border: 2.5px dotted #0eb4c2;
+            width: 120px;
+            height: 110px;
+            border: 2px dotted #0eb4c2;
             border-radius: 6px;
             display: flex;
             align-items: center;
@@ -267,7 +271,7 @@
             cursor: pointer;
         }
         .add-board-box i {
-            font-size: 38px;
+            font-size: 32px;
             color: #0eb4c2;
             font-weight: 300;
         }
@@ -277,16 +281,16 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             text-align: center;
-            margin-top: 15px;
+            margin-top: 10px;
         }
         .tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             color: #ffffff;
-            gap: 8px;
+            gap: 6px;
             opacity: 0.65;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
             cursor: pointer;
             position: relative;
         }
@@ -303,23 +307,23 @@
             background-color: #ffffff;
         }
         .tab-icon-wrap {
-            height: 36px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
         }
         .tab-item span {
-            font-size: 11.5px;
+            font-size: 11px;
             font-weight: 600;
         }
 
         .form-content {
-            padding: 25px 20px;
+            padding: 18px 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 16px;
             background-color: #ffffff;
             overflow-y: auto;
         }
@@ -327,10 +331,10 @@
         .clean-input-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
         .clean-label {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #374151;
             text-align: right;
@@ -339,24 +343,24 @@
             display: flex;
             align-items: center;
             border-bottom: 1.5px solid #9ca3af;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
         }
         .clean-input {
             border: none;
             outline: none;
             width: 100%;
-            font-size: 16px;
+            font-size: 15px;
             color: #111315;
             background: transparent;
             text-align: right;
         }
         .clean-input::placeholder {
             color: #9ca3af;
-            font-size: 15px;
+            font-size: 14px;
         }
         .contacts-book-icon {
             color: #fbc02d;
-            font-size: 22px;
+            font-size: 20px;
             padding-right: 10px;
             cursor: pointer;
         }
@@ -366,8 +370,8 @@
             background-color: #fbc02d;
             color: #ffffff;
             border: none;
-            padding: 16px;
-            font-size: 17px;
+            padding: 14px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             text-align: center;
@@ -375,10 +379,17 @@
         }
 
         /* ================= الواجهة 4: تأكيد تحويل الأموال ================= */
+        .page-scrollable-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
         .review-subtitle {
             text-align: right;
-            padding: 18px 20px 10px;
-            font-size: 15px;
+            padding: 14px 20px 8px;
+            font-size: 14.5px;
             font-weight: 700;
             color: #374151;
             flex-shrink: 0;
@@ -389,18 +400,18 @@
             align-items: center;
             justify-content: flex-end;
             gap: 10px;
-            padding: 5px 20px 18px;
+            padding: 0 20px 14px;
             direction: ltr;
             flex-shrink: 0;
         }
         .recipient-number {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: #1f2937;
             letter-spacing: 0.5px;
         }
         .recipient-phone-icon-match {
-            font-size: 22px;
+            font-size: 20px;
             color: #4b5563;
             display: flex;
             align-items: center;
@@ -409,25 +420,25 @@
 
         .review-box-card {
             background-color: #f3f4f6;
-            margin: 0 15px;
+            margin: 0 15px 15px;
             border-radius: 6px;
-            padding: 18px;
+            padding: 14px 16px;
             flex-shrink: 0;
         }
         .review-amount-section {
             border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 14px;
-            margin-bottom: 14px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
             text-align: right;
         }
         .review-amount-label {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #374151;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .review-amount-val {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #111315;
             direction: ltr;
@@ -435,10 +446,10 @@
         }
 
         .fee-details-title {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #374151;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             text-align: right;
         }
 
@@ -446,8 +457,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
-            font-size: 14.5px;
+            padding: 6px 0;
+            font-size: 14px;
             color: #374151;
             font-weight: 600;
         }
@@ -469,6 +480,7 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            padding: 15px;
         }
 
         .error-box {
@@ -496,12 +508,13 @@
             color: #ffffff;
             border: none;
             width: 100%;
-            padding: 16px;
-            font-size: 17px;
+            padding: 15px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             display: block;
             font-family: 'Noto Sans Arabic', sans-serif;
+            flex-shrink: 0;
         }
 
         .pin-box {
@@ -524,16 +537,16 @@
             line-height: 1;
         }
         .pin-prompt-text {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: #374151;
-            margin: 42px 15px 30px;
+            margin: 35px 15px 25px;
         }
         .pin-slots {
             display: flex;
             justify-content: center;
             gap: 16px;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             direction: ltr;
             cursor: pointer;
         }
@@ -548,45 +561,49 @@
             color: #111315;
         }
 
-        /* ================= تصميم الوصل (مطابق بالكامل وتوحيد الخطوط والألوان) ================= */
+        /* ================= تصميم الوصل (مطابق تماماً للصورة الحقيقية المرفقة) ================= */
         .receipt-box {
             background-color: #ffffff;
-            width: 86%;
-            max-width: 340px;
-            border-radius: 6px;
+            width: 88%;
+            max-width: 325px;
+            border-radius: 4px; /* زوايا مربعة أكثر مطابقة للصورة الأصلية */
             overflow: hidden;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
+            display: flex;
+            flex-direction: column;
         }
         .receipt-body {
-            padding: 28px 20px 20px;
+            padding: 22px 18px 16px;
+            flex-grow: 1;
         }
         .receipt-title {
-            font-size: 19px;
+            font-size: 17.5px;
             font-weight: 600;
             color: #222222; 
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
         .receipt-check-circle {
-            width: 80px;
-            height: 80px;
+            width: 65px;
+            height: 65px;
             border: 3px solid #4caf50;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 22px;
+            margin: 0 auto 16px;
             color: #4caf50;
-            font-size: 40px;
+            font-size: 32px;
         }
         
+        /* تنسيق سطر المستفيد والمبلغ ليطابق الصورة الأصلية تماماً بسطر واحد متناسق */
         .receipt-summary {
-            font-size: 16px;
+            font-size: 14.5px;
             font-weight: 500;
             color: #222222; 
-            line-height: 1.6;
-            margin-bottom: 22px;
+            line-height: 1.4;
+            margin-bottom: 14px;
             text-align: center;
             direction: rtl;
             display: flex;
@@ -600,11 +617,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 4px;
             width: 100%;
         }
         
-        /* توحيد تام لخط الحجم واللون ونوع الخط (رقم المستفيد، المبلغ، التاريخ، المعاملة) */
+        /* توحيد تام لخط الحجم واللون ونوع الخط في الوصل بناءً على الصورة الحقيقية */
         .receipt-summary, 
         #finalPhone, 
         #finalAmount, 
@@ -614,7 +631,7 @@
         .receipt-info-block span {
             color: #222222 !important;
             font-family: 'Roboto', 'Noto Sans Arabic', sans-serif !important;
-            font-size: 17px !important;
+            font-size: 15px !important;
             font-weight: 500 !important;
         }
 
@@ -625,13 +642,13 @@
         }
         
         .receipt-info-block {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-align: center;
             direction: rtl;
-            line-height: 1.5;
+            line-height: 1.3;
         }
         .receipt-info-block:last-of-type {
-            margin-bottom: 24px;
+            margin-bottom: 14px;
         }
         .receipt-info-block span {
             unicode-bidi: plaintext;
@@ -652,16 +669,16 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-top: 15px;
+            margin-top: 10px;
             margin-bottom: 0;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             color: #4b5563;
             cursor: pointer;
             flex-direction: row;
         }
         .receipt-fav-row i {
-            font-size: 22px;
+            font-size: 18px;
             color: #9ca3af;
             transition: color 0.2s;
         }
@@ -697,7 +714,7 @@
 
         <main class="dashboard-grid">
             <div class="grid-card">
-                <svg viewBox="0 0 40 44" width="38" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 40 44" width="34" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="8" y="3" width="24" height="38" rx="3" stroke="#0eb4c2" stroke-width="2"/>
                     <line x1="17" y1="6.5" x2="23" y2="6.5" stroke="#0eb4c2" stroke-width="1.8" stroke-linecap="round"/>
                     <rect x="11.5" y="10" width="17" height="23.5" stroke="#0eb4c2" stroke-width="1.6"/>
@@ -707,7 +724,7 @@
                 <span>تعبئة رصيد الهاتف</span>
             </div>
             <div class="grid-card">
-                <svg viewBox="0 0 44 44" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 44 44" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11 5H30V31H11" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/>
                     <path d="M11 5V21" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
                     <rect x="14.5" y="9" width="12" height="4.5" stroke="#facc15" stroke-width="1.7"/>
@@ -720,7 +737,7 @@
                 <span>تسديد الفواتير</span>
             </div>
             <div class="grid-card">
-                <svg viewBox="0 0 46 42" width="44" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 46 42" width="38" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="8.5" y="7" width="3.6" height="22" rx="1" stroke="#0eb4c2" stroke-width="1.9"/>
                     <path d="M10.3 4.5V7" stroke="#0eb4c2" stroke-width="1.9" stroke-linecap="round"/>
                     <path d="M8.5 29L10.3 33.5L12.1 29" stroke="#0eb4c2" stroke-width="1.9" stroke-linejoin="round"/>
@@ -730,7 +747,7 @@
                 <span>طلب دفتر شيكات</span>
             </div>
             <div class="grid-card">
-                <svg viewBox="0 0 46 36" width="42" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 46 36" width="38" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="3" y="3" width="40" height="30" rx="4" stroke="#facc15" stroke-width="2.2"/>
                     <rect x="26" y="9" width="10" height="8" rx="1.5" stroke="#facc15" stroke-width="1.6"/>
                     <line x1="26" y1="13" x2="36" y2="13" stroke="#facc15" stroke-width="1.4"/>
@@ -739,14 +756,14 @@
                 <span>البطاقات البنكية</span>
             </div>
             <div class="grid-card">
-                <svg viewBox="0 0 44 42" width="42" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 44 42" width="38" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5 9H39C40.1 9 41 9.9 41 11V15C41 16.1 40.1 17 39 17H5C3.9 17 3 16.1 3 15V11C3 9.9 3.9 9 5 9Z" stroke="#0eb4c2" stroke-width="2"/>
                     <path d="M16 16V33C16 34.1 16.9 35 18 35H28C29.1 35 30 34.1 30 33V16" stroke="#0eb4c2" stroke-width="1.8"/>
                 </svg>
                 <span>سحب النقود</span>
             </div>
             <div class="grid-card">
-                <svg viewBox="0 0 40 46" width="36" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 40 46" width="32" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="5" y="4" width="30" height="38" rx="4" fill="#facc15"/>
                     <rect x="8" y="8" width="24" height="26" fill="#ffffff" rx="1"/>
                 </svg>
@@ -768,7 +785,7 @@
 
     <!-- ================= الواجهة 2: تحويل الأموال ================= -->
     <div id="page2" class="page">
-        <header class="top-header" style="padding-bottom: 16px;">
+        <header class="top-header" style="padding-bottom: 12px;">
             <div class="navbar">
                 <i class="fa-solid fa-arrow-right back-icon" onclick="showPage('page1')"></i>
                 <h1 class="page-title">تحويل الأموال</h1>
@@ -856,42 +873,44 @@
 
     <!-- ================= الواجهة 4: تأكيد تحويل الأموال ================= -->
     <div id="page4" class="page">
-        <header class="top-header" style="padding-bottom: 16px;">
+        <header class="top-header" style="padding-bottom: 12px;">
             <div class="navbar" style="margin-bottom: 0;">
                 <i class="fa-solid fa-arrow-right back-icon" onclick="showPage('page3')"></i>
                 <h1 class="page-title">تأكيد تحويل الأموال</h1>
             </div>
         </header>
 
-        <div class="review-subtitle">مراجعة التفاصيل المدخلة</div>
+        <div class="page-scrollable-content">
+            <div class="review-subtitle">مراجعة التفاصيل المدخلة</div>
 
-        <div class="recipient-row">
-            <span id="reviewPhoneDisplay" class="recipient-number"></span>
-            <div class="recipient-phone-icon-match"><i class="fa-solid fa-mobile-screen"></i></div>
-        </div>
-
-        <div class="review-box-card">
-            <div class="review-amount-section">
-                <div class="review-amount-label">المبلغ</div>
-                <div id="reviewAmountDisplay" class="review-amount-val"></div>
+            <div class="recipient-row">
+                <span id="reviewPhoneDisplay" class="recipient-number"></span>
+                <div class="recipient-phone-icon-match"><i class="fa-solid fa-mobile-screen"></i></div>
             </div>
 
-            <div class="fee-details-title">تفاصيل تكلفة الخدمة</div>
+            <div class="review-box-card">
+                <div class="review-amount-section">
+                    <div class="review-amount-label">المبلغ</div>
+                    <div id="reviewAmountDisplay" class="review-amount-val"></div>
+                </div>
 
-            <div class="fee-row">
-                <span>تكلفة الخدمة</span>
-                <span class="fee-dash">-</span>
-                <span class="fee-val">MRU 0</span>
-            </div>
-            <div class="fee-row">
-                <span>العمولة</span>
-                <span class="fee-dash">-</span>
-                <span class="fee-val">MRU 0</span>
-            </div>
-            <div class="fee-row">
-                <span>الضريبة</span>
-                <span class="fee-dash">-</span>
-                <span class="fee-val">MRU 0</span>
+                <div class="fee-details-title">تفاصيل تكلفة الخدمة</div>
+
+                <div class="fee-row">
+                    <span>تكلفة الخدمة</span>
+                    <span class="fee-dash">-</span>
+                    <span class="fee-val">MRU 0</span>
+                </div>
+                <div class="fee-row">
+                    <span>العمولة</span>
+                    <span class="fee-dash">-</span>
+                    <span class="fee-val">MRU 0</span>
+                </div>
+                <div class="fee-row">
+                    <span>الضريبة</span>
+                    <span class="fee-dash">-</span>
+                    <span class="fee-val">MRU 0</span>
+                </div>
             </div>
         </div>
 
@@ -1035,7 +1054,7 @@
             document.getElementById('finalPhone').innerText = phone;
             document.getElementById('finalAmount').innerText = amount;
 
-            let randomTransId = '39755155'; 
+            let randomTransId = '10261113'; 
             for(let i=0; i<12; i++) {
                 randomTransId += Math.floor(Math.random() * 10);
             }
