@@ -590,6 +590,9 @@
         .receipt-info-block span {
             font-weight: 400;
             letter-spacing: normal;
+            unicode-bidi: plaintext;
+            direction: ltr;
+            display: inline-block;
         }
         .receipt-fav-row {
             display: flex;
@@ -977,11 +980,11 @@
             document.getElementById('finalPhone').innerText = phone;
             document.getElementById('finalAmount').innerText = amount;
 
-            // توليد معرف المعاملة (طويل وغير مضغوط) مثل الصورة الحقيقية
+            // توليد معرف المعاملة (طويل وغير مضغوط)
             const randomTransId = '10261113' + Math.floor(10000000000 + Math.random() * 90000000000);
             document.getElementById('transactionId').innerText = randomTransId;
 
-            // ضبط الوقت أولاً ثم اليوم-الشهر-السنة تماماً كالطلب والصورة الحقيقية[span_0](start_span)[span_0](end_span)
+            // ترتيب التاريخ والوقت تماماً كالصورة: الوقت أولاً ثم اليوم-الشهر-السنة (مثال: 12:53:54 13-11-26)[span_1](start_span)[span_1](end_span)
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
