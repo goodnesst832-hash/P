@@ -133,7 +133,7 @@
             box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
-        .grid-card i { font-size: 30px; }
+        .grid-card svg { width: 34px; height: 34px; }
         .icon-teal { color: #0eb4c2; }
         .icon-gold { color: #facc15; }
 
@@ -306,6 +306,11 @@
             justify-content: center;
             font-size: 24px;
         }
+        .tab-icon-wrap svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+        }
         .tab-item span {
             font-size: 11.5px;
             font-weight: 600;
@@ -370,7 +375,7 @@
             margin-top: auto;
         }
 
-        /* ================= الواجهة 4: تأكيد تحويل الأموال (حسب الصورة الحقيقية) ================= */
+        /* ================= الواجهة 4: تأكيد تحويل الأموال ================= */
         .review-subtitle {
             text-align: right;
             padding: 18px 20px 10px;
@@ -618,27 +623,51 @@
             </div>
             <div class="top-actions">
                 <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    </div>
                     <span>تسديد مشتريات</span>
                 </div>
                 <div class="action-item" onclick="showPage('page2')">
-                    <div class="circle-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                    </div>
                     <span>تحويل الأموال</span>
                 </div>
                 <div class="action-item">
-                    <div class="circle-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
                     <span>حسابي</span>
                 </div>
             </div>
         </header>
 
         <main class="dashboard-grid">
-            <div class="grid-card"><i class="fa-solid fa-mobile-screen-button icon-teal"></i><span>تعبئة رصيد الهاتف</span></div>
-            <div class="grid-card"><i class="fa-solid fa-file-invoice-dollar icon-gold"></i><span>تسديد الفواتير</span></div>
-            <div class="grid-card"><i class="fa-solid fa-money-check-dollar icon-teal"></i><span>طلب دفتر شيكات</span></div>
-            <div class="grid-card"><i class="fa-regular fa-credit-card icon-gold"></i><span>البطاقات البنكية</span></div>
-            <div class="grid-card"><i class="fa-solid fa-money-bill-wave icon-teal"></i><span>سحب النقود</span></div>
-            <div class="grid-card"><i class="fa-solid fa-mobile-retro icon-gold"></i><span>ب-باي</span></div>
+            <div class="grid-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0eb4c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><polyline points="9 6 15 6 12 10"></polyline></svg>
+                <span>تعبئة رصيد الهاتف</span>
+            </div>
+            <div class="grid-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                <span>تسديد الفواتير</span>
+            </div>
+            <div class="grid-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0eb4c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><line x1="9" y1="7" x2="15" y2="7"></line><line x1="9" y1="11" x2="15" y2="11"></line></svg>
+                <span>طلب دفتر شيكات</span>
+            </div>
+            <div class="grid-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                <span>البطاقات البنكية</span>
+            </div>
+            <div class="grid-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0eb4c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                <span>سحب النقود</span>
+            </div>
+            <div class="grid-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect><line x1="11" y1="18" x2="13" y2="18"></line></svg>
+                <span>ب-باي</span>
+            </div>
             <div class="grid-card"><div class="gimtel-badge">G</div><span>جيمتل</span></div>
         </main>
 
@@ -650,7 +679,7 @@
         </nav>
     </div>
 
-    <!-- الواجهة 2: تحويل الأموال (تم عكس مكان الزرين ونقل الأيقونات كما في الصورة) -->
+    <!-- الواجهة 2: تحويل الأموال -->
     <div id="page2" class="page">
         <header class="top-header" style="padding-bottom: 16px;">
             <div class="navbar">
@@ -658,7 +687,6 @@
                 <h1 class="page-title">تحويل الأموال</h1>
             </div>
             <div class="action-buttons-top">
-                <!-- الزر الأيمن: إرسال الأموال -->
                 <button class="top-btn" onclick="openSendMoneyPage()">
                     <svg viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 4H60L65 34H10L5 4Z" fill="white"/>
@@ -671,7 +699,6 @@
                     </svg>
                     <span>إرسال الأموال</span>
                 </button>
-                <!-- الزر الأيسر: طلب المال -->
                 <button class="top-btn yellow">
                     <svg viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 4H67L72 34H17L12 4Z" fill="white"/>
@@ -710,19 +737,27 @@
             </div>
             <div class="top-tabs">
                 <div class="tab-item active">
-                    <div class="tab-icon-wrap"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <div class="tab-icon-wrap">
+                        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke="currentColor" stroke-width="2"/></svg>
+                    </div>
                     <span>رقم الهاتف</span>
                 </div>
                 <div class="tab-item">
-                    <div class="tab-icon-wrap"><i class="fa-solid fa-circle-user"></i></div>
+                    <div class="tab-icon-wrap">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    </div>
                     <span>اسم المستخدم</span>
                 </div>
                 <div class="tab-item">
-                    <div class="tab-icon-wrap"><i class="fa-solid fa-landmark"></i></div>
+                    <div class="tab-icon-wrap">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11m-10-6v6m4-6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
                     <span>بنك</span>
                 </div>
                 <div class="tab-item">
-                    <div class="tab-icon-wrap"><i class="fa-brands fa-facebook"></i></div>
+                    <div class="tab-icon-wrap">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></svg>
+                    </div>
                     <span>فيسبوك</span>
                 </div>
             </div>
