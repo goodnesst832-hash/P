@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>تطبيق تحويل الأموال</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@300;400;500;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -19,8 +19,8 @@
             color: #111315;
             display: flex;
             flex-direction: column;
-            height: 100dvh; /* يدعم الشاشات الحديثة لملء الشاشة تماماً */
-            overflow: hidden; /* منع التمرير نهائياً */
+            height: 100dvh;
+            overflow: hidden;
             max-width: 480px;
             margin: 0 auto;
             border-left: 1px solid #e5e7eb;
@@ -371,7 +371,7 @@
             font-weight: 600;
             cursor: pointer;
             text-align: center;
-            flex-shrink: 0; /* يضمن بقاء الزر ثابتاً في الأسفل */
+            flex-shrink: 0;
         }
 
         /* ================= الواجهة 4: تأكيد تحويل الأموال ================= */
@@ -569,7 +569,7 @@
             margin-bottom: 18px;
         }
         .receipt-check-circle {
-            width: 80px; /* تكبير حجم الدائرة ليطابق الصورة */
+            width: 80px;
             height: 80px;
             border: 3px solid #4caf50;
             border-radius: 50%;
@@ -578,31 +578,41 @@
             justify-content: center;
             margin: 0 auto 22px;
             color: #4caf50;
-            font-size: 40px; /* تكبير إشارة الصح ليطابق الصورة */
+            font-size: 40px;
         }
         .receipt-summary {
             font-size: 15px;
             font-weight: 500;
-            color: #2b2b2b; /* لون رمادي داكن جداً */
+            color: #333333;
             line-height: 1.6;
             margin-bottom: 20px;
             text-align: center;
             direction: rtl;
         }
+        
+        /* تكبير رقم الهاتف والمبلغ */
+        #finalPhone, #finalAmount {
+            font-size: 19px; /* تكبير الخط */
+            font-weight: 500; /* سُمك متوسط غير غليظ */
+            font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
+            color: #111315; /* لون داكن واضح */
+            margin: 0 4px;
+        }
+
         .receipt-summary .mru-label {
             display: block;
             font-family: 'Roboto', sans-serif;
             font-weight: 400;
-            color: #2b2b2b; /* لون رمادي داكن جداً */
+            color: #333333;
             margin-top: 2px;
             letter-spacing: 0.5px;
             font-size: 16px;
         }
         
         .receipt-info-block {
-            font-size: 15px; /* تصغير طفيف ليتناسق مع الصورة */
-            font-weight: 400; /* الوزن العادي */
-            color: #2b2b2b; /* لون رمادي داكن جداً */
+            font-size: 15px;
+            font-weight: 400;
+            color: #333333;
             margin-bottom: 6px;
             text-align: center;
             direction: rtl;
@@ -617,18 +627,18 @@
             direction: ltr;
             display: inline-block;
         }
+        
+        /* ترقيق رقم المعاملة وإطالته */
         .transaction-id-value {
             font-family: 'Roboto', sans-serif;
-            font-weight: 400;
-            letter-spacing: 1px; /* زيادة التباعد بين الحروف */
-            font-size: 17px; /* تكبير حجم الخط */
-            color: #2b2b2b; /* لون رمادي داكن جداً */
+            font-weight: 300; /* خط رقيق */
+            letter-spacing: 0.8px; /* تباعد الأحرف ليبقى طويلاً */
+            font-size: 17px;
+            color: #333333;
             direction: ltr;
             display: inline-block;
             white-space: nowrap;
             unicode-bidi: plaintext;
-            transform: scaleX(1.1); /* تمديد عرض الأرقام لتكون أطول */
-            transform-origin: center;
         }
         .receipt-fav-row {
             display: flex;
