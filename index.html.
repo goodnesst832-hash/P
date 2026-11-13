@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق تحويل الأموال</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -455,7 +455,7 @@
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.65);
+            background-color: rgba(0, 0, 0, 0.45);
             display: none;
             align-items: center;
             justify-content: center;
@@ -483,162 +483,216 @@
             padding: 0 15px 20px;
         }
         .modal-cyan-btn {
-            background-color: #1ccbe4;
+            background-color: #0eb4c2;
             color: #ffffff;
             border: none;
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             display: block;
-            font-family: 'Noto Sans Arabic', sans-serif;
         }
 
-        .pin-box {
+        /* ================= تصميم نافذة الرمز السري بأسلوب بنكيلي (Bankily) ================= */
+        .bankily-pin-box {
             background-color: #ffffff;
-            width: 85%;
-            max-width: 320px;
-            border-radius: 4px;
+            width: 90%;
+            max-width: 350px;
+            border-radius: 8px;
             overflow: hidden;
             position: relative;
             text-align: center;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
         }
-        .pin-close-btn {
-            position: absolute;
-            top: 10px;
-            left: 12px;
-            font-size: 22px;
-            color: #9ca3af;
-            cursor: pointer;
-            line-height: 1;
-        }
-        .pin-prompt-text {
-            font-size: 16px;
+        .bankily-pin-header {
+            background-color: #0eb4c2;
+            color: #ffffff;
+            padding: 16px;
+            font-size: 17px;
             font-weight: 600;
-            color: #374151;
-            margin: 42px 15px 30px;
+            position: relative;
         }
-        .pin-slots {
+        .bankily-pin-close {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .bankily-pin-body {
+            padding: 24px 20px 20px;
+        }
+        .bankily-pin-prompt {
+            font-size: 15px;
+            color: #374151;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .bankily-slots {
             display: flex;
             justify-content: center;
-            gap: 16px;
-            margin-bottom: 35px;
+            gap: 14px;
+            margin-bottom: 25px;
             direction: ltr;
-            cursor: pointer;
         }
-        .pin-slot {
-            width: 36px;
-            height: 28px;
-            border-bottom: 1.5px solid #374151;
+        .bankily-slot {
+            width: 42px;
+            height: 42px;
+            border: 1.5px solid #0eb4c2;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            color: #111315;
+            font-size: 28px;
+            color: #0eb4c2;
+            background-color: #f9fafb;
         }
 
-        /* ================= تصميم الوصل ================= */
+        /* لوحة المفاتيح الرقمية المدمجة مثل التطبيق البنكي */
+        .bankily-keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 0 10px 20px;
+        }
+        .key-btn {
+            background-color: #f3f4f6;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .key-btn:active {
+            background-color: #e5e7eb;
+        }
+        .key-btn.action-key {
+            background-color: #0eb4c2;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        /* تصميم الوصل المطابق تماماً للصورة */
+        .receipt-box,
+        .receipt-box * {
+            font-family: 'Roboto', 'Noto Sans Arabic', sans-serif !important;
+        }
         .receipt-box {
             background-color: #ffffff;
-            width: 86%;
-            max-width: 340px;
-            border-radius: 6px;
+            width: 84%;
+            max-width: 330px;
+            border-radius: 4px;
             overflow: hidden;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
         .receipt-body {
-            padding: 28px 20px 20px;
+            padding: 24px 16px 18px;
         }
         .receipt-title {
-            font-size: 19px;
-            font-weight: 600;
-            color: #1a1a1a; /* لون أسود داكن */
-            margin-bottom: 18px;
+            font-size: 17px;
+            font-weight: 400;
+            color: #212121;
+            margin-bottom: 16px;
         }
         .receipt-check-circle {
-            width: 64px;
-            height: 64px;
+            width: 58px;
+            height: 58px;
             border: 3px solid #4caf50;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 22px;
+            margin: 0 auto 20px;
             color: #4caf50;
-            font-size: 30px;
+            font-size: 26px;
+        }
+        .receipt-check-circle i {
+            font-family: "Font Awesome 6 Free" !important;
+            font-weight: 900 !important;
         }
         .receipt-summary {
-            font-size: 15px;
-            font-weight: 600; /* سمك خط أعلى ليكون واضحاً */
-            color: #1a1a1a;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: center;
-            direction: rtl;
-        }
-        .receipt-summary .mru-label {
-            display: block;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            color: #1a1a1a;
-            margin-top: 2px;
-            letter-spacing: 0.5px;
-            font-size: 16px;
-        }
-        
-        /* معرف المعاملة والتاريخ متلاصقين */
-        .receipt-info-block {
             font-size: 14.5px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 4px;
+            font-weight: 400;
+            color: #212121;
+            line-height: 1.55;
+            margin-bottom: 18px;
             text-align: center;
             direction: rtl;
-            line-height: 1.5;
         }
-        .receipt-info-block:last-of-type {
-            margin-bottom: 20px;
-        }
-        .receipt-info-block span {
-            font-weight: 600;
-            unicode-bidi: plaintext;
+        .receipt-summary .num-ltr {
             direction: ltr;
+            unicode-bidi: embed;
             display: inline-block;
+            letter-spacing: 0.3px;
         }
-        .transaction-id-value {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
+        .receipt-mru-line {
+            display: block;
+            text-align: center;
+            font-size: 14.5px;
+            color: #212121;
+            margin-top: 2px;
+            letter-spacing: 0.4px;
+        }
+        .receipt-info-block {
+            font-size: 14px;
+            font-weight: 400;
+            color: #212121;
+            margin-bottom: 6px;
+            text-align: center;
+            direction: rtl;
+            line-height: 1.55;
+        }
+        .receipt-trans-id {
+            display: inline-block;
+            direction: ltr;
+            unicode-bidi: embed;
+            font-size: 14px;
             letter-spacing: 0.6px;
-            font-size: 16px;
-            color: #1a1a1a;
-            direction: ltr;
+            color: #212121;
+            margin-top: 2px;
+        }
+        .receipt-datetime-val {
             display: inline-block;
-            white-space: nowrap;
-            unicode-bidi: plaintext;
+            direction: ltr;
+            unicode-bidi: embed;
+            letter-spacing: 0.3px;
+            color: #212121;
         }
         .receipt-fav-row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4b5563;
+            margin-top: 24px;
+            margin-bottom: 4px;
+            font-size: 13.5px;
+            font-weight: 400;
+            color: #616161;
             cursor: pointer;
             flex-direction: row;
         }
         .receipt-fav-row i {
+            font-family: "Font Awesome 6 Free" !important;
+            font-weight: 900 !important;
             font-size: 20px;
-            color: #9ca3af;
+            color: #9e9e9e;
             transition: color 0.2s;
         }
         .receipt-fav-row i.starred {
             color: #fbc02d;
+        }
+        .receipt-box .modal-cyan-btn {
+            font-size: 15px;
+            font-weight: 500;
+            padding: 13px;
         }
     </style>
 </head>
@@ -879,43 +933,59 @@
         </div>
     </div>
 
-    <!-- نافذة الرمز السري -->
+    <!-- نافذة الرمز السري بنمط تطبيق بنكيلي (Bankily) -->
     <div id="pinModal" class="modal-overlay">
-        <div class="pin-box">
-            <i class="fa-solid fa-xmark pin-close-btn" onclick="closePinModal()"></i>
-            <div class="pin-prompt-text">الرجاء إدخال الرمز السري</div>
-
-            <input type="tel" id="hiddenPinInput" inputmode="numeric" pattern="[0-9]*" style="position: absolute; opacity: 0; pointer-events: none;" maxlength="4" oninput="updatePinDisplay(this.value)">
-
-            <div class="pin-slots" onclick="document.getElementById('hiddenPinInput').focus();">
-                <div class="pin-slot" id="d1"></div>
-                <div class="pin-slot" id="d2"></div>
-                <div class="pin-slot" id="d3"></div>
-                <div class="pin-slot" id="d4"></div>
+        <div class="bankily-pin-box">
+            <div class="bankily-pin-header">
+                إدخال الرمز السري
+                <i class="fa-solid fa-xmark bankily-pin-close" onclick="closePinModal()"></i>
             </div>
+            <div class="bankily-pin-body">
+                <div class="bankily-pin-prompt">الرجاء إدخال الرمز السري الخاص بك</div>
+                
+                <div class="bankily-slots">
+                    <div class="bankily-slot" id="d1"></div>
+                    <div class="bankily-slot" id="d2"></div>
+                    <div class="bankily-slot" id="d3"></div>
+                    <div class="bankily-slot" id="d4"></div>
+                </div>
 
-            <button type="button" class="modal-cyan-btn" onclick="submitPin()">ارسل الطلب</button>
+                <div class="bankily-keypad">
+                    <button type="button" class="key-btn" onclick="pressKey('1')">1</button>
+                    <button type="button" class="key-btn" onclick="pressKey('2')">2</button>
+                    <button type="button" class="key-btn" onclick="pressKey('3')">3</button>
+                    <button type="button" class="key-btn" onclick="pressKey('4')">4</button>
+                    <button type="button" class="key-btn" onclick="pressKey('5')">5</button>
+                    <button type="button" class="key-btn" onclick="pressKey('6')">6</button>
+                    <button type="button" class="key-btn" onclick="pressKey('7')">7</button>
+                    <button type="button" class="key-btn" onclick="pressKey('8')">8</button>
+                    <button type="button" class="key-btn" onclick="pressKey('9')">9</button>
+                    <button type="button" class="key-btn" onclick="pressKey('C')">C</button>
+                    <button type="button" class="key-btn" onclick="pressKey('0')">0</button>
+                    <button type="button" class="key-btn action-key" onclick="submitPin()"><i class="fa-solid fa-check"></i></button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- الوصل النهائي -->
+    <!-- الوصل النهائي المطابق تماماً -->
     <div id="successModal" class="modal-overlay">
         <div class="receipt-box">
             <div class="receipt-body">
-                <div class="receipt-title">النقل ناجح!</div>
+                <div class="receipt-title">النقل ناجح[span_0](start_span)[span_0](end_span)!</div>
                 <div class="receipt-check-circle"><i class="fa-solid fa-check"></i></div>
 
                 <div class="receipt-summary">
-                    المستفيد: <span id="finalPhone"></span> المبلغ المرسل: <span id="finalAmount"></span>
-                    <span class="mru-label">MRU</span>
+                    المستفيد: <span id="finalPhone" class="num-ltr"></span> المبلغ المرسل: <span id="finalAmount" class="num-ltr"></span>[span_1](start_span)[span_1](end_span)
+                    <span class="receipt-mru-line">MRU[span_2](start_span)[span_2](end_span)</span>
                 </div>
 
-                <div class="receipt-info-block">معرف المعاملة :<br><span id="transactionId" class="transaction-id-value"></span></div>
-                <div class="receipt-info-block">التاريخ والوقت : <span id="transactionDateTime"></span></div>
+                <div class="receipt-info-block">معرف المعاملة :<br><span id="transactionId" class="receipt-trans-id"></span>[span_3](start_span)[span_3](end_span)</div>
+                <div class="receipt-info-block">التاريخ والوقت : <span id="transactionDateTime" class="receipt-datetime-val"></span>[span_4](start_span)[span_4](end_span)</div>
 
                 <div class="receipt-fav-row" onclick="toggleFavorite()">
                     <i class="fa-solid fa-star" id="favStar"></i>
-                    <span>إضافة إلى المفضلة</span>
+                    <span>إضافة إلى المفضلة[span_5](start_span)[span_5](end_span)</span>
                 </div>
             </div>
 
@@ -924,6 +994,8 @@
     </div>
 
     <script>
+        let currentPin = '';
+
         function clearFormFields() {
             document.getElementById('phoneInput').value = '';
             document.getElementById('amountInput').value = '';
@@ -972,28 +1044,33 @@
         }
 
         function openPinModal() {
-            document.getElementById('hiddenPinInput').value = '';
-            updatePinDisplay('');
+            currentPin = '';
+            updatePinDisplay();
             document.getElementById('pinModal').style.display = 'flex';
-            setTimeout(() => document.getElementById('hiddenPinInput').focus(), 100);
         }
 
         function closePinModal() {
             document.getElementById('pinModal').style.display = 'none';
         }
 
-        function updatePinDisplay(val) {
-            val = val.replace(/\D/g, '').slice(0, 4);
-            document.getElementById('hiddenPinInput').value = val;
+        function pressKey(key) {
+            if (key === 'C') {
+                currentPin = '';
+            } else if (currentPin.length < 4) {
+                currentPin += key;
+            }
+            updatePinDisplay();
+        }
+
+        function updatePinDisplay() {
             for (let i = 1; i <= 4; i++) {
                 const slot = document.getElementById('d' + i);
-                slot.innerText = i <= val.length ? '•' : '';
+                slot.innerText = i <= currentPin.length ? '•' : '';
             }
         }
 
         function submitPin() {
-            const pin = document.getElementById('hiddenPinInput').value.trim();
-            if (pin.length < 4) {
+            if (currentPin.length < 4) {
                 showErrorPopup('الرجاء إدخال الرمز السري كاملاً (4 أرقام)');
                 return;
             }
@@ -1006,9 +1083,11 @@
             document.getElementById('finalPhone').innerText = phone;
             document.getElementById('finalAmount').innerText = amount;
 
+            // توليد معرف المعاملة مكون من 19 رقم مطابق للصورة الحقيقية[span_6](start_span)[span_6](end_span)
             const randomTransId = '10261113' + Math.floor(10000000000 + Math.random() * 90000000000);
             document.getElementById('transactionId').innerText = randomTransId;
 
+            // ترتيب التاريخ والوقت مطابق للصورة: HH:MM:SS YY-MM-DD[span_7](start_span)[span_7](end_span)
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -1018,7 +1097,7 @@
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const year = String(now.getFullYear()).slice(-2);
 
-            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
+            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${year}-${month}-${day}`;
             document.getElementById('favStar').classList.remove('starred');
 
             document.getElementById('successModal').style.display = 'flex';
