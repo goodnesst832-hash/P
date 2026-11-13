@@ -178,7 +178,7 @@
         .nav-item i { font-size: 19px; }
         .nav-item.active { color: #0eb4c2; }
 
-        /* ================= الواجهة 2: تحويل الأموال ================= */
+        /* ================= الواجهة 2: تحويل الأموال (بالشكل السابق الأصلي) ================= */
         .action-buttons-top {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -539,7 +539,7 @@
             color: #111315;
         }
 
-        /* تصميم الوصل المطابق للصورة تماماً */
+        /* تصميم الوصل مع تصحيح مكان النجمة على الجهة الأخرى وتعديل الوقت ليصبح حقيقياً */
         .receipt-box {
             background-color: #ffffff;
             width: 86%;
@@ -599,6 +599,7 @@
             font-weight: 600;
             color: #4b5563;
             cursor: pointer;
+            flex-direction: row-reverse; /* تعديل مكان النجمة لتصبح على الجهة المقابلة كما في الصورة */
         }
         .receipt-fav-row i {
             font-size: 22px;
@@ -706,7 +707,7 @@
         </nav>
     </div>
 
-    <!-- ================= الواجهة 2: تحويل الأموال ================= -->
+    <!-- ================= الواجهة 2: تحويل الأموال (بالشكل الأصلي) ================= -->
     <div id="page2" class="page">
         <header class="top-header" style="padding-bottom: 16px;">
             <div class="navbar">
@@ -717,12 +718,18 @@
                 <button class="top-btn" onclick="openSendMoneyPage()">
                     <svg viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 4H60L65 34H10L5 4Z" fill="white"/>
+                        <path d="M22 8C17.5 14 17.5 24 22 30" stroke="#007b8a" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M48 8C52.5 14 52.5 24 48 30" stroke="#007b8a" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M31 11H41M31 16H39M33 11V19L39 27M31 21H37" stroke="#007b8a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <span>إرسال الأموال</span>
                 </button>
                 <button class="top-btn yellow">
                     <svg viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 4H67L72 34H17L12 4Z" fill="white"/>
+                        <path d="M29 8C24.5 14 24.5 24 29 30" stroke="#fbc02d" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M55 8C59.5 14 59.5 24 55 30" stroke="#fbc02d" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M38 11H48M38 16H46M40 11V19L46 27M38 21H44" stroke="#fbc02d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <span>طلب المال</span>
                 </button>
@@ -870,7 +877,7 @@
         </div>
     </div>
 
-    <!-- الوصل النهائي المطابق لصورة المعاملة -->
+    <!-- الوصل النهائي (بالوقت الحقيقي وموقع النجمة المصحح) -->
     <div id="successModal" class="modal-overlay">
         <div class="receipt-box">
             <div class="receipt-body">
@@ -885,8 +892,8 @@
                 <div class="receipt-info-block">التاريخ والوقت : <span id="transactionDateTime"></span></div>
 
                 <div class="receipt-fav-row" onclick="toggleFavorite()">
-                    <span>إضافة إلى المفضلة</span>
                     <i class="fa-solid fa-star" id="favStar"></i>
+                    <span>إضافة إلى المفضلة</span>
                 </div>
             </div>
 
@@ -977,12 +984,20 @@
             document.getElementById('finalPhone').innerText = phone;
             document.getElementById('finalAmount').innerText = amount;
 
-            // توليد معرف معاملة مشابه للظاهر في الصورة
+            // معرف المعاملة
             const randomTransId = '10261113' + Math.floor(100000000 + Math.random() * 900000000);
             document.getElementById('transactionId').innerText = randomTransId;
 
-            // تثبيت التاريخ والوقت ليكون مطابقاً لصورة المعاملة الحقيقية أو حسب الوقت الحالي
-            document.getElementById('transactionDateTime').innerText = '13-11-26 12:53:54';
+            // توليد الوقت الحقيقي وقت إتمام المعاملة بالتنسيق المطلوب (YY-MM-DD HH:MM:SS)
+            const now = new Date();
+            const year = now.getFullYear().toString().slice(-2);
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('transactionDateTime').innerText = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
             document.getElementById('favStar').classList.remove('starred');
 
             document.getElementById('successModal').style.display = 'flex';
