@@ -564,8 +564,8 @@
         }
         .receipt-title {
             font-size: 19px;
-            font-weight: 600; /* خط أعرض قليلاً */
-            color: #222222;
+            font-weight: 600;
+            color: #111315; /* لون داكن جداً مطابق */
             margin-bottom: 18px;
         }
         .receipt-check-circle {
@@ -583,11 +583,11 @@
         
         /* تنسيق السطر الأول (المستفيد والمبلغ) */
         .receipt-summary {
-            font-size: 16px; /* تكبير الخط الأساسي */
+            font-size: 16px;
             font-weight: 500;
-            color: #333333; /* لون رمادي داكن جداً ومريح */
+            color: #111315; /* لون داكن جداً مطابق */
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             text-align: center;
             direction: rtl;
             display: flex;
@@ -601,39 +601,39 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             width: 100%;
         }
         
-        /* أرقام المستفيد والمبلغ */
+        /* الأرقام: حجم كبير، سُمك متوسط (لا رقيق ولا غليظ) */
         #finalPhone, #finalAmount {
-            font-size: 16px; /* حجم كبير وواضح مطابق للصورة */
-            font-weight: 500; /* سُمك متوسط وليس رقيقاً */
+            font-size: 17px; /* حجم كبير مطابق */
+            font-weight: 500; /* سُمك متوسط مطابق */
             font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
-            color: #333333; 
+            color: #111315; 
         }
 
         .mru-label {
             font-family: 'Roboto', sans-serif;
             font-weight: 500;
-            color: #333333;
+            color: #111315;
             margin-top: 2px;
             letter-spacing: 0.5px;
-            font-size: 16px;
+            font-size: 17px;
             display: block;
         }
         
         .receipt-info-block {
-            font-size: 15px;
-            font-weight: 500; /* تحسين السُمك ليكون مقروءاً */
-            color: #333333;
-            margin-bottom: 8px; /* مسافة بسيطة للفصل */
+            font-size: 16px;
+            font-weight: 500;
+            color: #111315;
+            margin-bottom: 8px;
             text-align: center;
             direction: rtl;
             line-height: 1.5;
         }
         .receipt-info-block:last-of-type {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         .receipt-info-block span {
             font-weight: 500;
@@ -642,13 +642,13 @@
             display: inline-block;
         }
         
-        /* رقم المعاملة: تكبير الخط وإضافة تباعد ليصبح واضحاً وطويلاً */
+        /* رقم المعاملة: خط عادي متوسط، مقاس كبير وواضح بدون أي تمديد صناعي */
         .transaction-id-value {
             font-family: 'Roboto', sans-serif;
-            font-weight: 400; /* سُمك طبيعي لا يبدو رقيقاً */
-            letter-spacing: 0.8px; /* زيادة التباعد بين الأرقام */
-            font-size: 16px; /* تكبير الخط */
-            color: #333333;
+            font-weight: 400; /* خط عادي غير سميك */
+            letter-spacing: 0.5px; 
+            font-size: 17px;
+            color: #111315;
             direction: ltr;
             display: inline-block;
             white-space: nowrap;
@@ -661,10 +661,10 @@
             justify-content: center;
             gap: 8px;
             margin-top: 15px;
-            margin-bottom: 5px;
+            margin-bottom: 0;
             font-size: 15px;
             font-weight: 500;
-            color: #555555;
+            color: #4b5563;
             cursor: pointer;
             flex-direction: row;
         }
@@ -1043,7 +1043,11 @@
             document.getElementById('finalPhone').innerText = phone;
             document.getElementById('finalAmount').innerText = amount;
 
-            const randomTransId = '10261113' + Math.floor(10000000000 + Math.random() * 90000000000);
+            // توليد معرف معاملة بطول 20 رقم مطابق للحقيقي
+            let randomTransId = '39755155'; // 8 أرقام ثابتة كمثال
+            for(let i=0; i<12; i++) {
+                randomTransId += Math.floor(Math.random() * 10);
+            }
             document.getElementById('transactionId').innerText = randomTransId;
 
             const now = new Date();
