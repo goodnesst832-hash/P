@@ -455,7 +455,7 @@
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.45);
+            background-color: rgba(0, 0, 0, 0.6); /* تغميق الخلفية ليتطابق مع الصورة */
             display: none;
             align-items: center;
             justify-content: center;
@@ -483,15 +483,16 @@
             padding: 0 15px 20px;
         }
         .modal-cyan-btn {
-            background-color: #0eb4c2;
+            background-color: #1ccbe4; /* تم تعديل اللون ليكون أكثر إشراقاً كما في الصورة */
             color: #ffffff;
             border: none;
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             display: block;
+            font-family: 'Noto Sans Arabic', sans-serif;
         }
 
         .pin-box {
@@ -546,76 +547,81 @@
             border-radius: 6px;
             overflow: hidden;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
         }
         .receipt-body {
-            padding: 24px 20px 16px;
+            padding: 28px 20px 24px; /* مساحة داخلية متناسقة */
         }
         .receipt-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1f2937;
-            margin-bottom: 14px;
-            font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
+            font-size: 19px;
+            font-weight: 600; /* سمك الخط */
+            color: #111315;
+            margin-bottom: 18px;
+            font-family: 'Noto Sans Arabic', sans-serif;
         }
         .receipt-check-circle {
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             border: 3px solid #4caf50;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 18px;
+            margin: 0 auto 22px;
             color: #4caf50;
-            font-size: 26px;
+            font-size: 30px;
         }
         .receipt-summary {
-            font-size: 13.5px;
-            font-weight: 400;
-            color: #333333;
-            line-height: 1.7;
-            margin-bottom: 16px;
+            font-size: 15px;
+            font-weight: 500; /* خط أعرض وأوضح */
+            color: #111315;
+            line-height: 1.6;
+            margin-bottom: 20px;
             text-align: center;
             direction: rtl;
-            font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
+            font-family: 'Noto Sans Arabic', sans-serif;
         }
         .receipt-summary .amount-line {
             display: block;
-            margin-top: 4px;
+            margin-top: 2px;
         }
         .receipt-summary .mru-label {
             display: block;
             font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
             font-weight: 500;
-            color: #222;
+            color: #111315;
             margin-top: 2px;
             letter-spacing: 0.5px;
         }
+        
+        /* معرف المعاملة والتاريخ متلاصقين بدون مسافات كبيرة */
         .receipt-info-block {
-            font-size: 13px;
-            font-weight: 400;
-            color: #333333;
-            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #111315;
+            margin-bottom: 6px; /* تقليل المسافة السفلية */
             text-align: center;
             direction: rtl;
-            line-height: 1.5;
-            font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
+            line-height: 1.6;
+            font-family: 'Noto Sans Arabic', sans-serif;
+        }
+        .receipt-info-block:last-of-type {
+            margin-bottom: 20px;
         }
         .receipt-info-block span {
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: normal;
             unicode-bidi: plaintext;
             direction: ltr;
             display: inline-block;
         }
         .transaction-id-value {
-            font-family: 'Roboto', 'Noto Sans Arabic', sans-serif;
+            font-family: 'Roboto', sans-serif;
             font-weight: 500;
             letter-spacing: 0.6px;
-            font-size: 13.5px;
-            color: #1f2937;
+            font-size: 15px;
+            color: #111315;
             direction: ltr;
             display: inline-block;
             white-space: nowrap;
@@ -628,15 +634,15 @@
             gap: 8px;
             margin-top: 18px;
             margin-bottom: 6px;
-            font-size: 13px;
-            font-weight: 400;
+            font-size: 14px;
+            font-weight: 500;
             color: #4b5563;
             cursor: pointer;
             flex-direction: row;
-            font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
+            font-family: 'Noto Sans Arabic', sans-serif;
         }
         .receipt-fav-row i {
-            font-size: 18px;
+            font-size: 20px;
             color: #9ca3af;
             transition: color 0.2s;
         }
@@ -901,7 +907,7 @@
         </div>
     </div>
 
-    <!-- الوصل النهائي -->
+    <!-- الوصل النهائي المطابق للصورة -->
     <div id="successModal" class="modal-overlay">
         <div class="receipt-box">
             <div class="receipt-body">
@@ -909,8 +915,7 @@
                 <div class="receipt-check-circle"><i class="fa-solid fa-check"></i></div>
 
                 <div class="receipt-summary">
-                    المستفيد: <span id="finalPhone"></span>
-                    <span class="amount-line">المبلغ المرسل: <span id="finalAmount"></span></span>
+                    المستفيد: <span id="finalPhone"></span> المبلغ المرسل: <span id="finalAmount"></span>
                     <span class="mru-label">MRU</span>
                 </div>
 
