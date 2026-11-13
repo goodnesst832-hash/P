@@ -538,7 +538,7 @@
             color: #111315;
         }
 
-        /* تصميم الوصل */
+        /* تصميم الوصل الحقيقي المطابق للصورة تماماً */
         .receipt-box {
             background-color: #ffffff;
             width: 86%;
@@ -553,55 +553,59 @@
         }
         .receipt-title {
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 400; /* حبر رقيق غير مغلظ */
             color: #1f2937;
             margin-bottom: 14px;
         }
         .receipt-check-circle {
-            width: 64px;
-            height: 64px;
-            border: 3.5px solid #4caf50;
+            width: 60px;
+            height: 60px;
+            border: 3px solid #4caf50;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 18px;
             color: #4caf50;
-            font-size: 28px;
+            font-size: 26px;
         }
         .receipt-summary {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1f2937;
+            font-size: 13.5px;
+            font-weight: 400; /* حبر رقيق غير مغلظ */
+            color: #333333;
             line-height: 1.6;
             margin-bottom: 16px;
             text-align: center;
             direction: rtl;
         }
         .receipt-info-block {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 10px;
+            font-size: 13px;
+            font-weight: 400; /* حبر رقيق غير مغلظ */
+            color: #333333;
+            margin-bottom: 12px;
             text-align: center;
             direction: rtl;
             line-height: 1.5;
+        }
+        .receipt-info-block span {
+            font-weight: 400;
+            letter-spacing: normal; /* إلغاء أي ضغط أو تبااعد غير مطلوب */
         }
         .receipt-fav-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: 18px;
             margin-bottom: 6px;
-            font-size: 13.5px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 400; /* حبر رقيق غير مغلظ */
             color: #4b5563;
             cursor: pointer;
-            flex-direction: row-reverse;
+            flex-direction: row; /* النجمة في اليمين والنص بعدها */
         }
         .receipt-fav-row i {
-            font-size: 22px;
+            font-size: 18px;
             color: #9ca3af;
             transition: color 0.2s;
         }
@@ -714,12 +718,10 @@
                 <h1 class="page-title">تحويل الأموال</h1>
             </div>
             <div class="action-buttons-top">
-                <!-- تم إصلاح وتحديث رمز إرسال الأموال -->
                 <button class="top-btn" onclick="openSendMoneyPage()">
                     <i class="fa-solid fa-paper-plane"></i>
                     <span>إرسال الأموال</span>
                 </button>
-                <!-- تم إصلاح وتحديث رمز طلب المال -->
                 <button class="top-btn yellow">
                     <i class="fa-solid fa-hand-holding-dollar"></i>
                     <span>طلب المال</span>
@@ -868,7 +870,7 @@
         </div>
     </div>
 
-    <!-- الوصل النهائي -->
+    <!-- الوصل النهائي المطابق تماماً -->
     <div id="successModal" class="modal-overlay">
         <div class="receipt-box">
             <div class="receipt-body">
@@ -975,20 +977,21 @@
             document.getElementById('finalPhone').innerText = phone;
             document.getElementById('finalAmount').innerText = amount;
 
-            // توليد معرف المعاملة
-            const randomTransId = '10261113' + Math.floor(100000000 + Math.random() * 900000000);
+            // توليد معرف المعاملة (طويل وغير مضغوط) مثل الصورة الحقيقية
+            const randomTransId = '10261113' + Math.floor(10000000000 + Math.random() * 90000000000);
             document.getElementById('transactionId').innerText = randomTransId;
 
-            // التقاط الوقت الحقيقي الفعلي للحظة إتمام العملية
+            // التقاط الوقت والتاريخ المطابق تماماً لتنسيق الصورة (الساعة أولاً ثم التاريخ بترميز صحيح غير معكوس)
             const now = new Date();
-            const year = String(now.getFullYear()).slice(-2);
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = String(now.getFullYear()).slice(-2);
 
-            document.getElementById('transactionDateTime').innerText = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('transactionDateTime').innerText = `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
             document.getElementById('favStar').classList.remove('starred');
 
             document.getElementById('successModal').style.display = 'flex';
