@@ -538,7 +538,7 @@
             color: #111315;
         }
 
-        /* تصميم الوصل الحقيقي المطابق للصورة تماماً */
+        /* تصميم الوصل المطابق للصورة الحقيقية تماماً */
         .receipt-box {
             background-color: #ffffff;
             width: 86%;
@@ -553,7 +553,7 @@
         }
         .receipt-title {
             font-size: 18px;
-            font-weight: 400; /* حبر رقيق غير مغلظ */
+            font-weight: 400;
             color: #1f2937;
             margin-bottom: 14px;
         }
@@ -571,7 +571,7 @@
         }
         .receipt-summary {
             font-size: 13.5px;
-            font-weight: 400; /* حبر رقيق غير مغلظ */
+            font-weight: 400;
             color: #333333;
             line-height: 1.6;
             margin-bottom: 16px;
@@ -580,7 +580,7 @@
         }
         .receipt-info-block {
             font-size: 13px;
-            font-weight: 400; /* حبر رقيق غير مغلظ */
+            font-weight: 400;
             color: #333333;
             margin-bottom: 12px;
             text-align: center;
@@ -589,7 +589,7 @@
         }
         .receipt-info-block span {
             font-weight: 400;
-            letter-spacing: normal; /* إلغاء أي ضغط أو تبااعد غير مطلوب */
+            letter-spacing: normal;
         }
         .receipt-fav-row {
             display: flex;
@@ -599,7 +599,7 @@
             margin-top: 18px;
             margin-bottom: 6px;
             font-size: 13px;
-            font-weight: 400; /* حبر رقيق غير مغلظ */
+            font-weight: 400;
             color: #4b5563;
             cursor: pointer;
             flex-direction: row; /* النجمة في اليمين والنص بعدها */
@@ -981,7 +981,7 @@
             const randomTransId = '10261113' + Math.floor(10000000000 + Math.random() * 90000000000);
             document.getElementById('transactionId').innerText = randomTransId;
 
-            // التقاط الوقت والتاريخ المطابق تماماً لتنسيق الصورة (الساعة أولاً ثم التاريخ بترميز صحيح غير معكوس)
+            // ضبط الوقت أولاً ثم اليوم-الشهر-السنة تماماً كالطلب والصورة الحقيقية[span_0](start_span)[span_0](end_span)
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
