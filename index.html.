@@ -70,7 +70,7 @@
             pointer-events: none;
         }
 
-        /* الأزرار الثلاثة العلوية مطابقة للصورة تماماً (يمين: تسديد مشتريات، وسط: تحويل الأموال، يسار: حسابي) */
+        /* ================= الواجهة 1: لوحة القيادة ================= */
         .top-actions {
             display: flex;
             justify-content: space-around;
@@ -89,15 +89,17 @@
             width: 33.3%;
         }
 
-        .circle-icon-match {
-            width: 58px;
-            height: 58px;
-            background-color: #0ab2bf;
-            border: 2px solid #a4df64;
+        /* تعديل الدائرة لتطابق الصورة (حدود خضراء) */
+        .circle-icon {
+            width: 56px;
+            height: 56px;
+            background-color: #0a8d99;
+            border: 2px solid #c5e063; /* اللون الأخضر الفاتح */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 24px;
         }
 
         .action-item span {
@@ -105,7 +107,6 @@
             font-weight: 600;
         }
 
-        /* شبكة الأيقونات الداخلية بالترتيب الصحيح المطابق للصورة */
         .dashboard-grid {
             padding: 14px;
             display: grid;
@@ -133,16 +134,20 @@
             box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
-        .gimtel-badge-match {
-            width: 44px;
-            height: 44px;
+        .grid-card i { font-size: 30px; }
+        .icon-teal { color: #0eb4c2; }
+        .icon-gold { color: #facc15; }
+
+        .gimtel-badge {
+            width: 50px;
+            height: 50px;
             background-color: #0eb4c2;
             color: #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 25px;
+            font-size: 28px;
             font-weight: 700;
             font-family: Arial, sans-serif;
         }
@@ -154,7 +159,6 @@
             color: #374151;
         }
 
-        /* شريط التنقل السفلي المطابق للصورة تماماً */
         .bottom-nav {
             background-color: #ffffff;
             border-top: 1px solid #e5e7eb;
@@ -177,7 +181,7 @@
         .nav-item i { font-size: 19px; }
         .nav-item.active { color: #0eb4c2; }
 
-        /* صفحات التطبيق التفاعلية */
+        /* ================= الواجهة 2: تحويل الأموال ================= */
         .action-buttons-top {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -202,7 +206,10 @@
             background-color: #fbc02d;
             color: #ffffff;
         }
-        .top-btn svg { height: 30px; width: auto; }
+        .top-btn svg {
+            height: 30px;
+            width: auto;
+        }
         .top-btn span { font-size: 14px; font-weight: 600; }
 
         .grey-divider-bar {
@@ -224,8 +231,15 @@
             background-color: #ffffff;
             cursor: pointer;
         }
-        .qr-center-box i { font-size: 40px; color: #0eb4c2; }
-        .qr-center-box span { font-size: 14px; font-weight: 600; color: #374151; }
+        .qr-center-box i {
+            font-size: 40px;
+            color: #0eb4c2;
+        }
+        .qr-center-box span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
 
         .board-section {
             padding: 22px 20px;
@@ -235,7 +249,12 @@
             background-color: #ffffff;
             flex-grow: 1;
         }
-        .board-desc { font-size: 13px; color: #6b7280; text-align: center; margin-bottom: 25px; }
+        .board-desc {
+            font-size: 13px;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 25px;
+        }
         .add-board-box {
             width: 145px;
             height: 135px;
@@ -246,8 +265,13 @@
             justify-content: center;
             cursor: pointer;
         }
-        .add-board-box i { font-size: 38px; color: #0eb4c2; font-weight: 300; }
+        .add-board-box i {
+            font-size: 38px;
+            color: #0eb4c2;
+            font-weight: 300;
+        }
 
+        /* ================= الواجهة 3: إرسال الأموال ================= */
         .top-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -265,7 +289,9 @@
             cursor: pointer;
             position: relative;
         }
-        .tab-item.active { opacity: 1; }
+        .tab-item.active {
+            opacity: 1;
+        }
         .tab-item.active::after {
             content: '';
             position: absolute;
@@ -275,8 +301,17 @@
             height: 3px;
             background-color: #ffffff;
         }
-        .tab-icon-wrap { height: 36px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-        .tab-item span { font-size: 11.5px; font-weight: 600; }
+        .tab-icon-wrap {
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .tab-item span {
+            font-size: 11.5px;
+            font-weight: 600;
+        }
 
         .form-content {
             padding: 25px 20px;
@@ -287,12 +322,42 @@
             background-color: #ffffff;
         }
 
-        .clean-input-group { display: flex; flex-direction: column; gap: 8px; }
-        .clean-label { font-size: 14px; font-weight: 700; color: #374151; text-align: right; }
-        .clean-input-row { display: flex; align-items: center; border-bottom: 1.5px solid #9ca3af; padding-bottom: 8px; }
-        .clean-input { border: none; outline: none; width: 100%; font-size: 16px; color: #111315; background: transparent; text-align: right; }
-        .clean-input::placeholder { color: #9ca3af; font-size: 15px; }
-        .contacts-book-icon { color: #fbc02d; font-size: 22px; padding-right: 10px; cursor: pointer; }
+        .clean-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .clean-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #374151;
+            text-align: right;
+        }
+        .clean-input-row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1.5px solid #9ca3af;
+            padding-bottom: 8px;
+        }
+        .clean-input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            color: #111315;
+            background: transparent;
+            text-align: right;
+        }
+        .clean-input::placeholder {
+            color: #9ca3af;
+            font-size: 15px;
+        }
+        .contacts-book-icon {
+            color: #fbc02d;
+            font-size: 22px;
+            padding-right: 10px;
+            cursor: pointer;
+        }
 
         .bottom-full-btn {
             width: 100%;
@@ -307,7 +372,14 @@
             margin-top: auto;
         }
 
-        .review-subtitle { text-align: right; padding: 18px 20px 10px; font-size: 15px; font-weight: 700; color: #374151; }
+        /* ================= الواجهة 4: تأكيد تحويل الأموال ================= */
+        .review-subtitle {
+            text-align: right;
+            padding: 18px 20px 10px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #374151;
+        }
 
         .recipient-row {
             display: flex;
@@ -317,20 +389,73 @@
             padding: 5px 20px 18px;
             direction: ltr;
         }
-        .recipient-number { font-size: 18px; font-weight: 700; color: #1f2937; letter-spacing: 0.5px; }
-        .recipient-phone-icon-match { font-size: 22px; color: #4b5563; display: flex; align-items: center; justify-content: center; }
+        .recipient-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            letter-spacing: 0.5px;
+        }
+        .recipient-phone-icon-match {
+            font-size: 22px;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-        .review-box-card { background-color: #f3f4f6; margin: 0 15px; border-radius: 6px; padding: 18px; }
-        .review-amount-section { border-bottom: 1px solid #e5e7eb; padding-bottom: 14px; margin-bottom: 14px; text-align: right; }
-        .review-amount-label { font-size: 14px; font-weight: 700; color: #374151; margin-bottom: 6px; }
-        .review-amount-val { font-size: 16px; font-weight: 700; color: #111315; direction: ltr; text-align: right; }
+        .review-box-card {
+            background-color: #f3f4f6;
+            margin: 0 15px;
+            border-radius: 6px;
+            padding: 18px;
+        }
+        .review-amount-section {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 14px;
+            margin-bottom: 14px;
+            text-align: right;
+        }
+        .review-amount-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .review-amount-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: #111315;
+            direction: ltr;
+            text-align: right;
+        }
 
-        .fee-details-title { font-size: 14px; font-weight: 700; color: #374151; margin-bottom: 14px; text-align: right; }
+        .fee-details-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 14px;
+            text-align: right;
+        }
 
-        .fee-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 14.5px; color: #374151; font-weight: 600; }
-        .fee-dash { color: #6b7280; }
-        .fee-val { direction: ltr; font-weight: 700; color: #1f2937; }
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 14.5px;
+            color: #374151;
+            font-weight: 600;
+        }
+        .fee-dash {
+            color: #6b7280;
+        }
+        .fee-val {
+            direction: ltr;
+            font-weight: 700;
+            color: #1f2937;
+        }
 
+        /* ================= النوافذ المنبثقة ================= */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -341,20 +466,100 @@
             z-index: 1000;
         }
 
-        .error-box { background-color: #ffffff; width: 82%; max-width: 310px; border-radius: 4px; overflow: hidden; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-        .error-title { font-size: 16px; font-weight: 700; padding: 18px 15px 8px; color: #111315; }
-        .error-msg { font-size: 14px; color: #4b5563; padding: 0 15px 20px; }
-        .modal-cyan-btn { background-color: #0eb4c2; color: #ffffff; border: none; width: 100%; padding: 14px; font-size: 16px; font-weight: 600; cursor: pointer; display: block; }
+        .error-box {
+            background-color: #ffffff;
+            width: 82%;
+            max-width: 310px;
+            border-radius: 4px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .error-title {
+            font-size: 16px;
+            font-weight: 700;
+            padding: 18px 15px 8px;
+            color: #111315;
+        }
+        .error-msg {
+            font-size: 14px;
+            color: #4b5563;
+            padding: 0 15px 20px;
+        }
+        .modal-cyan-btn {
+            background-color: #0eb4c2;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+        }
 
-        .pin-box { background-color: #ffffff; width: 85%; max-width: 320px; border-radius: 4px; overflow: hidden; position: relative; text-align: center; box-shadow: 0 6px 25px rgba(0,0,0,0.25); }
-        .pin-close-btn { position: absolute; top: 10px; left: 12px; font-size: 22px; color: #9ca3af; cursor: pointer; line-height: 1; }
-        .pin-prompt-text { font-size: 16px; font-weight: 600; color: #374151; margin: 42px 15px 30px; }
-        .pin-slots { display: flex; justify-content: center; gap: 16px; margin-bottom: 35px; direction: ltr; cursor: pointer; }
-        .pin-slot { width: 36px; height: 28px; border-bottom: 1.5px solid #374151; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #111315; }
+        .pin-box {
+            background-color: #ffffff;
+            width: 85%;
+            max-width: 320px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+        }
+        .pin-close-btn {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            font-size: 22px;
+            color: #9ca3af;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .pin-prompt-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin: 42px 15px 30px;
+        }
+        .pin-slots {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 35px;
+            direction: ltr;
+            cursor: pointer;
+        }
+        .pin-slot {
+            width: 36px;
+            height: 28px;
+            border-bottom: 1.5px solid #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #111315;
+        }
 
-        .receipt-box { background-color: #ffffff; width: 86%; max-width: 335px; border-radius: 6px; overflow: hidden; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-        .receipt-body { padding: 22px 18px 18px; }
-        .receipt-title { font-size: 17px; font-weight: 700; color: #1f2937; margin-bottom: 16px; }
+        .receipt-box {
+            background-color: #ffffff;
+            width: 86%;
+            max-width: 335px;
+            border-radius: 6px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .receipt-body {
+            padding: 22px 18px 18px;
+        }
+        .receipt-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
         .receipt-check-circle {
             width: 68px;
             height: 68px;
@@ -367,8 +572,21 @@
             color: #4caf50;
             font-size: 32px;
         }
-        .receipt-summary { font-size: 14.5px; font-weight: 700; color: #1f2937; line-height: 1.6; margin-bottom: 18px; direction: rtl; }
-        .receipt-info-line { font-size: 13.5px; font-weight: 700; color: #1f2937; margin-bottom: 8px; direction: rtl; }
+        .receipt-summary {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #1f2937;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            direction: rtl;
+        }
+        .receipt-info-line {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+            direction: rtl;
+        }
         .receipt-fav-row {
             display: flex;
             align-items: center;
@@ -381,13 +599,19 @@
             color: #4b5563;
             cursor: pointer;
         }
-        .receipt-fav-row i { font-size: 26px; color: #9ca3af; transition: color 0.2s; }
-        .receipt-fav-row i.starred { color: #fbc02d; }
+        .receipt-fav-row i {
+            font-size: 26px;
+            color: #9ca3af;
+            transition: color 0.2s;
+        }
+        .receipt-fav-row i.starred {
+            color: #fbc02d;
+        }
     </style>
 </head>
 <body>
 
-    <!-- ================= الواجهة 1: لوحة القيادة المطابقة للصورة تماماً ================= -->
+    <!-- ================= الواجهة 1: لوحة القيادة ================= -->
     <div id="page1" class="page active">
         <header class="top-header">
             <div class="navbar">
@@ -395,52 +619,24 @@
                 <h1 class="page-title">لوحة القيادة</h1>
             </div>
             <div class="top-actions">
-                <!-- 1. تسديد مشتريات (على اليمين) -->
+                <!-- تم الترتيب ليطابق الصورة: حسابي - تحويل الأموال - تسديد مشتريات -->
                 <div class="action-item">
-                    <div class="circle-icon-match">
-                        <svg viewBox="0 0 36 36" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="7" y="6" width="16" height="22" rx="2" stroke="#ffffff" stroke-width="1.8"/>
-                            <path d="M15 12H19M15 16H19" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                            <circle cx="15" cy="21" r="2.5" stroke="#ffffff" stroke-width="1.5"/>
-                            <path d="M12 4H24C25.1 4 26 4.9 26 6V24" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
-                            <path d="M11 20H21C22.1 20 23 20.9 23 22V28C23 29.1 22.1 30 21 30H11C9.9 30 9 29.1 9 28V22C9 20.9 9.9 20 11 20Z" stroke="#ffffff" stroke-width="1.8" fill="#0ab2bf"/>
-                            <path d="M13 24H19M13 26H17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <span>تسديد مشتريات</span>
+                    <div class="circle-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                    <span>حسابي</span>
                 </div>
-
-                <!-- 2. تحويل الأموال (في المنتصف) -->
                 <div class="action-item" onclick="showPage('page2')">
-                    <div class="circle-icon-match">
-                        <svg viewBox="0 0 36 36" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 10H26C27.1 10 28 10.9 28 12V24C28 25.1 27.1 26 26 26H6C4.9 26 4 25.1 4 24V12C4 10.9 4.9 10 6 10Z" stroke="#ffffff" stroke-width="1.8"/>
-                            <circle cx="16" cy="18" r="3" stroke="#ffffff" stroke-width="1.6"/>
-                            <path d="M14 26L9 21L14 16" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            <line x1="9" y1="21" x2="22" y2="21" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
-                        </svg>
-                    </div>
+                    <div class="circle-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
                     <span>تحويل الأموال</span>
                 </div>
-
-                <!-- 3. حسابي (على اليسار) -->
                 <div class="action-item">
-                    <div class="circle-icon-match">
-                        <svg viewBox="0 0 36 36" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="9" y="5" width="18" height="26" rx="2" stroke="#ffffff" stroke-width="1.8"/>
-                            <line x1="13" y1="10" x2="23" y2="10" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="13" y1="15" x2="23" y2="15" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="13" y1="20" x2="18" y2="20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M19 23L22 26L27 21" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <span>حسابي</span>
+                    <div class="circle-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <span>تسديد مشتريات</span>
                 </div>
             </div>
         </header>
 
         <main class="dashboard-grid">
-            <!-- 1. تعبئة رصيد الهاتف (يمين الصف الأول) -->
+            <!-- 1. تعبئة رصيد الهاتف (يمين) -->
             <div class="grid-card">
                 <svg viewBox="0 0 40 44" width="38" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="8" y="3" width="24" height="38" rx="3" stroke="#0eb4c2" stroke-width="2"/>
@@ -451,7 +647,7 @@
                 </svg>
                 <span>تعبئة رصيد الهاتف</span>
             </div>
-            <!-- 2. تسديد الفواتير (وسط الصف الأول) -->
+            <!-- 2. تسديد الفواتير (وسط) -->
             <div class="grid-card">
                 <svg viewBox="0 0 44 44" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11 5H30V31H11" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/>
@@ -470,7 +666,7 @@
                 </svg>
                 <span>تسديد الفواتير</span>
             </div>
-            <!-- 3. طلب دفتر شيكات (يسار الصف الأول) -->
+            <!-- 3. طلب دفتر شيكات (يسار) -->
             <div class="grid-card">
                 <svg viewBox="0 0 46 42" width="44" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="8.5" y="7" width="3.6" height="22" rx="1" stroke="#0eb4c2" stroke-width="1.9"/>
@@ -493,7 +689,7 @@
                 </svg>
                 <span>طلب دفتر شيكات</span>
             </div>
-            <!-- 4. البطاقات البنكية (يمين الصف الثاني) -->
+            <!-- 4. البطاقات البنكية (يمين) -->
             <div class="grid-card">
                 <svg viewBox="0 0 46 36" width="42" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="3" y="3" width="40" height="30" rx="4" stroke="#facc15" stroke-width="2.2"/>
@@ -504,7 +700,7 @@
                 </svg>
                 <span>البطاقات البنكية</span>
             </div>
-            <!-- 5. سحب النقود (وسط الصف الثاني) -->
+            <!-- 5. سحب النقود (وسط) -->
             <div class="grid-card">
                 <svg viewBox="0 0 44 42" width="42" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5 9H39C40.1 9 41 9.9 41 11V15C41 16.1 40.1 17 39 17H5C3.9 17 3 16.1 3 15V11C3 9.9 3.9 9 5 9Z" stroke="#0eb4c2" stroke-width="2"/>
@@ -516,7 +712,7 @@
                 </svg>
                 <span>سحب النقود</span>
             </div>
-            <!-- 6. ب-باي (يسار الصف الثاني) -->
+            <!-- 6. ب-باي (يسار) -->
             <div class="grid-card">
                 <svg viewBox="0 0 40 46" width="36" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="5" y="4" width="30" height="38" rx="4" fill="#facc15"/>
@@ -530,11 +726,8 @@
                 </svg>
                 <span>ب-باي</span>
             </div>
-            <!-- 7. جيمتل (تحت البطاقات البنكية في أقصى اليمين) -->
-            <div class="grid-card">
-                <div class="gimtel-badge-match">G</div>
-                <span>جيمتل</span>
-            </div>
+            <!-- 7. جيمتل (يمين في الصف الثالث) -->
+            <div class="grid-card"><div class="gimtel-badge">G</div><span>جيمتل</span></div>
         </main>
 
         <nav class="bottom-nav">
