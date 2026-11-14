@@ -553,11 +553,11 @@
             color: #111315;
         }
 
-        /* ================= تصميم الوصل ================= */
+        /* ================= تصميم الوصل المطابق للصورة الحقيقية ================= */
         .receipt-box {
             background-color: #ffffff;
-            width: 88%;
-            max-width: 325px;
+            width: 86%;
+            max-width: 310px;
             border-radius: 4px;
             overflow: hidden;
             text-align: center;
@@ -567,106 +567,86 @@
             flex-direction: column;
         }
         .receipt-body {
-            padding: 22px 18px 16px;
+            padding: 22px 18px 18px; /* مطابقة للمسافات الحقيقية */
             flex-grow: 1;
         }
         .receipt-title {
-            font-size: 17.5px;
-            font-weight: 600;
-            color: #111111; 
-            margin-bottom: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #222222; 
+            margin-bottom: 15px;
         }
         .receipt-check-circle {
-            width: 65px;
-            height: 65px;
-            border: 3px solid #4caf50;
+            width: 58px;
+            height: 58px;
+            border: 2px solid #5cb85c; /* ضبط السماكة لتكون أرق وأكثر طبيعية */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 16px;
-            color: #4caf50;
-            font-size: 32px;
+            color: #5cb85c;
+            font-size: 26px;
         }
         
-        .receipt-summary, 
-        .receipt-summary *, 
-        #finalPhone, 
-        #finalAmount, 
-        .mru-label, 
-        .receipt-info-block, 
-        .receipt-info-block *, 
-        .transaction-id-value {
-            color: #111111 !important;
-            font-family: 'Noto Sans Arabic', 'Roboto', sans-serif !important;
-            font-size: 15px !important;
-            font-weight: 500 !important;
-        }
-
         .receipt-summary {
+            font-size: 13.5px !important;
+            font-weight: 600 !important;
+            color: #333333 !important;
             line-height: 1.4;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             text-align: center;
             direction: rtl;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .summary-top-line {
-            white-space: nowrap; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            width: 100%;
         }
 
         .mru-label {
+            font-size: 13.5px !important;
+            font-weight: 600 !important;
+            color: #333333 !important;
             margin-top: 2px;
-            letter-spacing: 0.5px;
             display: block;
+            letter-spacing: 0.5px;
         }
         
         .receipt-info-block {
-            margin-bottom: 6px;
+            font-size: 13.5px !important;
+            font-weight: 600 !important;
+            color: #333333 !important;
+            margin-bottom: 8px;
             text-align: center;
             direction: rtl;
             line-height: 1.3;
-        }
-        .receipt-info-block:last-of-type {
-            margin-bottom: 14px;
         }
         .receipt-info-block span {
             unicode-bidi: plaintext;
             direction: ltr;
             display: inline-block;
+            font-weight: 600 !important;
         }
         
         .transaction-id-value {
-            letter-spacing: 0.5px; 
+            letter-spacing: 0.3px; 
             direction: ltr;
             display: inline-block;
             white-space: nowrap;
             unicode-bidi: plaintext;
+            font-size: 13.5px !important;
         }
         
         .receipt-fav-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: 10px;
-            margin-bottom: 0;
-            font-size: 14px;
-            font-weight: 500;
+            gap: 6px;
+            margin-top: 14px;
+            margin-bottom: 4px;
+            font-size: 13.5px;
+            font-weight: 600;
             color: #4b5563;
             cursor: pointer;
-            flex-direction: row;
         }
         .receipt-fav-row i {
-            font-size: 18px;
+            font-size: 16px;
             color: #9ca3af;
             transition: color 0.2s;
         }
@@ -792,7 +772,6 @@
                 <h1 class="page-title">تحويل الأموال</h1>
             </div>
             <div class="action-buttons-top">
-                <!-- زر إرسال المال (في الجانب الأيمن باللون الأساسي) -->
                 <button class="top-btn" onclick="openSendMoneyPage()">
                     <svg viewBox="0 0 100 35" width="48" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M95 17.5H65M80 7.5L65 17.5L80 27.5" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -801,7 +780,6 @@
                     </svg>
                     <span>إرسال الأموال</span>
                 </button>
-                <!-- زر طلب المال (في الجانب الأيسر باللون الأصفر) -->
                 <button class="top-btn yellow">
                     <svg viewBox="0 0 100 35" width="48" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 17.5H35M20 7.5L35 17.5L20 27.5" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -843,7 +821,6 @@
                 <h1 class="page-title">إرسال الأموال</h1>
             </div>
             <div class="top-tabs">
-                <!-- 1. رقم الهاتف -->
                 <div class="tab-item active">
                     <div class="tab-icon-wrap">
                         <svg viewBox="0 0 28 34" width="20" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -855,7 +832,6 @@
                     </div>
                     <span>رقم الهاتف</span>
                 </div>
-                <!-- 2. اسم المستخدم -->
                 <div class="tab-item">
                     <div class="tab-icon-wrap">
                         <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -864,7 +840,6 @@
                     </div>
                     <span>اسم المستخدم</span>
                 </div>
-                <!-- 3. بنك -->
                 <div class="tab-item">
                     <div class="tab-icon-wrap">
                         <svg viewBox="0 0 32 32" width="24" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -874,7 +849,6 @@
                     </div>
                     <span>بنك</span>
                 </div>
-                <!-- 4. فيسبوك -->
                 <div class="tab-item">
                     <div class="tab-icon-wrap">
                         <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -988,7 +962,7 @@
         </div>
     </div>
 
-    <!-- الوصل النهائي -->
+    <!-- الوصل النهائي (المعدل ليطابق الصورة الحقيقية تماماً) -->
     <div id="successModal" class="modal-overlay">
         <div class="receipt-box">
             <div class="receipt-body">
@@ -996,9 +970,7 @@
                 <div class="receipt-check-circle"><i class="fa-solid fa-check"></i></div>
 
                 <div class="receipt-summary">
-                    <div class="summary-top-line">
-                        المستفيد: <span id="finalPhone"></span> المبلغ المرسل: <span id="finalAmount"></span>
-                    </div>
+                    المستفيد: <span id="finalPhone"></span> المبلغ المرسل: <span id="finalAmount"></span>
                     <span class="mru-label">MRU</span>
                 </div>
 
